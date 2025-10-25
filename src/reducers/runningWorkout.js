@@ -77,6 +77,11 @@ const activeWorkoutSlice = createSlice({
       }
       return state
     },
+    removeExerciseGroup(state, action) {
+      const { groupKey } = action.payload;
+      state.exerciseGroups = state.exerciseGroups.filter(group => group.key !== groupKey)
+      return state;
+    },
     updateExerciseSet(state, action) {
       const { groupKey, setKey, field, value } = action.payload;
       const exerciseGroup = { ...state.exerciseGroups.find(group => group.key === groupKey) };
@@ -117,6 +122,7 @@ export const {
   clearActiveExerciseGroup,
   updateExerciseGroup,
   shiftExerciseGroup,
+  removeExerciseGroup,
   addExerciseSet,
   updateExerciseSet,
   removeExerciseSet } = activeWorkoutSlice.actions

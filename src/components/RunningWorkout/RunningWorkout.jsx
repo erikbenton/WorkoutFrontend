@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import useFetch from "../../hooks/useFetch";
-import { clearActiveExerciseGroup, clearRunningWorkout, initializeRunningWorkout, removeExerciseSet, selectActiveExerciseGroup, shiftExerciseGroup, updateExerciseGroup, updateExerciseSet } from "../../reducers/runningWorkout";
+import { clearActiveExerciseGroup, clearRunningWorkout, initializeRunningWorkout, removeExerciseGroup, removeExerciseSet, selectActiveExerciseGroup, shiftExerciseGroup, updateExerciseGroup, updateExerciseSet } from "../../reducers/runningWorkout";
 import { Link, useNavigate } from "react-router-dom";
 import { addExerciseSet } from "../../reducers/runningWorkout";
 
@@ -132,6 +132,10 @@ const RunningWorkoutSummary = () => {
     }));
   }
 
+  const removeGroup = (group) => {
+    dispatch(removeExerciseGroup({ groupKey: group.key }))
+  }
+
   return (
     <>
       <ol>
@@ -142,6 +146,7 @@ const RunningWorkoutSummary = () => {
             </Link>
             <button type="button" onClick={() => shiftGroup(group, -1)}>shift UP</button>
             <button type="button" onClick={() => shiftGroup(group, 1)}>shift DOWN</button>
+            <button type="button" onClick={() => removeGroup(group)}>remove</button>
           </li>
         ))}
       </ol>
