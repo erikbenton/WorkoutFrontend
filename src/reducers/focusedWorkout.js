@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import workoutService from '../services/workout'
-import { toKeyedObject } from '../utils/helper'
+import { toKeyedObject, findIndexOfKey, swapObjects } from '../utils/helper'
 
 const initialWorkout = {
   name: '',
@@ -19,23 +19,6 @@ const initialExerciseSet = {
   minReps: null,
   maxReps: null,
   weight: null,
-}
-
-const findIndexOfKey = (arr, key) => {
-  let i = 0;
-  for (i = 0; i < arr.length; i++) {
-    if (arr[i].key === key) {
-      return i
-    }
-  }
-  return i
-}
-
-const swapObjects = (arr, startIndex, swapIndex) => {
-  const temp = { ...arr[swapIndex] }
-  arr[swapIndex] = { ...arr[startIndex] }
-  arr[startIndex] = temp
-  return arr.map(obj => obj)
 }
 
 const workoutSlice = createSlice({

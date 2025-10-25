@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { toKeyedObject } from '../utils/helper'
+import { toKeyedObject, findIndexOfKey, swapObjects } from '../utils/helper'
 import workoutService from "../services/workout";
 
 const initializeWorkout = workout => {
@@ -68,6 +68,15 @@ const activeWorkoutSlice = createSlice({
       state.exerciseGroups = state.exerciseGroups.map(group => group.key === groupKey ? updatedGroup : group)
       return state
     },
+    shiftExerciseGroup(state, action) {
+      const { shiftAmount, groupKey } = action.payload;
+      const groupIndex = findIndexOfKey(state.exerciseGroups, groupKey)
+      const shiftIndex = shiftAmount + groupIndex
+      if (shiftIndex > -1 && shiftIndex < state.exerciseGroups.length) {
+        state.exerciseGroups = swapObjects(state.exerciseGroups, groupIndex, shiftIndex)
+      }
+      return state
+    },
     updateExerciseSet(state, action) {
       const { groupKey, setKey, field, value } = action.payload;
       const exerciseGroup = { ...state.exerciseGroups.find(group => group.key === groupKey) };
@@ -107,6 +116,7 @@ export const {
   selectActiveExerciseGroup,
   clearActiveExerciseGroup,
   updateExerciseGroup,
+  shiftExerciseGroup,
   addExerciseSet,
   updateExerciseSet,
   removeExerciseSet } = activeWorkoutSlice.actions
