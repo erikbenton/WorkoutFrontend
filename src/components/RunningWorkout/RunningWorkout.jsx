@@ -26,7 +26,7 @@ const RunningWorkout = () => {
   // show a summary of the workout
   return (
     <div>
-      <h1>{runningWorkout.name}</h1>
+      <h1>{runningWorkout.selectedWorkout.name}</h1>
       {!runningWorkout.activeExerciseGroup
         ? <RunningWorkoutSummary />
         : <ActiveExerciseGroup
