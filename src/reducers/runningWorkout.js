@@ -84,9 +84,13 @@ const activeWorkoutSlice = createSlice({
     },
     updateExerciseSet(state, action) {
       const { groupKey, setKey, field, value } = action.payload;
+      // ensure reps are an integer value
+      const updatedValue = (field === 'reps' && value !== "")
+        ? parseInt(value)
+        : value;
       const exerciseGroup = { ...state.exerciseGroups.find(group => group.key === groupKey) };
       const exerciseSet = { ...exerciseGroup.exerciseSets.find(s => s.key === setKey) };
-      const updatedSet = { ...exerciseSet, [field]: value === "" ? null : value }
+      const updatedSet = { ...exerciseSet, [field]: updatedValue === "" ? null : updatedValue }
       exerciseGroup.exerciseSets = exerciseGroup.exerciseSets.map(s => s.key === setKey ? updatedSet : s);
       state.exerciseGroups = state.exerciseGroups.map(group => group.key === groupKey ? exerciseGroup : group);
       return state;
