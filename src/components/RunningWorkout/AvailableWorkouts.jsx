@@ -15,15 +15,18 @@ const AvailableWorkouts = () => {
   if (error) return <h1>Error getting workouts</h1>
 
   return (
-    <ul>
-      {workouts.map(workout => (
-        <li key={workout.id} onClick={() => selectWorkout(workout)}>
-          <Link>
-            {workout.name}
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <h1>Choose a workout</h1>
+      <ul>
+        {workouts.map(workout => (
+          <li key={workout.id} onClick={() => selectWorkout(workout)}>
+            <Link>
+              {workout.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
