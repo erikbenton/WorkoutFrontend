@@ -1,0 +1,86 @@
+import { useState } from "react"
+import { useSelector } from "react-redux"
+import exerciseService from "../../services/exercise"
+import { useNavigate } from "react-router-dom";
+
+const ExerciseForm = (props) => {
+  const navigate = useNavigate()
+  const bodyParts = useSelector(state => state.bodyParts)
+  const equipments = useSelector(state => state.equipment)
+  const initialExercise = props.exercise
+    ? props.exercise
+    : { name: '', bodyPart: bodyParts[0].bodyPart, equipment: equipments[0].equipment, instructions: null }
+  const [exercise, setExercise] = useState(initialExercise)
+
+  const setExerciseName = (e) => {
+    const name = e.target.value
+    setExercise({
+      ...exercise,
+      name
+    })
+  }
+
+  const selectBodyPart = (e) => {
+    const selectedBodyPart = e.target.value
+    setExercise({
+      ...exercise,
+      bodyPart: selectedBodyPart
+    })
+  }
+
+  const selectEquipment = (e) => {
+    const selectedEquipment = e.target.value
+    setExercise({
+      ...exercise,
+      equipment: selectedEquipment
+    })
+  }
+
+  const setExerciseIntructions = (e) => {
+    const instructions = e.target.value
+    setExercise({
+      ...exercise,
+      instructions: instructions === '' ? null : instructions
+    })
+  }
+
+  const saveExercise = async (e) => {
+    e.preventDefault()
+
+    if (props.exercise) {
+      const updatedExercise = await exerciseService.update(exercise)
+      navigate(`/exercises/${updatedExercise.id}`)
+    } else {
+      const newExercise = await exerciseService.create(exercise)
+      navigate(`/exercises/${newExercise.id}`)
+    }
+  }
+
+  return (
+    <form onSubmit={saveExercise}>
+      <label>Name
+        <input type="text" value={exercise.name} onChange={setExerciseName} />
+      </label>
+      <br />
+      <label>Body Part
+        <select value={exercise.bodyPart} onChange={selectBodyPart}>
+          {bodyParts.map(bp => <option key={bp.bodyPart} value={bp.bodyPart}>{bp.bodyPart}</option>)}
+        </select>
+      </label>
+      <br />
+      <label>Equipment
+        <select value={exercise.equipment} onChange={selectEquipment}>
+          {equipments.map(eq => <option key={eq.equipment} value={eq.equipment}>{eq.equipment}</option>)}
+        </select>
+      </label>
+      <br />
+      <label>Instructions
+        <textarea value={exercise.instructions ?? ''} onChange={setExerciseIntructions} />
+      </label>
+      <br />
+      <button type="submit">{props.exercise ? 'Update' : 'Create'}</button>
+    </form>
+  )
+}
+
+export default ExerciseForm

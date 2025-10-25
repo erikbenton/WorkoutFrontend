@@ -1,0 +1,73 @@
+import { removeExerciseSet, updateExerciseSet } from '../../reducers/focusedWorkout'
+import { useDispatch } from 'react-redux'
+
+const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
+  const dispatch = useDispatch()
+
+  const updateExerciseSetMinReps = (e) => {
+    const minReps = e.target.value === '' ? null : e.target.value
+    dispatch(updateExerciseSet({
+      exerciseGroupKey,
+      exerciseSet: {
+        ...exerciseSet,
+        minReps
+      }
+    }))
+  }
+
+  const updateExerciseSetMaxReps = (e) => {
+    const maxReps = e.target.value === '' ? null : e.target.value
+    dispatch(updateExerciseSet({
+      exerciseGroupKey,
+      exerciseSet: {
+        ...exerciseSet,
+        maxReps
+      }
+    }))
+  }
+
+  const updateExerciseSetWeight = (e) => {
+    const weight = e.target.value === '' ? null : e.target.value
+    dispatch(updateExerciseSet({
+      exerciseGroupKey,
+      exerciseSet: {
+        ...exerciseSet,
+        weight
+      }
+    }))
+  }
+
+  const removeSet = () => {
+    dispatch(removeExerciseSet({
+      exerciseGroupKey,
+      exerciseSet
+    }))
+  }
+
+  return (
+    <>
+      <label>Min Reps
+        <input type='number' value={exerciseSet.minReps ?? ''} onChange={updateExerciseSetMinReps} />
+      </label>
+      <label>Max Reps
+        <input type='number' value={exerciseSet.maxReps ?? ''} onChange={updateExerciseSetMaxReps} />
+      </label>
+      <label>Weight
+        <input type='number' value={exerciseSet.weight ?? ''} onChange={updateExerciseSetWeight} />
+      </label>
+      <button type="button" onClick={removeSet}>remove set</button>
+      <br />
+    </>
+  )
+}
+
+const ExerciseSetsInput = ({ exerciseGroup }) => {
+  return (
+    <>
+      {exerciseGroup.exerciseSets.map(set =>
+        <ExerciseSetInput key={set.key} exerciseSet={set} exerciseGroupKey={exerciseGroup.key} />)}
+    </>
+  )
+}
+
+export default ExerciseSetsInput
