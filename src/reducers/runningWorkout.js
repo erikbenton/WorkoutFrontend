@@ -49,9 +49,9 @@ const activeWorkoutSlice = createSlice({
       return null;
     },
     selectActiveExerciseGroup(state, action) {
-      const groupKey = action.payload;
-      const activeExerciseGroup = state.exerciseGroups.find(group => group.key === groupKey)
-      state.activeExerciseGroup = { ...activeExerciseGroup }
+      const index = action.payload;
+      const activeExerciseGroup = { ...state.exerciseGroups[index] }
+      state.activeExerciseGroup = { ...activeExerciseGroup, index }
       return state
     },
     clearActiveExerciseGroup(state) {

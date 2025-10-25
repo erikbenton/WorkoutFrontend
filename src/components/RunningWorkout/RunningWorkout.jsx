@@ -32,6 +32,8 @@ const RunningWorkout = () => {
         : <ActiveExerciseGroup
           exerciseGroup={runningWorkout.exerciseGroups
             .find(group => group.key === runningWorkout.activeExerciseGroup.key)}
+          index={runningWorkout.activeExerciseGroup.index}
+          maxIndex={runningWorkout.exerciseGroups.length - 1}
         />
       }
       <button type="button" onClick={cancelWorkout}>Cancel workout</button>

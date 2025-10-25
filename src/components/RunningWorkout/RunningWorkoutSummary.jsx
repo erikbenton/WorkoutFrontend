@@ -7,8 +7,8 @@ const RunningWorkoutSummary = () => {
   const runningWorkout = useSelector(state => state.runningWorkout)
   const dispatch = useDispatch()
 
-  const selectExerciseGroup = group => {
-    dispatch(selectActiveExerciseGroup(group.key))
+  const selectExerciseGroup = (index) => {
+    dispatch(selectActiveExerciseGroup(index))
   }
 
   const shiftGroup = (group, shiftAmount) => {
@@ -25,9 +25,9 @@ const RunningWorkoutSummary = () => {
   return (
     <>
       <ol>
-        {runningWorkout.exerciseGroups.map(group => (
+        {runningWorkout.exerciseGroups.map((group, index) => (
           <li key={group.key}>
-            <Link onClick={() => selectExerciseGroup(group)}>
+            <Link onClick={() => selectExerciseGroup(index)}>
               {group.exercise.name} - {group.exerciseSets.length} sets
             </Link>
             <button type="button" onClick={() => shiftGroup(group, -1)}>shift UP</button>
