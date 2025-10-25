@@ -1,11 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectActiveExerciseGroup, shiftExerciseGroup, removeExerciseGroup } from "../../reducers/runningWorkout";
+import { selectActiveExerciseGroup, shiftExerciseGroup, removeExerciseGroup, addMultipleExerciseGroups } from "../../reducers/runningWorkout";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import ExercisesSelection from "../Exercises/ExercisesSelection";
 
 
 const RunningWorkoutSummary = () => {
+  const [selectingExercises, setSelectingExercises] = useState(false);
+  const [selectedExercises, setSelectedExercises] = useState([]);
   const runningWorkout = useSelector(state => state.runningWorkout)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (!selectingExercises && selectedExercises.length > 0) {
+      const exercisesToAdd = [...selectedExercises]
+      dispatch(addMultipleExerciseGroups(exercisesToAdd));
+      setSelectedExercises([]);
+    }
+  }, [dispatch, selectingExercises, selectedExercises])
 
   const selectExerciseGroup = (index) => {
     dispatch(selectActiveExerciseGroup(index))
@@ -22,8 +34,14 @@ const RunningWorkoutSummary = () => {
     dispatch(removeExerciseGroup({ groupKey: group.key }))
   }
 
+  if (selectingExercises) return (
+    <ExercisesSelection
+      setSelectingExercises={setSelectingExercises}
+      setSelectedExercises={setSelectedExercises} />
+  )
+
   return (
-    <>
+    <div>
       <ol>
         {runningWorkout.exerciseGroups.map((group, index) => (
           <li key={group.key}>
@@ -36,7 +54,8 @@ const RunningWorkoutSummary = () => {
           </li>
         ))}
       </ol>
-    </>
+      <button type="button" onClick={() => setSelectingExercises(true)}>Add exercises</button>
+    </div>
   )
 }
 

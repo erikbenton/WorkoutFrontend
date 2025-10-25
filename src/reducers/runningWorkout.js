@@ -20,10 +20,12 @@ const initializeWorkout = workout => {
 const initializeWorkoutExerciseGroup = (exerciseGroup, exercise) => {
   return {
     exercise,
-    exerciseGroupId: exerciseGroup.id,
-    note: exerciseGroup.note,
+    exerciseGroupId: exerciseGroup ? exerciseGroup.id : null,
+    note: exerciseGroup ? exerciseGroup.note : null,
     comment: null,
-    exerciseSets: exerciseGroup.exerciseSets.map(initializeExerciseSet).map(toKeyedObject)
+    exerciseSets: exerciseGroup
+      ? exerciseGroup.exerciseSets.map(initializeExerciseSet).map(toKeyedObject)
+      : []
   }
 }
 
@@ -82,6 +84,14 @@ const activeWorkoutSlice = createSlice({
       state.exerciseGroups = state.exerciseGroups.filter(group => group.key !== groupKey)
       return state;
     },
+    addMultipleExerciseGroups(state, action) {
+      const exercises = action.payload;
+      const newExerciseGroups = exercises
+        .map(ex => initializeWorkoutExerciseGroup(null, ex))
+        .map(toKeyedObject);
+      state.exerciseGroups = state.exerciseGroups.concat(newExerciseGroups);
+      return state;
+    },
     updateExerciseSet(state, action) {
       const { groupKey, setKey, field, value } = action.payload;
       // ensure reps are an integer value
@@ -127,6 +137,7 @@ export const {
   updateExerciseGroup,
   shiftExerciseGroup,
   removeExerciseGroup,
+  addMultipleExerciseGroups,
   addExerciseSet,
   updateExerciseSet,
   removeExerciseSet } = activeWorkoutSlice.actions
