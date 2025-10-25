@@ -67,13 +67,13 @@ const ActiveExerciseGroup = ({ exerciseGroup }) => {
     }));
   }
 
-  const markSetCompleted = set => {
+  const toggleSetCompleted = (set, value) => {
     if (set.reps && set.reps > -1) {
       dispatch(updateExerciseSet({
         groupKey: exerciseGroup.key,
         setKey: set.key,
         field: "completed",
-        value: true
+        value
       }));
     } else {
       alert("A set's reps must be non-negative.")
@@ -98,12 +98,28 @@ const ActiveExerciseGroup = ({ exerciseGroup }) => {
         {exerciseGroup.exerciseSets.map(set => (
           <li key={set.key}>
             <label>Reps
-              <input type="number" id={`reps_${set.key}`} value={set.reps ?? ""} onChange={(e) => updateSet(e, set)} placeholder={repsPlaceholderText(set)} />
+              <input
+                disabled={set.completed}
+                type="number"
+                id={`reps_${set.key}`}
+                value={set.reps ?? ""}
+                onChange={(e) => updateSet(e, set)}
+                placeholder={repsPlaceholderText(set)}
+              />
             </label>
             <label>Weight
-              <input type="number" id={`weight_${set.key}`} value={set.weight ?? ""} onChange={(e) => updateSet(e, set)} placeholder={weightPlaceholderText(set)} />
+              <input
+                disabled={set.completed}
+                type="number"
+                id={`weight_${set.key}`}
+                value={set.weight ?? ""}
+                onChange={(e) => updateSet(e, set)}
+                placeholder={weightPlaceholderText(set)}
+              />
             </label>
-            <button type="button" disabled={set.completed} onClick={() => markSetCompleted(set)}>completed</button>
+            <button type="button" onClick={() => toggleSetCompleted(set, !set.completed)}>
+              {set.completed ? 'edit' : 'completed'}
+            </button>
             <button type="button" onClick={() => removeSet(set)}>remove set</button>
           </li>
         ))}
