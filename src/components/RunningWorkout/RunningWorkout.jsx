@@ -28,7 +28,7 @@ const AvailableWorkouts = () => {
   )
 }
 
-const ActiveExerciseGroup = ({ activeExerciseGroup }) => {
+const ActiveExerciseGroup = ({ exerciseGroup }) => {
   const dispatch = useDispatch()
 
   const backToSummary = () => {
@@ -39,7 +39,7 @@ const ActiveExerciseGroup = ({ activeExerciseGroup }) => {
     const [field] = e.target.id.split("_");
     const value = e.target.value;
     dispatch(updateExerciseGroup({
-      groupKey: activeExerciseGroup.key,
+      groupKey: exerciseGroup.key,
       field,
       value
     }))
@@ -49,7 +49,7 @@ const ActiveExerciseGroup = ({ activeExerciseGroup }) => {
     const [field] = e.target.id.split("_");
     const value = e.target.value;
     dispatch(updateExerciseSet({
-      groupKey: activeExerciseGroup.key,
+      groupKey: exerciseGroup.key,
       setKey: set.key,
       field,
       value
@@ -57,12 +57,12 @@ const ActiveExerciseGroup = ({ activeExerciseGroup }) => {
   }
 
   const addSet = () => {
-    dispatch(addExerciseSet({ groupKey: activeExerciseGroup.key }))
+    dispatch(addExerciseSet({ groupKey: exerciseGroup.key }))
   }
 
   const removeSet = (set) => {
     dispatch(removeExerciseSet({
-      groupKey: activeExerciseGroup.key,
+      groupKey: exerciseGroup.key,
       setKey: set.key
     }));
   }
@@ -70,7 +70,7 @@ const ActiveExerciseGroup = ({ activeExerciseGroup }) => {
   const markSetCompleted = set => {
     if (set.reps && set.reps > -1) {
       dispatch(updateExerciseSet({
-        groupKey: activeExerciseGroup.key,
+        groupKey: exerciseGroup.key,
         setKey: set.key,
         field: "completed",
         value: true
@@ -89,13 +89,13 @@ const ActiveExerciseGroup = ({ activeExerciseGroup }) => {
     <div>
       <button type="button" onClick={backToSummary}>Back to summary</button>
       <h2>
-        <Link to={`/exercises/${activeExerciseGroup.exercise.id}`}>
-          {activeExerciseGroup.exercise.name}
+        <Link to={`/exercises/${exerciseGroup.exercise.id}`}>
+          {exerciseGroup.exercise.name}
         </Link>
       </h2>
-      {activeExerciseGroup.note && <p>{activeExerciseGroup.note}</p>}
+      {exerciseGroup.note && <p>{exerciseGroup.note}</p>}
       <ol>
-        {activeExerciseGroup.exerciseSets.map(set => (
+        {exerciseGroup.exerciseSets.map(set => (
           <li key={set.key}>
             <label>Reps
               <input type="number" id={`reps_${set.key}`} value={set.reps ?? ""} onChange={(e) => updateSet(e, set)} placeholder={repsPlaceholderText(set)} />
@@ -111,7 +111,7 @@ const ActiveExerciseGroup = ({ activeExerciseGroup }) => {
       <button type="button" onClick={addSet}>Add set</button>
       <br />
       <label>Comment
-        <input type="text" id={`comment_${activeExerciseGroup.key}`} value={activeExerciseGroup.comment ?? ""} onChange={(e) => updateGroup(e)} />
+        <input type="text" id={`comment_${exerciseGroup.key}`} value={exerciseGroup.comment ?? ""} onChange={(e) => updateGroup(e)} />
       </label>
     </div>
   )
@@ -168,7 +168,7 @@ const RunningWorkout = () => {
       {!runningWorkout.activeExerciseGroup
         ? <RunningWorkoutSummary />
         : <ActiveExerciseGroup
-          activeExerciseGroup={runningWorkout.exerciseGroups
+          exerciseGroup={runningWorkout.exerciseGroups
             .find(group => group.key === runningWorkout.activeExerciseGroup.key)}
         />
       }
