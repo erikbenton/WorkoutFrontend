@@ -1,13 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectActiveExerciseGroup, shiftExerciseGroup, removeExerciseGroup, addMultipleExerciseGroups } from "../../reducers/runningWorkout";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import ExercisesSelection from "../Exercises/ExercisesSelection";
 
 
-const RunningWorkoutSummary = () => {
-  const [selectingExercises, setSelectingExercises] = useState(false);
-  const [selectedExercises, setSelectedExercises] = useState([]);
+const RunningWorkoutSummary = ({
+  selectingExercises,
+  setSelectingExercises,
+  selectedExercises,
+  setSelectedExercises }) => {
   const runningWorkout = useSelector(state => state.runningWorkout)
   const dispatch = useDispatch()
 
@@ -17,7 +19,7 @@ const RunningWorkoutSummary = () => {
       dispatch(addMultipleExerciseGroups(exercisesToAdd));
       setSelectedExercises([]);
     }
-  }, [dispatch, selectingExercises, selectedExercises])
+  }, [dispatch, selectingExercises, selectedExercises, setSelectedExercises])
 
   const selectExerciseGroup = (index) => {
     dispatch(selectActiveExerciseGroup(index))

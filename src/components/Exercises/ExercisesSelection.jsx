@@ -1,7 +1,14 @@
+import { useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 
-const ExercisesSelection = ({ setSelectingExercises, setSelectedExercises }) => {
+const ExercisesSelection = ({ setSelectingExercises, setSelectedExercises, selectedExercises, maxSelection }) => {
   const { data: exercises, loading } = useFetch('exercises');
+
+  useEffect(() => {
+    if (maxSelection && selectedExercises.length >= maxSelection) {
+      setSelectingExercises(false);
+    }
+  }, [maxSelection, selectedExercises, setSelectingExercises])
 
   const setSelection = (e, exercise) => {
     const { checked } = e.target
