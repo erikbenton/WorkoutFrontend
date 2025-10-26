@@ -1,8 +1,9 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams, useNavigate } from "react-router-dom"
-import { getWorkoutDetails } from '../../reducers/focusedWorkout'
-import { deleteWorkout } from "../../reducers/workouts"
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { getWorkoutDetails } from "../../reducers/focusedWorkout";
+import { deleteWorkout } from "../../reducers/workouts";
+import { initializeRunningWorkout } from "../../reducers/runningWorkout";
 
 const WorkoutDetails = () => {
   const id = Number(useParams().id)
@@ -11,18 +12,23 @@ const WorkoutDetails = () => {
   const workout = useSelector(state => state.focusedWorkout)
 
   useEffect(() => {
-    dispatch(getWorkoutDetails(id))
-  }, [dispatch, id])
+    dispatch(getWorkoutDetails(id));
+  }, [dispatch, id]);
 
   const navigateToEditWorkoutForm = () => {
-    navigate(`/workouts/edit/${workout.id}`)
+    navigate(`/workouts/edit/${workout.id}`);
   }
 
-    const removeWorkout = (workout) => {
-    const response = confirm(`Delete workout ${workout.name}?`)
+  const navigateToRunningWorkout = () => {
+    dispatch(initializeRunningWorkout(workout.id));
+    navigate("/runningWorkout");
+  }
+
+  const removeWorkout = (workout) => {
+    const response = confirm(`Delete workout ${workout.name}?`);
     if (response) {
-      dispatch(deleteWorkout(workout))
-      navigate('/workouts')
+      dispatch(deleteWorkout(workout));
+      navigate("/workouts");
     }
   }
 
@@ -31,15 +37,15 @@ const WorkoutDetails = () => {
       <div>
         Loading data...
       </div>
-    )
+    );
   }
 
   const repsText = set =>
-    `${set.minReps !== null ? set.minReps : ''}
-    ${set.minReps && set.maxReps ? '-' : ''}
-    ${set.maxReps !== null ? set.maxReps : ''}`
+    `${set.minReps ? set.minReps : ""}
+    ${set.minReps && set.maxReps ? "-" : ""}
+    ${set.maxReps ? set.maxReps : ""}`;
 
-  const weightText = set => set.weight !== null ? `x ${set.weight} lbs` : 'reps'
+  const weightText = set => set.weight !== null ? `x ${set.weight} lbs` : "reps"
 
   return (
     <>
@@ -59,6 +65,7 @@ const WorkoutDetails = () => {
         )}
       </ol>
       <button onClick={navigateToEditWorkoutForm}>Edit Workout</button>
+      <button onClick={navigateToRunningWorkout}>Run this Workout</button>
       <button type="button" onClick={() => removeWorkout(workout)}>Delete?</button>
     </>
   )
