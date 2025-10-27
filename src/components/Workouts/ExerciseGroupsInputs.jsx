@@ -46,14 +46,21 @@ const ExerciseGroupInput = ({ exerciseGroup, exercises }) => {
   return (
     <>
       <label>Exercise
-        <select value={exercise.id} onChange={(e) => selectExercise(e)}>
-          {exercises.map(e => <option key={e.id} value={e.id}>{e.name}</option>)}
+        <select
+          id={`exercise_${exerciseGroup.key}`}
+          value={exercise.id}
+          onChange={(e) => selectExercise(e)}
+        >
+          {exercises.map(e => (
+            <option key={e.id} value={e.id}>{e.name}</option>)
+          )}
         </select>
       </label>
       <label>
         Note
         <input
           type='text'
+          id={`note_${exerciseGroup.key}`}
           value={exerciseGroup.note ?? ''}
           onChange={updateExerciseGroupNote}
         />
@@ -73,9 +80,13 @@ const ExerciseGroupInput = ({ exerciseGroup, exercises }) => {
 const ExerciseGroupsInput = ({ exerciseGroups, exercises }) => {
   return (
     <>
-      {exerciseGroups.map(group =>
-        (<ExerciseGroupInput key={group.key} exerciseGroup={group} exercises={exercises} />)
-      )}
+      {exerciseGroups.map(group => (
+        <ExerciseGroupInput
+          key={group.key}
+          exerciseGroup={group}
+          exercises={exercises}
+        />
+      ))}
     </>
   )
 }

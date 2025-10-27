@@ -47,13 +47,13 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
   return (
     <>
       <label>Min Reps
-        <input type='number' value={exerciseSet.minReps ?? ''} onChange={updateExerciseSetMinReps} />
+        <input type='number' id={`minReps_${exerciseSet.key}`} value={exerciseSet.minReps ?? ''} onChange={updateExerciseSetMinReps} />
       </label>
       <label>Max Reps
-        <input type='number' value={exerciseSet.maxReps ?? ''} onChange={updateExerciseSetMaxReps} />
+        <input type='number' id={`maxReps_${exerciseSet.key}`} value={exerciseSet.maxReps ?? ''} onChange={updateExerciseSetMaxReps} />
       </label>
       <label>Weight
-        <input type='number' value={exerciseSet.weight ?? ''} onChange={updateExerciseSetWeight} />
+        <input type='number' id={`weight_${exerciseSet.key}`} value={exerciseSet.weight ?? ''} onChange={updateExerciseSetWeight} />
       </label>
       <button type="button" onClick={removeSet}>remove set</button>
       <br />

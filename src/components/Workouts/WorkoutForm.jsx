@@ -68,9 +68,9 @@ const WorkoutForm = (props) => {
   )
 
   return (
-    <form onSubmit={id ? updateEditedWorkout : createNewWorkout}>
+    <form id="workout_form" onSubmit={id ? updateEditedWorkout : createNewWorkout}>
       <label>Name
-        <input type='text' value={workout.name ?? ""} onChange={(e) => dispatch(updateWorkoutName({ ...workout, name: e.target.value }))} />
+        <input id="workout_name" type='text' value={workout.name ?? ""} onChange={(e) => dispatch(updateWorkoutName({ ...workout, name: e.target.value }))} />
       </label>
       <br />
       <ExerciseGroupsInput exerciseGroups={workout.exerciseGroups} exercises={exercises} />
