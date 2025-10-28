@@ -5,6 +5,8 @@ import workoutService from "../services/workout";
 const initializeWorkout = workout => {
   const now = new Date()
   return {
+    name: workout ? workout.name : null,
+    note: null,
     selectedWorkout: { ...workout },
     activeExerciseGroup: null,
     workoutId: workout ? workout.id : null,
