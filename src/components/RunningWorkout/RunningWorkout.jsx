@@ -5,6 +5,8 @@ import ActiveExerciseGroup from "./ActiveExerciseGroup";
 import RunningWorkoutSummary from "./RunningWorkoutSummary";
 import { useState } from "react";
 import RunningWorkoutName from "./RunningWorkoutName";
+import { createCompletedWorkout } from "../../utils/helper";
+import completedWorkoutService from "../../services/completedWorkout"
 
 const RunningWorkout = () => {
   const [selectingExercises, setSelectingExercises] = useState(false);
@@ -19,8 +21,14 @@ const RunningWorkout = () => {
     }
   }
 
-  const completeWorkout = () => {
-    
+  const completeWorkout = async () => {
+    const completedWorkout = createCompletedWorkout(runningWorkout);
+    try {
+      const savedCompletedWorkout = await completedWorkoutService
+        .create(completedWorkout);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   // if no running workout, show list of available workouts

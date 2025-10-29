@@ -46,7 +46,8 @@ export const createCompletedWorkout = (workout) => {
 
   const completedExerciseGroups = workout.exerciseGroups
     .map(group => {
-      group.completedExerciseSets = group.exerciseSets.filter(set => set.completed)
+      const completedExerciseSets = group.exerciseSets.filter(set => set.completed)
+      return { ...group, completedExerciseSets };
     })
     .filter(group => group.completedExerciseSets.length > 0);
 
@@ -54,7 +55,7 @@ export const createCompletedWorkout = (workout) => {
   const endDate = workout.endTime ? Date.parse(workout.endTime) : Date.now();
   const time = endDate - startDate;
   const duration = formatTime(time);
-  
+
   return {
     name: workout.name,
     note: workout.note,
