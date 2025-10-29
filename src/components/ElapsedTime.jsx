@@ -1,8 +1,6 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from "react";
+import { formatTime } from "../utils/helper";
 
-const SECOND = 1000;
-const MINUTE = SECOND * 60;
-const HOUR = MINUTE * 60;
 const INTERVAL_TIME = 100;
 
 const ElapsedTimer = ({ startTime }) => {
@@ -19,14 +17,10 @@ const ElapsedTimer = ({ startTime }) => {
     return () => clearInterval(intervalId);
   }, [])
 
-  const hours = Math.floor(time / HOUR);
-  const minutes = Math.floor((time / MINUTE) % 60);
-  const seconds = Math.floor((time / SECOND) % 60);
-
   return (
     <>
       <span style={{fontFamily: "monospace"}}>
-        {(hours < 10 ? "0" : "") + hours}:{(minutes < 10 ? "0" : "") + minutes}:{(seconds < 10 ? '0' : '') + seconds}
+        {formatTime(time)}
       </span>
     </>
   )

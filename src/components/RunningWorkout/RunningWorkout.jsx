@@ -19,6 +19,10 @@ const RunningWorkout = () => {
     }
   }
 
+  const completeWorkout = () => {
+    
+  }
+
   // if no running workout, show list of available workouts
   if (!runningWorkout) {
     return (
@@ -50,6 +54,7 @@ const RunningWorkout = () => {
         />
       }
       <button type="button" onClick={cancelWorkout}>Cancel workout</button>
+      <button type="button" onClick={completeWorkout}>Complete workout</button>
     </div>
   )
 }
