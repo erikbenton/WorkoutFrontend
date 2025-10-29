@@ -8,6 +8,7 @@ const Menu = () => {
   const padding = {
     padding: "0.25rem"
   }
+
   return (
     <div>
       <Link style={padding} to="/">Home</Link>

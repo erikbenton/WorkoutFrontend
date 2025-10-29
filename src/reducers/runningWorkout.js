@@ -139,6 +139,7 @@ const activeWorkoutSlice = createSlice({
 
 export const initializeRunningWorkout = (id) => {
   return async dispatch => {
+    dispatch(clearRunningWorkout());
     const workout = await workoutService.getDetails(id)
     dispatch(initializeActiveWorkout(workout))
   }

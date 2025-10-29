@@ -6,10 +6,11 @@ import { deleteWorkout } from "../../reducers/workouts";
 import { initializeRunningWorkout } from "../../reducers/runningWorkout";
 
 const WorkoutDetails = () => {
-  const id = Number(useParams().id)
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const workout = useSelector(state => state.focusedWorkout)
+  const id = Number(useParams().id);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const workout = useSelector(state => state.focusedWorkout);
+  const runningWorkout = useSelector(state => state.runningWorkout);
 
   useEffect(() => {
     dispatch(getWorkoutDetails(id));
@@ -20,6 +21,12 @@ const WorkoutDetails = () => {
   }
 
   const navigateToRunningWorkout = () => {
+    if (runningWorkout) {
+      const response = confirm("There is already a workout running. Do you want to cancel that workout and run this one instead?");
+      if (!response) {
+        return; // don't reset the workout
+      }
+    }
     dispatch(initializeRunningWorkout(workout.id));
     navigate("/runningWorkout");
   }
