@@ -4,12 +4,13 @@ import AvailableWorkouts from "./AvailableWorkouts";
 import ActiveExerciseGroup from "./ActiveExerciseGroup";
 import RunningWorkoutSummary from "./RunningWorkoutSummary";
 import { useState } from "react";
+import RunningWorkoutName from "./RunningWorkoutName";
 
 const RunningWorkout = () => {
   const [selectingExercises, setSelectingExercises] = useState(false);
   const [selectedExercises, setSelectedExercises] = useState([]);
-  const runningWorkout = useSelector(state => state.runningWorkout)
-  const dispatch = useDispatch()
+  const runningWorkout = useSelector(state => state.runningWorkout);
+  const dispatch = useDispatch();
 
   const cancelWorkout = () => {
     const cancelingWorkout = confirm("Cancel the current workout?")
@@ -29,7 +30,7 @@ const RunningWorkout = () => {
   // show a summary of the workout
   return (
     <div>
-      <h1>{runningWorkout.selectedWorkout.name}</h1>
+      <RunningWorkoutName />
       {!runningWorkout.activeExerciseGroup
         ? <RunningWorkoutSummary
           selectingExercises={selectingExercises}
@@ -42,7 +43,7 @@ const RunningWorkout = () => {
             .find(group => group.key === runningWorkout.activeExerciseGroup.key)}
           index={runningWorkout.activeExerciseGroup.index}
           maxIndex={runningWorkout.exerciseGroups.length - 1}
-                    selectingExercises={selectingExercises}
+          selectingExercises={selectingExercises}
           setSelectingExercises={setSelectingExercises}
           selectedExercises={selectedExercises}
           setSelectedExercises={setSelectedExercises}

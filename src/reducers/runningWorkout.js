@@ -52,6 +52,14 @@ const activeWorkoutSlice = createSlice({
     clearRunningWorkout() {
       return null;
     },
+    updateRunningWorkout(state, action) {
+      const { field, value } = action.payload;
+      const updatedRunningWorkout = {
+        ...state,
+        [field]: value === "" ? null : value
+      };
+      return updatedRunningWorkout;
+    },
     selectActiveExerciseGroup(state, action) {
       const index = action.payload;
       const activeExerciseGroup = { ...state.exerciseGroups[index] }
@@ -139,6 +147,7 @@ export const initializeRunningWorkout = (id) => {
 export const {
   initializeActiveWorkout,
   clearRunningWorkout,
+  updateRunningWorkout,
   selectActiveExerciseGroup,
   updateActiveExerciseGroupExercise,
   clearActiveExerciseGroup,
