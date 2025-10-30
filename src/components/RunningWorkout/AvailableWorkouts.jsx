@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import useFetch from "../../hooks/useFetch";
-import { initializeRunningWorkout } from "../../reducers/runningWorkout";
+import { initializeActiveWorkout, initializeRunningWorkout } from "../../reducers/runningWorkout";
 import { Link } from "react-router-dom";
 
 const AvailableWorkouts = () => {
@@ -9,6 +9,10 @@ const AvailableWorkouts = () => {
 
   const selectWorkout = workout => {
     dispatch(initializeRunningWorkout(workout.id));
+  }
+
+  const startEmptyWorkout = () => {
+    dispatch(initializeActiveWorkout(null))
   }
 
   if (loading) return <h1>Loading workouts...</h1>
@@ -26,6 +30,7 @@ const AvailableWorkouts = () => {
           </li>
         ))}
       </ul>
+      <button type="button" onClick={startEmptyWorkout}>Start an Empty Workout</button>
     </div>
   )
 }
