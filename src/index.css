@@ -1,3 +1,7 @@
 nav span {
   cursor: pointer;
 }
+
+nav a {
+  text-decoration: none;
+}
