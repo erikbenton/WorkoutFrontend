@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
 import exerciseService from '../../services/exercise'
 
@@ -25,6 +25,7 @@ const ExerciseDetails = () => {
       <section>Body Part: {exercise.bodyPart}</section>
       <section>Equipment: {exercise.equipment}</section>
       <section>Instructions: {exercise.instructions ?? 'No instructions'}</section>
+      <Link to="/exercises">View all exercises</Link>
       <button type="button" onClick={() => navigate(`/exercises/edit/${exercise.id}`)}>Edit</button>
       <button type="button" onClick={deleteExercise}>Delete</button>
     </div>
