@@ -1,19 +1,21 @@
-import { Routes, Route } from 'react-router-dom'
-import WorkoutList from './components/Workouts/WorkoutList'
-import Home from './components/Home'
-import WorkoutDetails from './components/Workouts/WorkoutDetails'
-import ExerciseList from './components/Exercises/ExerciseList'
-import ExerciseDetails from './components/Exercises/ExerciseDetails'
-import { useDispatch } from 'react-redux'
-import { useEffect } from 'react'
-import { initializeBodyParts } from './reducers/bodyParts'
-import { initializeEquipment } from './reducers/equipment'
-import WorkoutForm from './components/Workouts/WorkoutForm'
-import EditExerciseForm from './components/Exercises/EditExerciseForm'
-import ExerciseForm from './components/Exercises/ExerciseForm'
-import EditWorkoutForm from './components/Workouts/EditWorkoutForm'
-import RunningWorkout from './components/RunningWorkout/RunningWorkout'
-import Menu from "./components/Menu"
+import { Routes, Route } from "react-router-dom";
+import WorkoutList from "./components/Workouts/WorkoutList";
+import Home from "./components/Home";
+import WorkoutDetails from "./components/Workouts/WorkoutDetails";
+import ExerciseList from "./components/Exercises/ExerciseList";
+import ExerciseDetails from "./components/Exercises/ExerciseDetails";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { initializeBodyParts } from "./reducers/bodyParts";
+import { initializeEquipment } from "./reducers/equipment";
+import WorkoutForm from "./components/Workouts/WorkoutForm";
+import EditExerciseForm from "./components/Exercises/EditExerciseForm";
+import ExerciseForm from "./components/Exercises/ExerciseForm";
+import EditWorkoutForm from "./components/Workouts/EditWorkoutForm";
+import RunningWorkout from "./components/RunningWorkout/RunningWorkout";
+import Menu from "./components/Menu";
+import CompletedWorkoutDetails from "./components/CompletedWorkouts/CompletedWorkoutDetails";
+import CompletedWorkoutHistoryList from "./components/CompletedWorkouts/CompletedWorkoutHistoryList";
 
 const App = () => {
   const dispatch = useDispatch()
@@ -39,6 +41,9 @@ const App = () => {
         <Route path="/exercises/create" element={<ExerciseForm exercise={null} />} />
         <Route path="/exercises/edit/:id" element={<EditExerciseForm />} />
         <Route path="/runningWorkout" element={<RunningWorkout />} />
+        {/* Completed Workout routes */}
+        <Route path="/completedWorkouts" element={<CompletedWorkoutHistoryList />} />
+        <Route path="/completedWorkouts/:id" element={<CompletedWorkoutDetails />} />
       </Routes>
     </>
   )

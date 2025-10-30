@@ -7,12 +7,14 @@ import { useState } from "react";
 import RunningWorkoutName from "./RunningWorkoutName";
 import { createCompletedWorkout } from "../../utils/helper";
 import completedWorkoutService from "../../services/completedWorkout"
+import { useNavigate } from "react-router-dom";
 
 const RunningWorkout = () => {
   const [selectingExercises, setSelectingExercises] = useState(false);
   const [selectedExercises, setSelectedExercises] = useState([]);
   const runningWorkout = useSelector(state => state.runningWorkout);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const cancelWorkout = () => {
     const cancelingWorkout = confirm("Cancel the current workout?")
@@ -26,6 +28,8 @@ const RunningWorkout = () => {
     try {
       const savedCompletedWorkout = await completedWorkoutService
         .create(completedWorkout);
+      dispatch(clearRunningWorkout());
+      navigate(`/completedWorkouts/${savedCompletedWorkout.id}`);
     } catch (e) {
       console.error(e);
     }

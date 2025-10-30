@@ -15,6 +15,7 @@ const Menu = () => {
       <Link style={padding} to="/Programs">Programs</Link>
       <Link style={padding} to="/Workouts">Workouts</Link>
       <Link style={padding} to="/Exercises">Exercises</Link>
+      <Link style={padding} to="/completedWorkouts">Workout History</Link>
       {(!match || !runningWorkout)
         && <Link style={padding} to="/runningWorkout">
           {runningWorkout ? "Continue Workout" : "Do a Workout"}
