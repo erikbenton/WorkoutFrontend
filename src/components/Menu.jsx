@@ -1,28 +1,50 @@
 import { useMatch, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ElapsedTimer from "./ElapsedTime";
+import { Table, Form, Button, Alert, Navbar, Nav } from "react-bootstrap";
 
 const Menu = () => {
   const match = useMatch("/runningWorkout")
   const runningWorkout = useSelector(state => state.runningWorkout)
   const padding = {
     padding: "0.25rem"
-  }
+  };
 
   return (
-    <div>
-      <Link style={padding} to="/">Home</Link>
-      <Link style={padding} to="/Programs">Programs</Link>
-      <Link style={padding} to="/Workouts">Workouts</Link>
-      <Link style={padding} to="/Exercises">Exercises</Link>
-      <Link style={padding} to="/completedWorkouts">Workout History</Link>
-      {(!match || !runningWorkout)
-        && <Link style={padding} to="/runningWorkout">
-          {runningWorkout ? "Continue Workout" : "Do a Workout"}
-        </Link>
-      }
-      {runningWorkout && <ElapsedTimer startTime={Date.parse(runningWorkout.startTime)} />}
-    </div>
+    <Navbar className="d-flex" collapseOnSelect expand="lg" bg="light" variant="light">
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="me-auto">
+          <Nav.Link href="#" to="/" as="span">
+            <Link style={padding} to="/">Home</Link>
+          </Nav.Link>
+          <Nav.Link href="#" to="/Programs" as="span">
+            <Link style={padding} to="/Programs">Programs</Link>
+          </Nav.Link>
+          <Nav.Link href="#" to="/Workouts" as="span">
+            <Link style={padding} to="/Workouts">Workouts</Link>
+          </Nav.Link>
+          <Nav.Link href="#" to="/Exercises" as="span">
+            <Link style={padding} to="/Exercises">Exercises</Link>
+          </Nav.Link>
+          <Nav.Link href="#" to="/completedWorkouts" as="span">
+            <Link style={padding} to="/completedWorkouts">Workout History</Link>
+          </Nav.Link>
+          <Nav.Link href="#" as="span">
+            {(!match || !runningWorkout)
+              && <Link style={padding} to="/runningWorkout">
+                {runningWorkout ? "Continue Workout" : "Do a Workout"}
+              </Link>
+            }
+          </Nav.Link>
+          {runningWorkout && (
+            <Nav.Item className="justify-content-end">
+              <ElapsedTimer startTime={Date.parse(runningWorkout.startTime)} />
+            </Nav.Item>
+          )}
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   )
 }
 

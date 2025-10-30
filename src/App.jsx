@@ -26,7 +26,7 @@ const App = () => {
   }, [dispatch])
 
   return (
-    <>
+    <div className="container">
       <Menu />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -45,7 +45,7 @@ const App = () => {
         <Route path="/completedWorkouts" element={<CompletedWorkoutHistoryList />} />
         <Route path="/completedWorkouts/:id" element={<CompletedWorkoutDetails />} />
       </Routes>
-    </>
+    </div>
   )
 }
 

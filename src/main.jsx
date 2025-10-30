@@ -10,6 +10,7 @@ import equipmentReducer from './reducers/equipment'
 import focusedWorkoutReducer from './reducers/focusedWorkout'
 import runningWorkoutReducer from './reducers/runningWorkout.js'
 import App from './App.jsx'
+import "./index.css"
 
 const store = configureStore({
   reducer: {
