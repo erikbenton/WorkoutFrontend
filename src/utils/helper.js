@@ -64,3 +64,11 @@ export const createCompletedWorkout = (workout) => {
     duration
   }
 }
+
+export const formatExerciseNames = (exerciseNames) => {
+  const maxLength = 65;
+  const joinedNames = exerciseNames.join(", ");
+  return joinedNames.length < maxLength
+    ? joinedNames
+    : joinedNames.slice(0, maxLength) + "...";
+}

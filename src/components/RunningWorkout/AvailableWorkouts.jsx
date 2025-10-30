@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import useFetch from "../../hooks/useFetch";
 import { initializeActiveWorkout, initializeRunningWorkout } from "../../reducers/runningWorkout";
 import { Link } from "react-router-dom";
+import { formatExerciseNames } from "../../utils/helper";
 
 const AvailableWorkouts = () => {
   const { data: workouts, loading, error } = useFetch('workouts');
@@ -27,6 +28,7 @@ const AvailableWorkouts = () => {
             <Link>
               {workout.name}
             </Link>
+            <p>{formatExerciseNames(workout.exerciseNames)}</p>
           </li>
         ))}
       </ul>

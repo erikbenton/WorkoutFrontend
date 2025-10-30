@@ -4,7 +4,7 @@ import { resetWorkout } from "../../reducers/focusedWorkout"
 import { useEffect } from "react"
 import { initializeWorkouts } from "../../reducers/workouts"
 import useFetch from "../../hooks/useFetch"
-
+import { formatExerciseNames } from "../../utils/helper";
 
 const WorkoutList = () => {
   const { data: workouts, loading, error } = useFetch("workouts");
@@ -20,14 +20,6 @@ const WorkoutList = () => {
     navigate('/workouts/create')
   }
 
-  const formatExerciseName = (exerciseNames) => {
-    const maxLength = 65;
-    const joinedNames = exerciseNames.join(", ");
-    return joinedNames.length < maxLength
-      ? joinedNames
-      : joinedNames.slice(0, maxLength) + "...";
-  }
-
   if (loading) return <h1>Loading workouts...</h1>;
   if (error) return <h1>Unable to get workouts: {error.status}</h1>;
 
@@ -40,7 +32,7 @@ const WorkoutList = () => {
           {workouts.map(workout =>
           <li key={workout.id}>
             <Link to={`/workouts/${workout.id}`}>{workout.name}</Link>
-            <p>{formatExerciseName(workout.exerciseNames)}</p>
+            <p>{formatExerciseNames(workout.exerciseNames)}</p>
           </li>)}
         </ul>
       }
