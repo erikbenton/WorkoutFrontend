@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { initializeExercises } from '../../reducers/exercises'
+import { Table } from 'react-bootstrap'
 
 const ExerciseListRow = ({ exercise }) => {
   return (
@@ -14,6 +15,9 @@ const ExerciseListRow = ({ exercise }) => {
 }
 
 const ExerciseList = () => {
+  const [nameFilter, setNameFilter] = useState("");
+  const [bodyPartFilter, setBodyPartFilter] = useState("");
+  const [equipmentFilter, setEquipmentFilter] = useState("");
   const exercises = useSelector(state => state.exercises)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -26,21 +30,51 @@ const ExerciseList = () => {
     return <div>Loading data...</div>
   }
 
+  const filteredExercises = exercises
+    .filter(ex => {
+      return ex.name.toLowerCase().includes(nameFilter.toLowerCase()) &&
+        ex.bodyPart.toLowerCase().includes(bodyPartFilter.toLowerCase()) &&
+        ex.equipment.toLowerCase().includes(equipmentFilter.toLowerCase())
+    });
+
   return (
     <div>
       <h2>Exercises</h2>
-      <table>
+      <Table striped>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Body Part</th>
-            <th>Equipment</th>
+            <th>Name
+              <input
+                id="exercise_name_filter"
+                type="text"
+                placeholder="filter by name"
+                value={nameFilter}
+                onChange={(e) => setNameFilter(e.target.value)} />
+            </th>
+            <th>Body Part
+              <input
+                id="exercise_bodyParts_filter"
+                type="text"
+                placeholder="filter by body part"
+                value={bodyPartFilter}
+                onChange={(e) => setBodyPartFilter(e.target.value)} />
+            </th>
+            <th>Equipment
+              <input
+                id="exercise_equipment_filter"
+                type="text"
+                placeholder="filter by equipment"
+                value={equipmentFilter}
+                onChange={(e) => setEquipmentFilter(e.target.value)} />
+            </th>
           </tr>
         </thead>
         <tbody>
-          {exercises.map(exercise => <ExerciseListRow key={exercise.id} exercise={exercise} />)}
+          {filteredExercises.map(exercise => (
+            <ExerciseListRow key={exercise.id} exercise={exercise} />
+          ))}
         </tbody>
-      </table>
+      </Table>
       <button type="button" onClick={() => navigate("/exercises/create")}>Create Exercise</button>
     </div>
   )
