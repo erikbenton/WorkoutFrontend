@@ -71,6 +71,7 @@ const WorkoutDetails = () => {
           </li>
         )}
       </ol>
+      <Link to="/workouts">View all workouts</Link>
       <button onClick={navigateToEditWorkoutForm}>Edit Workout</button>
       <button onClick={navigateToRunningWorkout}>Run this Workout</button>
       <button type="button" onClick={() => removeWorkout(workout)}>Delete?</button>

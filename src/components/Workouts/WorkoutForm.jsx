@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import ExerciseGroupsInput from "./ExerciseGroupsInputs"
 import { useNavigate, useParams } from "react-router-dom"
 import workoutService from '../../services/workout'
-import { addWorkout } from "../../reducers/workouts"
 import useFetch from "../../hooks/useFetch"
 import ExercisesSelection from "../Exercises/ExercisesSelection";
 
@@ -37,7 +36,6 @@ const WorkoutForm = (props) => {
 
     try {
       const savedWorkout = await workoutService.create(workout)
-      dispatch(addWorkout({ id: savedWorkout.id, name: savedWorkout.name }))
       navigate(`/workouts/${savedWorkout.id}`)
     } catch (error) {
       console.error(error)
