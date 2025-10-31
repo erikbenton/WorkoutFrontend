@@ -15,7 +15,7 @@ const CompletedWorkoutHistoryList = () => {
 
   return (
     <div>
-      <h2>Workouts</h2>
+      <h2>Workout Histories</h2>
       <ul>
         {completedWorkouts.map(workout =>
           <li key={workout.id}>

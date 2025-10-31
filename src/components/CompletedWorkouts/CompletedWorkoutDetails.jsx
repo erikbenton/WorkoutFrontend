@@ -33,7 +33,7 @@ const CompletedWorkoutDetails = () => {
           </li>
         )}
       </ol>
-      <Button variant="outline-primary"><Link to="/completedWorkouts">Workouts History</Link></Button>
+      <Button variant="outline-primary"><Link to="/completedWorkouts">Workout Histories</Link></Button>
     </>
   )
 }
