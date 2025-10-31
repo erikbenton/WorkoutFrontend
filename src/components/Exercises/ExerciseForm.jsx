@@ -102,7 +102,6 @@ const ExerciseForm = (props) => {
           />
         </label>
         <br />
-        <Button variant="outline-primary"><Link to="/exercises">View all exercises</Link></Button>
         <Button variant="success" type="submit">{props.exercise ? 'Update' : 'Create'}</Button>
         <Button variant="warning" type="button">
           <Link to={props.exercise ? `/exercises/${props.exercise.id}` : "/exercises"}>

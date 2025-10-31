@@ -56,7 +56,7 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
       <label>Weight
         <input type='number' id={`weight_${exerciseSet.key}`} value={exerciseSet.weight ?? ''} onChange={updateExerciseSetWeight} />
       </label>
-      <Button variant="danger" type="button" onClick={removeSet}>remove set</Button>
+      <Button variant="danger" type="button" onClick={removeSet}>X</Button>
       <br />
     </>
   )
