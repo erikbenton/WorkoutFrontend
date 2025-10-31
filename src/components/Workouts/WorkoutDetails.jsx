@@ -4,6 +4,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { getWorkoutDetails } from "../../reducers/focusedWorkout";
 import { deleteWorkout } from "../../reducers/workouts";
 import { initializeRunningWorkout } from "../../reducers/runningWorkout";
+import { Button } from "react-bootstrap";
 
 const WorkoutDetails = () => {
   const id = Number(useParams().id);
@@ -71,10 +72,10 @@ const WorkoutDetails = () => {
           </li>
         )}
       </ol>
-      <Link to="/workouts">View all workouts</Link>
-      <button onClick={navigateToEditWorkoutForm}>Edit Workout</button>
-      <button onClick={navigateToRunningWorkout}>Run this Workout</button>
-      <button type="button" onClick={() => removeWorkout(workout)}>Delete?</button>
+      <Button variant="outline-primary"><Link to="/workouts">View all workouts</Link></Button>
+      <Button variant="success" onClick={navigateToEditWorkoutForm}>Edit Workout</Button>
+      <Button onClick={navigateToRunningWorkout}>Run this Workout</Button>
+      <Button variant="danger" type="button" onClick={() => removeWorkout(workout)}>Delete?</Button>
     </>
   )
 }

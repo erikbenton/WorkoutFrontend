@@ -3,6 +3,7 @@ import useFetch from "../../hooks/useFetch";
 import { initializeActiveWorkout, initializeRunningWorkout } from "../../reducers/runningWorkout";
 import { Link } from "react-router-dom";
 import { formatExerciseNames } from "../../utils/helper";
+import { Button } from "react-bootstrap";
 
 const AvailableWorkouts = () => {
   const { data: workouts, loading, error } = useFetch('workouts');
@@ -32,7 +33,7 @@ const AvailableWorkouts = () => {
           </li>
         ))}
       </ul>
-      <button type="button" onClick={startEmptyWorkout}>Start an Empty Workout</button>
+      <Button variant="primary" type="button" onClick={startEmptyWorkout}>Start an Empty Workout</Button>
     </div>
   )
 }

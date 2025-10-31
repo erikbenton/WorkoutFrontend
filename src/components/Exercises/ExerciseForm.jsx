@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
 import exerciseService from "../../services/exercise"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const ExerciseForm = (props) => {
   const navigate = useNavigate()
@@ -57,50 +58,55 @@ const ExerciseForm = (props) => {
   }
 
   return (
-    <form onSubmit={saveExercise}>
-      <label>Name
-        <input
-          id={`name_${exercise.id}`}
-          type="text"
-          value={exercise.name}
-          onChange={setExerciseName}
-        />
-      </label>
-      <br />
-      <label>Body Part
-        <select
-          id={`bodyPart_${exercise.id}`}
-          value={exercise.bodyPart}
-          onChange={selectBodyPart}
-        >
-          {bodyParts.map(bp => (
-            <option key={bp.bodyPart} value={bp.bodyPart}>{bp.bodyPart}</option>
-          ))}
-        </select>
-      </label>
-      <br />
-      <label>Equipment
-        <select
-          id={`equipment_${exercise.id}`}
-          value={exercise.equipment}
-          onChange={selectEquipment}
-        >
-          {equipments.map(eq => (
-            <option key={eq.equipment} value={eq.equipment}>{eq.equipment}</option>
-          ))}
-        </select>
-      </label>
-      <br />
-      <label>Instructions
-        <textarea
-          id={`instructions_${exercise.id}`}
-          value={exercise.instructions ?? ''}
-          onChange={setExerciseIntructions}
-        />
-      </label>
-      <br />
-      <button type="submit">{props.exercise ? 'Update' : 'Create'}</button>
-    </form>
+    <>
+      <h1>{props.exercise ? 'Edit' : 'Create'} Exercise</h1>
+      <form onSubmit={saveExercise}>
+        <label>Name
+          <input
+            id={`name_${exercise.id}`}
+            type="text"
+            value={exercise.name}
+            onChange={setExerciseName}
+          />
+        </label>
+        <br />
+        <label>Body Part
+          <select
+            id={`bodyPart_${exercise.id}`}
+            value={exercise.bodyPart}
+            onChange={selectBodyPart}
+          >
+            {bodyParts.map(bp => (
+              <option key={bp.bodyPart} value={bp.bodyPart}>{bp.bodyPart}</option>
+            ))}
+          </select>
+        </label>
+        <br />
+        <label>Equipment
+          <select
+            id={`equipment_${exercise.id}`}
+            value={exercise.equipment}
+            onChange={selectEquipment}
+          >
+            {equipments.map(eq => (
+              <option key={eq.equipment} value={eq.equipment}>{eq.equipment}</option>
+            ))}
+          </select>
+        </label>
+        <br />
+        <label>Instructions
+          <textarea
+            id={`instructions_${exercise.id}`}
+            value={exercise.instructions ?? ''}
+            onChange={setExerciseIntructions}
+          />
+        </label>
+        <br />
+        <Button variant="outline-primary"><Link to="/exercises">View all exercises</Link></Button>
+        {props.exercise && <Button variant="primary"><Link to={`/exercises/${exercise.id}`}>Back</Link></Button>}
+        <Button variant="success" type="submit">{props.exercise ? 'Update' : 'Create'}</Button>
+      </form>
+    </>
   )
 }
 

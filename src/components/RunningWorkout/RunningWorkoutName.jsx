@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { updateRunningWorkout } from "../../reducers/runningWorkout";
+import { Button } from "react-bootstrap";
 
 const RunningWorkoutName = () => {
   const [editWorkoutName, setEditWorkoutName] = useState(false);
@@ -24,9 +25,9 @@ const RunningWorkoutName = () => {
           onBlur={() => setEditWorkoutName(false)}
         />
         : runningWorkout.name}
-      <button type="button" onClick={() => setEditWorkoutName(!editWorkoutName)}>
+      <Button variant="primary" size="sm" type="button" onClick={() => setEditWorkoutName(!editWorkoutName)}>
         {editWorkoutName ? "save" : "edit"}
-      </button>
+      </Button>
     </h1>
   )
 }

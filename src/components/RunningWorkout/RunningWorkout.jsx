@@ -8,6 +8,7 @@ import RunningWorkoutName from "./RunningWorkoutName";
 import { createCompletedWorkout } from "../../utils/helper";
 import completedWorkoutService from "../../services/completedWorkout"
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const RunningWorkout = () => {
   const [selectingExercises, setSelectingExercises] = useState(false);
@@ -65,8 +66,8 @@ const RunningWorkout = () => {
           setSelectedExercises={setSelectedExercises}
         />
       }
-      <button type="button" onClick={cancelWorkout}>Cancel workout</button>
-      <button type="button" onClick={completeWorkout}>Complete workout</button>
+      <Button variant="danger" type="button" onClick={cancelWorkout}>Cancel workout</Button>
+      <Button variant="success" type="button" onClick={completeWorkout}>Complete workout</Button>
     </div>
   )
 }

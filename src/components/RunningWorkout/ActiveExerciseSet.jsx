@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { updateExerciseSet, removeExerciseSet } from "../../reducers/runningWorkout";
+import { Button, CloseButton } from "react-bootstrap";
 
 
 const ActiveExerciseSet = ({ groupKey, set }) => {
@@ -63,10 +64,10 @@ const ActiveExerciseSet = ({ groupKey, set }) => {
           placeholder={weightPlaceholderText(set)}
         />
       </label>
-      <button type="button" onClick={() => toggleSetCompleted(set, !set.completed)}>
-        {set.completed ? 'edit' : 'completed'}
-      </button>
-      <button type="button" onClick={() => removeSet(set)}>remove set</button>
+      <Button type="button" variant={set.completed ? "success" : "primary"} onClick={() => toggleSetCompleted(set, !set.completed)}>
+        {set.completed ? 'edit' : 'complete'}
+      </Button>
+      <Button variant="danger" type="button" disabled={set.completed} onClick={() => removeSet(set)}>X</Button>
     </li>
   )
 }

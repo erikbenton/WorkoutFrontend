@@ -1,3 +1,4 @@
+import { Button } from 'react-bootstrap'
 import { removeExerciseSet, updateExerciseSet } from '../../reducers/focusedWorkout'
 import { useDispatch } from 'react-redux'
 
@@ -55,7 +56,7 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
       <label>Weight
         <input type='number' id={`weight_${exerciseSet.key}`} value={exerciseSet.weight ?? ''} onChange={updateExerciseSetWeight} />
       </label>
-      <button type="button" onClick={removeSet}>remove set</button>
+      <Button variant="danger" type="button" onClick={removeSet}>remove set</Button>
       <br />
     </>
   )

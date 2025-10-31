@@ -10,6 +10,7 @@ import {
 import ActiveExerciseSet from "./ActiveExerciseSet";
 import { useEffect } from "react";
 import ReplaceExercise from "../Exercises/ReplaceExercise";
+import { Button } from "react-bootstrap";
 
 const ActiveExerciseGroup = ({
   exerciseGroup,
@@ -70,12 +71,12 @@ const ActiveExerciseGroup = ({
 
   return (
     <div>
-      <button type="button" onClick={backToSummary}>Back to summary</button>
+      <Button variant="outline-primary" type="button" onClick={backToSummary}>Back to summary</Button>
       <h2>
         <Link to={`/exercises/${exerciseGroup.exercise.id}`}>
           {exerciseGroup.exercise.name}
         </Link>
-        <button type="button" onClick={replaceExercise}>replace exercise</button>
+        <Button type="button" onClick={replaceExercise}>replace exercise</Button>
       </h2>
       {exerciseGroup.note && <p>{exerciseGroup.note}</p>}
       <ol>
@@ -83,14 +84,14 @@ const ActiveExerciseGroup = ({
           <ActiveExerciseSet key={set.key} groupKey={exerciseGroup.key} set={set} />
         ))}
       </ol>
-      <button type="button" onClick={addSet}>Add set</button>
+      <Button type="button" onClick={addSet}>Add set</Button>
       <br />
       <label>Comment
         <input type="text" id={`comment_${exerciseGroup.key}`} value={exerciseGroup.comment ?? ""} onChange={(e) => updateGroup(e)} />
       </label>
       <br />
-      {index > 0 && <button type="button" onClick={() => shiftActiveExercise(-1)}>Prev Exercise</button>}
-      {index < maxIndex && <button type="button" onClick={() => shiftActiveExercise(1)}>Next Exercise</button>}
+      {index > 0 && <Button variant="outline-primary" type="button" onClick={() => shiftActiveExercise(-1)}>Prev Exercise</Button>}
+      {index < maxIndex && <Button type="button" onClick={() => shiftActiveExercise(1)}>Next Exercise</Button>}
     </div>
   )
 }

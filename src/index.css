@@ -2,6 +2,18 @@ nav span {
   cursor: pointer;
 }
 
-nav a {
+a {
   text-decoration: none;
+}
+
+button {
+  margin: 2px;
+}
+
+button a {
+  color: inherit;
+}
+
+.btn-close-danger {
+  background-color: red;
 }

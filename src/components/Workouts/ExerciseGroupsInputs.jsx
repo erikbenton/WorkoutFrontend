@@ -1,7 +1,9 @@
-import { updateExerciseGroup, addExerciseSet, removeExerciseGroup, shiftExerciseGroup } from '../../reducers/focusedWorkout'
+import { updateExerciseGroup, addExerciseSet } from '../../reducers/focusedWorkout'
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 import ExerciseSetsInput from './ExerciseSetsInput'
+import { Button } from 'react-bootstrap'
+import ExerciseGroupOptions from './ExerciseGroupOptions';
 
 const ExerciseGroupInput = ({ exerciseGroup, exercises }) => {
   const dispatch = useDispatch()
@@ -32,17 +34,6 @@ const ExerciseGroupInput = ({ exerciseGroup, exercises }) => {
     }))
   }
 
-  const removeGroup = () => {
-    dispatch(removeExerciseGroup(exerciseGroup))
-  }
-
-  const shiftGroup = (shiftAmount) => {
-    dispatch(shiftExerciseGroup({
-      shiftAmount,
-      exerciseGroup
-    }))
-  }
-
   return (
     <>
       <label>Exercise
@@ -65,13 +56,11 @@ const ExerciseGroupInput = ({ exerciseGroup, exercises }) => {
           onChange={updateExerciseGroupNote}
         />
       </label>
-      <button type="button" onClick={() => shiftGroup(-1)}>shift UP</button>
-      <button type="button" onClick={() => shiftGroup(1)}>shift DOWN</button>
-      <button type="button" onClick={removeGroup}>remove group</button>
+      <ExerciseGroupOptions exerciseGroup={exerciseGroup} />
       <br />
       <ExerciseSetsInput exerciseGroup={exerciseGroup} />
       <br />
-      <button type="button" onClick={addNewExerciseSet}>Add Set</button>
+      <Button type="button" onClick={addNewExerciseSet}>Add Set</Button>
       <br />
     </>
   )

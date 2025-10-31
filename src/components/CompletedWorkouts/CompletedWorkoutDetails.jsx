@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
+import { Button } from "react-bootstrap";
 
 
 const CompletedWorkoutDetails = () => {
@@ -32,7 +33,7 @@ const CompletedWorkoutDetails = () => {
           </li>
         )}
       </ol>
-      <Link to="/completedWorkouts">Back to Workout History</Link>
+      <Button variant="outline-primary"><Link to="/completedWorkouts">Workouts History</Link></Button>
     </>
   )
 }

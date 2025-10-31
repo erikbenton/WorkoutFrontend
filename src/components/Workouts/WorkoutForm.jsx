@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import workoutService from '../../services/workout'
 import useFetch from "../../hooks/useFetch"
 import ExercisesSelection from "../Exercises/ExercisesSelection";
+import { Button } from "react-bootstrap"
 
 const WorkoutForm = (props) => {
   const [selectingExercises, setSelectingExercises] = useState(false);
@@ -68,15 +69,20 @@ const WorkoutForm = (props) => {
   return (
     <form id="workout_form" onSubmit={id ? updateEditedWorkout : createNewWorkout}>
       <label>Name
-        <input id="workout_name" type='text' value={workout.name ?? ""} onChange={(e) => dispatch(updateWorkoutName({ ...workout, name: e.target.value }))} />
+        <input
+          id="workout_name"
+          type='text'
+          value={workout.name ?? ""}
+          onChange={(e) => dispatch(updateWorkoutName({ ...workout, name: e.target.value }))}
+        />
       </label>
       <br />
       <ExerciseGroupsInput exerciseGroups={workout.exerciseGroups} exercises={exercises} />
       <br />
-      <button type="button" onClick={() => dispatch(addExerciseGroup(exercises[0]))}>Add exercise</button>
-      <button type="button" onClick={() => setSelectingExercises(true)}>Add multiple exercises</button>
+      <Button variant="outline-primary" type="button" onClick={() => dispatch(addExerciseGroup(exercises[0]))}>Add exercise</Button>
+      <Button type="button" onClick={() => setSelectingExercises(true)}>Add multiple exercises</Button>
       <br />
-      <button type="submit">{id ? 'Update' : 'Create'}</button>
+      <Button variant="success" type="submit">{id ? 'Update' : 'Create'}</Button>
     </form>
   )
 }

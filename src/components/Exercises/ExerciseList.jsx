@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { initializeExercises } from '../../reducers/exercises'
-import { Table } from 'react-bootstrap'
+import { Button, Table } from 'react-bootstrap'
 
 const ExerciseListRow = ({ exercise }) => {
   return (
@@ -75,7 +75,7 @@ const ExerciseList = () => {
           ))}
         </tbody>
       </Table>
-      <button type="button" onClick={() => navigate("/exercises/create")}>Create Exercise</button>
+      <Button type="button" onClick={() => navigate("/exercises/create")}>Create Exercise</Button>
     </div>
   )
 }

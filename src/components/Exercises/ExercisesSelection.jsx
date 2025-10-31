@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
+import { Button } from "react-bootstrap";
 
 const ExercisesSelection = ({ setSelectingExercises, setSelectedExercises, selectedExercises, maxSelection }) => {
   const { data: exercises, loading } = useFetch('exercises');
@@ -31,7 +32,7 @@ const ExercisesSelection = ({ setSelectingExercises, setSelectedExercises, selec
           </li>
         ))}
       </ul>
-      <button type="button" onClick={() => setSelectingExercises(false)}>Done</button>
+      <Button type="button" onClick={() => setSelectingExercises(false)}>Done</Button>
     </div>
   )
 }

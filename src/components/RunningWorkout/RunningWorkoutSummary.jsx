@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectActiveExerciseGroup, shiftExerciseGroup, removeExerciseGroup, addMultipleExerciseGroups } from "../../reducers/runningWorkout";
+import { selectActiveExerciseGroup, addMultipleExerciseGroups } from "../../reducers/runningWorkout";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import ExercisesSelection from "../Exercises/ExercisesSelection";
-
+import ActiveGroupOptions from "./ActiveGroupOptions";
+import { Button } from "react-bootstrap";
 
 const RunningWorkoutSummary = ({
   selectingExercises,
@@ -25,17 +26,6 @@ const RunningWorkoutSummary = ({
     dispatch(selectActiveExerciseGroup(index))
   }
 
-  const shiftGroup = (group, shiftAmount) => {
-    dispatch(shiftExerciseGroup({
-      groupKey: group.key,
-      shiftAmount
-    }));
-  }
-
-  const removeGroup = (group) => {
-    dispatch(removeExerciseGroup({ groupKey: group.key }))
-  }
-
   if (selectingExercises) return (
     <ExercisesSelection
       setSelectingExercises={setSelectingExercises}
@@ -50,13 +40,11 @@ const RunningWorkoutSummary = ({
             <Link onClick={() => selectExerciseGroup(index)}>
               {group.exercise.name} - {group.exerciseSets.length} sets
             </Link>
-            <button type="button" onClick={() => shiftGroup(group, -1)}>shift UP</button>
-            <button type="button" onClick={() => shiftGroup(group, 1)}>shift DOWN</button>
-            <button type="button" onClick={() => removeGroup(group)}>remove</button>
+            <ActiveGroupOptions key={group.key} exerciseGroup={group} />
           </li>
         ))}
       </ol>
-      <button type="button" onClick={() => setSelectingExercises(true)}>Add exercises</button>
+      <Button type="button" onClick={() => setSelectingExercises(true)}>Add exercises</Button>
     </div>
   )
 }

@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import { initializeWorkouts } from "../../reducers/workouts"
 import useFetch from "../../hooks/useFetch"
 import { formatExerciseNames } from "../../utils/helper";
+import { Button } from "react-bootstrap"
 
 const WorkoutList = () => {
   const { data: workouts, loading, error } = useFetch("workouts");
@@ -36,7 +37,7 @@ const WorkoutList = () => {
           </li>)}
         </ul>
       }
-      <button onClick={navigateToNewWorkoutForm}>New Workout</button>
+      <Button variant="primary" onClick={navigateToNewWorkoutForm}>New Workout</Button>
     </div>
   )
 }

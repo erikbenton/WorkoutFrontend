@@ -1,6 +1,7 @@
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
 import exerciseService from '../../services/exercise'
+import { Button } from 'react-bootstrap'
 
 const ExerciseDetails = () => {
   const id = Number(useParams().id)
@@ -25,9 +26,9 @@ const ExerciseDetails = () => {
       <section>Body Part: {exercise.bodyPart}</section>
       <section>Equipment: {exercise.equipment}</section>
       <section>Instructions: {exercise.instructions ?? 'No instructions'}</section>
-      <Link to="/exercises">View all exercises</Link>
-      <button type="button" onClick={() => navigate(`/exercises/edit/${exercise.id}`)}>Edit</button>
-      <button type="button" onClick={deleteExercise}>Delete</button>
+      <Button variant="outline-primary"><Link to="/exercises">View all exercises</Link></Button>
+      <Button variant="success" type="button" onClick={() => navigate(`/exercises/edit/${exercise.id}`)}>Edit</Button>
+      <Button variant="danger" type="button" onClick={deleteExercise}>Delete?</Button>
     </div>
   )
 }
