@@ -26,7 +26,7 @@ const ExerciseDetails = () => {
       <section>Body Part: {exercise.bodyPart}</section>
       <section>Equipment: {exercise.equipment}</section>
       <section>Instructions: {exercise.instructions ?? 'No instructions'}</section>
-      <Button variant="outline-primary"><Link to="/exercises">View all exercises</Link></Button>
+      <Link to="/exercises"><Button variant="outline-primary">View all exercises</Button></Link>
       <Button variant="success" type="button" onClick={() => navigate(`/exercises/edit/${exercise.id}`)}>Edit</Button>
       <Button variant="danger" type="button" onClick={deleteExercise}>Delete?</Button>
     </div>

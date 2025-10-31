@@ -72,7 +72,7 @@ const WorkoutDetails = () => {
           </li>
         )}
       </ol>
-      <Button variant="outline-primary"><Link to="/workouts">View all workouts</Link></Button>
+      <Link to="/workouts"><Button variant="outline-primary">View all workouts</Button></Link>
       <Button variant="success" onClick={navigateToEditWorkoutForm}>Edit Workout</Button>
       <Button onClick={navigateToRunningWorkout}>Run this Workout</Button>
       <Button variant="danger" type="button" onClick={() => removeWorkout(workout)}>Delete?</Button>

@@ -85,11 +85,11 @@ const WorkoutForm = (props) => {
         <Button type="button" onClick={() => setSelectingExercises(true)}>Add multiple exercises</Button>
         <br />
         <Button variant="success" type="submit">{id ? 'Update' : 'Create'}</Button>
-        <Button variant="warning" type="button">
-          <Link to={id ? `/workouts/${id}` : "/workouts"}>
+        <Link to={id ? `/workouts/${id}` : "/workouts"}>
+          <Button variant="warning" type="button">
             Cancel
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </form>
     </>
   )
