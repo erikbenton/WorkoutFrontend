@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { addExerciseGroup, addMultipleExerciseGroups, setWorkout, updateWorkoutName } from "../../reducers/focusedWorkout"
 import { useEffect, useState } from "react"
 import ExerciseGroupsInput from "./ExerciseGroupsInputs"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import workoutService from '../../services/workout'
 import useFetch from "../../hooks/useFetch"
 import ExercisesSelection from "../Exercises/ExercisesSelection";
@@ -67,23 +67,31 @@ const WorkoutForm = (props) => {
   )
 
   return (
-    <form id="workout_form" onSubmit={id ? updateEditedWorkout : createNewWorkout}>
-      <label>Name
-        <input
-          id="workout_name"
-          type='text'
-          value={workout.name ?? ""}
-          onChange={(e) => dispatch(updateWorkoutName({ ...workout, name: e.target.value }))}
-        />
-      </label>
-      <br />
-      <ExerciseGroupsInput exerciseGroups={workout.exerciseGroups} exercises={exercises} />
-      <br />
-      <Button variant="outline-primary" type="button" onClick={() => dispatch(addExerciseGroup(exercises[0]))}>Add exercise</Button>
-      <Button type="button" onClick={() => setSelectingExercises(true)}>Add multiple exercises</Button>
-      <br />
-      <Button variant="success" type="submit">{id ? 'Update' : 'Create'}</Button>
-    </form>
+    <>
+      <h1>{id ? 'Edit' : 'Create'} Workout</h1>
+      <form id="workout_form" onSubmit={id ? updateEditedWorkout : createNewWorkout}>
+        <label>Name
+          <input
+            id="workout_name"
+            type='text'
+            value={workout.name ?? ""}
+            onChange={(e) => dispatch(updateWorkoutName({ ...workout, name: e.target.value }))}
+          />
+        </label>
+        <br />
+        <ExerciseGroupsInput exerciseGroups={workout.exerciseGroups} exercises={exercises} />
+        <br />
+        <Button variant="outline-primary" type="button" onClick={() => dispatch(addExerciseGroup(exercises[0]))}>Add exercise</Button>
+        <Button type="button" onClick={() => setSelectingExercises(true)}>Add multiple exercises</Button>
+        <br />
+        <Button variant="success" type="submit">{id ? 'Update' : 'Create'}</Button>
+        <Button variant="warning" type="button">
+          <Link to={id ? `/workouts/${id}` : "/workouts"}>
+            Cancel
+          </Link>
+        </Button>
+      </form>
+    </>
   )
 }
 
