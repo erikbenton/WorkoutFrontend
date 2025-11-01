@@ -43,32 +43,47 @@ const ActiveExerciseSet = ({ groupKey, set }) => {
   const weightPlaceholderText = set => set.targetWeight ? `${set.targetWeight} lbs` : ''
 
   return (
-    <li key={set.key}>
-      <label>Reps
+    <div className="row row-cols-auto m-1">
+      <div className="col-3">
         <input
           disabled={set.completed}
+          className="form-control"
           type="number"
           id={`reps_${set.key}`}
           value={set.reps ?? ""}
           onChange={(e) => updateSet(e, set)}
           placeholder={repsPlaceholderText(set)}
         />
-      </label>
-      <label>Weight
+      </div>
+      <div className="col-5">
         <input
           disabled={set.completed}
+          className="form-control"
           type="number"
           id={`weight_${set.key}`}
           value={set.weight ?? ""}
           onChange={(e) => updateSet(e, set)}
           placeholder={weightPlaceholderText(set)}
         />
-      </label>
-      <Button type="button" variant={set.completed ? "success" : "primary"} onClick={() => toggleSetCompleted(set, !set.completed)}>
+      </div>
+      <Button
+        className="col-2"
+        type="button"
+        variant={set.completed ? "success" : "primary"}
+        onClick={() => toggleSetCompleted(set, !set.completed)}
+      >
         {set.completed ? 'edit' : 'complete'}
       </Button>
-      <Button variant="danger" type="button" disabled={set.completed} onClick={() => removeSet(set)}>X</Button>
-    </li>
+      <Button
+        className="col-1"
+        variant="danger"
+        type="button"
+        disabled={set.completed}
+        onClick={() => removeSet(set)}
+      >
+        X
+      </Button>
+    </div>
   )
 }
 

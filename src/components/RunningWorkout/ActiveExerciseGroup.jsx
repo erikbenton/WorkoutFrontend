@@ -72,26 +72,63 @@ const ActiveExerciseGroup = ({
   return (
     <div>
       <Button variant="outline-primary" type="button" onClick={backToSummary}>Back to summary</Button>
-      <h2>
-        <Link to={`/exercises/${exerciseGroup.exercise.id}`}>
-          {exerciseGroup.exercise.name}
-        </Link>
-        <Button type="button" onClick={replaceExercise}>replace exercise</Button>
-      </h2>
-      {exerciseGroup.note && <p>{exerciseGroup.note}</p>}
-      <ol>
+      <div className="container">
+        <div className="row align-items-center">
+          <h2 className="col-auto">
+            <Link to={`/exercises/${exerciseGroup.exercise.id}`}>
+              {exerciseGroup.exercise.name}
+            </Link>
+          </h2>
+          <Button className="col-auto" type="button" onClick={replaceExercise}>replace exercise</Button>
+        </div>
+        <div className="row">
+          {exerciseGroup.note && <p>{exerciseGroup.note}</p>}
+        </div>
+        {exerciseGroup.exerciseSets.length > 0 &&
+          <div className="row row-cols-auto m-1 justify-content-center align-items-center text-center">
+            <span className="col-3">Reps</span>
+            <span className="col-5">Weight</span>
+            <span className="col-4"></span>
+          </div>
+        }
         {exerciseGroup.exerciseSets.map(set => (
           <ActiveExerciseSet key={set.key} groupKey={exerciseGroup.key} set={set} />
         ))}
-      </ol>
-      <Button type="button" onClick={addSet}>Add set</Button>
-      <br />
-      <label>Comment
-        <input type="text" id={`comment_${exerciseGroup.key}`} value={exerciseGroup.comment ?? ""} onChange={(e) => updateGroup(e)} />
-      </label>
-      <br />
-      {index > 0 && <Button variant="outline-primary" type="button" onClick={() => shiftActiveExercise(-1)}>Prev Exercise</Button>}
-      {index < maxIndex && <Button type="button" onClick={() => shiftActiveExercise(1)}>Next Exercise</Button>}
+        <div className="row justify-content-center">
+          <Button className="col-3" type="button" onClick={addSet}>Add set</Button>
+        </div>
+        <div className="row row-cols-auto my-3 align-items-center">
+          <label className="col-form-label">Comment</label>
+          <div className="col-5">
+            <input
+              type="text"
+              className="form-control"
+              id={`comment_${exerciseGroup.key}`}
+              value={exerciseGroup.comment ?? ""}
+              onChange={(e) => updateGroup(e)}
+            />
+          </div>
+        </div>
+        <div className="row justify-content-center mb-3">
+          <Button
+            className="col-3"
+            disabled={index === 0}
+            variant="outline-primary"
+            type="button"
+            onClick={() => shiftActiveExercise(-1)}
+          >
+            Prev Exercise
+          </Button>
+          <Button
+            className="col-3"
+            disabled={index === maxIndex}
+            type="button"
+            onClick={() => shiftActiveExercise(1)}
+          >
+            Next Exercise
+          </Button>
+        </div>
+      </div>
     </div>
   )
 }
