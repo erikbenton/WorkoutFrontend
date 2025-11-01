@@ -35,40 +35,48 @@ const ExerciseGroupInput = ({ exerciseGroup, exercises }) => {
   }
 
   return (
-    <>
-      <label>Exercise
-        <select
-          id={`exercise_${exerciseGroup.key}`}
-          value={exercise.id}
-          onChange={(e) => selectExercise(e)}
-        >
-          {exercises.map(e => (
-            <option key={e.id} value={e.id}>{e.name}</option>)
-          )}
-        </select>
-      </label>
-      <label>
-        Note
-        <input
-          type='text'
-          id={`note_${exerciseGroup.key}`}
-          value={exerciseGroup.note ?? ''}
-          onChange={updateExerciseGroupNote}
-        />
-      </label>
-      <ExerciseGroupOptions exerciseGroup={exerciseGroup} />
-      <br />
+    <div className="col-12 card mb-2 pb-1">
+      <div className="my-2 pe-2 row row-cols-auto justify-content-center align-items-center">
+        <label className="col-auto">Exercise</label>
+        <div className="col-4">
+          <select
+            id={`exercise_${exerciseGroup.key}`}
+            className="form-select"
+            value={exercise.id}
+            onChange={(e) => selectExercise(e)}
+          >
+            {exercises.map(e => (
+              <option key={e.id} value={e.id}>{e.name}</option>)
+            )}
+          </select>
+        </div>
+        <div className="col">
+          <input
+            type='text'
+            className="form-control"
+            placeholder="Note"
+            id={`note_${exerciseGroup.key}`}
+            value={exerciseGroup.note ?? ''}
+            onChange={updateExerciseGroupNote}
+          />
+        </div>
+        <div className="col">
+          <ExerciseGroupOptions exerciseGroup={exerciseGroup} />
+        </div>
+      </div>
       <ExerciseSetsInput exerciseGroup={exerciseGroup} />
-      <br />
-      <Button type="button" onClick={addNewExerciseSet}>Add Set</Button>
-      <br />
-    </>
+      <div className="row justify-content-center">
+        <div className="col-4">
+          <Button className="w-100" type="button" onClick={addNewExerciseSet}>Add Set</Button>
+        </div>
+      </div>
+    </div>
   )
 }
 
 const ExerciseGroupsInput = ({ exerciseGroups, exercises }) => {
   return (
-    <>
+    <div>
       {exerciseGroups.map(group => (
         <ExerciseGroupInput
           key={group.key}
@@ -76,7 +84,7 @@ const ExerciseGroupsInput = ({ exerciseGroups, exercises }) => {
           exercises={exercises}
         />
       ))}
-    </>
+    </div>
   )
 }
 

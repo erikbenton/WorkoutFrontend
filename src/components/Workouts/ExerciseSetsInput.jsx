@@ -46,28 +46,55 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
   }
 
   return (
-    <>
-      <label>Min Reps
-        <input type='number' id={`minReps_${exerciseSet.key}`} value={exerciseSet.minReps ?? ''} onChange={updateExerciseSetMinReps} />
-      </label>
-      <label>Max Reps
-        <input type='number' id={`maxReps_${exerciseSet.key}`} value={exerciseSet.maxReps ?? ''} onChange={updateExerciseSetMaxReps} />
-      </label>
-      <label>Weight
-        <input type='number' id={`weight_${exerciseSet.key}`} value={exerciseSet.weight ?? ''} onChange={updateExerciseSetWeight} />
-      </label>
-      <Button variant="danger" type="button" onClick={removeSet}>X</Button>
-      <br />
-    </>
+    <div className="row row-cols-auto m-1 justify-content-center align-items-center">
+      <div className="col-3">
+        <input
+          type='number'
+          className="form-control"
+          id={`minReps_${exerciseSet.key}`}
+          value={exerciseSet.minReps ?? ''}
+          onChange={updateExerciseSetMinReps}
+        />
+      </div>
+      <div className="col-3">
+        <input
+          type='number'
+          className="form-control"
+          id={`maxReps_${exerciseSet.key}`}
+          value={exerciseSet.maxReps ?? ''}
+          onChange={updateExerciseSetMaxReps}
+        />
+      </div>
+      <div className="col-5">
+        <input
+          type='number'
+          className="form-control"
+          id={`weight_${exerciseSet.key}`}
+          value={exerciseSet.weight ?? ''}
+          onChange={updateExerciseSetWeight}
+        />
+      </div>
+      <div className="col-1 p-0">
+        <Button variant="danger" type="button" onClick={removeSet}>X</Button>
+      </div>
+    </div>
   )
 }
 
 const ExerciseSetsInput = ({ exerciseGroup }) => {
   return (
-    <>
+    <div>
+      {exerciseGroup.exerciseSets.length > 0 &&
+        <div className="row row-cols-auto m-1 text-center">
+          <span className="col-3">Min Reps</span>
+          <span className="col-3">Max Reps</span>
+          <span className="col-5">Weight</span>
+          <span className="col-1"></span>
+        </div>
+      }
       {exerciseGroup.exerciseSets.map(set =>
         <ExerciseSetInput key={set.key} exerciseSet={set} exerciseGroupKey={exerciseGroup.key} />)}
-    </>
+    </div>
   )
 }
 
