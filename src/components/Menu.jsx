@@ -19,9 +19,6 @@ const Menu = () => {
             <Nav.Link href="#" to="/" as="span">
               <Link style={padding} to="/">Home</Link>
             </Nav.Link>
-            <Nav.Link href="#" to="/Programs" as="span">
-              <Link style={padding} to="/Programs">Programs</Link>
-            </Nav.Link>
             <Nav.Link href="#" to="/Workouts" as="span">
               <Link style={padding} to="/Workouts">Workouts</Link>
             </Nav.Link>
