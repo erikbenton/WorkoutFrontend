@@ -31,10 +31,21 @@ const WorkoutList = () => {
         workouts &&
         <ul>
           {workouts.map(workout =>
-          <li key={workout.id}>
-            <Link to={`/workouts/${workout.id}`}>{workout.name}</Link>
-            <p>{formatExerciseNames(workout.exerciseNames)}</p>
-          </li>)}
+            <li key={workout.id} className="no-bullets">
+              <div className="card my-2 p-2 col-xs-12 col-md-11 col-lg-7">
+                <div className="row">
+                  <Link
+                    className="col-auto"
+                    to={`/workouts/${workout.id}`}
+                  >
+                    {workout.name}
+                  </Link>
+                </div>
+                <div className="row">
+                <p className="card-text">{formatExerciseNames(workout.exerciseNames)}</p>
+                </div>
+              </div>
+            </li>)}
         </ul>
       }
       <Button variant="primary" onClick={navigateToNewWorkoutForm}>New Workout</Button>

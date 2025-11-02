@@ -17,3 +17,7 @@ button a {
 .btn-close-danger {
   background-color: red;
 }
+
+.no-bullets {
+  list-style-type: none;
+}
