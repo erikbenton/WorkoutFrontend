@@ -1,11 +1,11 @@
 import { useMatch, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ElapsedTimer from "./ElapsedTime";
-import { Table, Form, Button, Alert, Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 
 const Menu = () => {
-  const match = useMatch("/runningWorkout")
-  const runningWorkout = useSelector(state => state.runningWorkout)
+  const match = useMatch("/runningWorkout");
+  const runningWorkout = useSelector(state => state.runningWorkout);
   const padding = {
     padding: "0.25rem"
   };
