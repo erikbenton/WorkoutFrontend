@@ -61,54 +61,67 @@ const ExerciseForm = (props) => {
     <>
       <h1>{props.exercise ? 'Edit' : 'Create'} Exercise</h1>
       <form onSubmit={saveExercise}>
-        <label>Name
-          <input
-            id={`name_${exercise.id}`}
-            type="text"
-            value={exercise.name}
-            onChange={setExerciseName}
-          />
-        </label>
-        <br />
-        <label>Body Part
-          <select
-            id={`bodyPart_${exercise.id}`}
-            value={exercise.bodyPart}
-            onChange={selectBodyPart}
-          >
-            {bodyParts.map(bp => (
-              <option key={bp.bodyPart} value={bp.bodyPart}>{bp.bodyPart}</option>
-            ))}
-          </select>
-        </label>
-        <br />
-        <label>Equipment
-          <select
-            id={`equipment_${exercise.id}`}
-            value={exercise.equipment}
-            onChange={selectEquipment}
-          >
-            {equipments.map(eq => (
-              <option key={eq.equipment} value={eq.equipment}>{eq.equipment}</option>
-            ))}
-          </select>
-        </label>
-        <br />
-        <label>Instructions
-          <textarea
-            id={`instructions_${exercise.id}`}
-            value={exercise.instructions ?? ''}
-            onChange={setExerciseIntructions}
-          />
-        </label>
-        <br />
+        <div className="my-2 pe-2 row row-cols-auto align-items-center">
+          <label className="col-2">Name</label>
+          <div className="col-3">
+            <input
+              className="form-control"
+              id={`name_${exercise.id}`}
+              type="text"
+              value={exercise.name}
+              onChange={setExerciseName}
+            />
+          </div>
+        </div>
+        <div className="my-2 pe-2 row row-cols-auto align-items-center">
+          <label className="col-2">Body Part</label>
+          <div className="col-auto">
+            <select
+              className="form-select"
+              id={`bodyPart_${exercise.id}`}
+              value={exercise.bodyPart}
+              onChange={selectBodyPart}
+            >
+              {bodyParts.map(bp => (
+                <option key={bp.bodyPart} value={bp.bodyPart}>{bp.bodyPart}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="my-2 pe-2 row row-cols-auto align-items-center">
+          <label className="col-2">Equipment</label>
+          <div className="col-auto">
+            <select
+              className="form-select"
+              id={`equipment_${exercise.id}`}
+              value={exercise.equipment}
+              onChange={selectEquipment}
+            >
+              {equipments.map(eq => (
+                <option key={eq.equipment} value={eq.equipment}>{eq.equipment}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="my-2 pe-2 row align-items-center">
+          <label className="col-2">Instructions</label>
+          <div className="col">
+            <textarea
+              className="form-control"
+              rows="3"
+              id={`instructions_${exercise.id}`}
+              value={exercise.instructions ?? ''}
+              onChange={setExerciseIntructions}
+            />
+          </div>
+        </div>
         <Button variant="success" type="submit">{props.exercise ? 'Update' : 'Create'}</Button>
         <Link to={props.exercise ? `/exercises/${props.exercise.id}` : "/exercises"}>
           <Button variant="warning" type="button">
             Cancel
           </Button>
         </Link>
-      </form>
+      </form >
     </>
   )
 }
