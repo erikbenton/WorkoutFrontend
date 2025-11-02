@@ -31,9 +31,9 @@ const CompletedWorkoutHistoryList = () => {
   return (
     <div>
       <h2>Workout Histories</h2>
-      <ul>
+      <ul className="no-bullets">
         {completedWorkouts.map(workout =>
-          <li key={workout.id} className="no-bullets">
+          <li key={workout.id}>
             <div className="card my-2 p-2 col-md-8 col-lg-5">
               <div className="row">
                 <Link

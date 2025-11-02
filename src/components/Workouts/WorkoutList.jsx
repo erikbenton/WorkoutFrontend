@@ -29,9 +29,9 @@ const WorkoutList = () => {
       <h2>Workouts</h2>
       {
         workouts &&
-        <ul>
+        <ul className="no-bullets">
           {workouts.map(workout =>
-            <li key={workout.id} className="no-bullets">
+            <li key={workout.id}>
               <div className="card my-2 p-2 col-xs-12 col-md-11 col-lg-7">
                 <div className="row">
                   <Link
