@@ -45,6 +45,7 @@ const ExerciseList = () => {
           <tr>
             <th>Name
               <input
+                className="form-control"
                 id="exercise_name_filter"
                 type="text"
                 placeholder="filter by name"
@@ -53,6 +54,7 @@ const ExerciseList = () => {
             </th>
             <th>Body Part
               <input
+                className="form-control"
                 id="exercise_bodyParts_filter"
                 type="text"
                 placeholder="filter by body part"
@@ -61,6 +63,7 @@ const ExerciseList = () => {
             </th>
             <th>Equipment
               <input
+              className="form-control"
                 id="exercise_equipment_filter"
                 type="text"
                 placeholder="filter by equipment"
