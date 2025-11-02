@@ -25,8 +25,8 @@ const AvailableWorkouts = () => {
       <h1>Choose a workout</h1>
       <ul>
         {workouts.map(workout => (
-          <li key={workout.id} onClick={() => selectWorkout(workout)}>
-            <Link>
+          <li key={workout.id}>
+            <Link onClick={() => selectWorkout(workout)}>
               {workout.name}
             </Link>
             <p>{formatExerciseNames(workout.exerciseNames)}</p>

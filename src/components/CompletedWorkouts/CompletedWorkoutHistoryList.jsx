@@ -37,6 +37,7 @@ const CompletedWorkoutHistoryList = () => {
             <div className="card my-2 p-2 col-md-8 col-lg-5">
               <div className="row">
                 <Link
+                className="col-auto"
                   to={`/completedWorkouts/${workout.id}`}
                 >
                   {workout.name} - {getFormatedCompletion(workout)}
