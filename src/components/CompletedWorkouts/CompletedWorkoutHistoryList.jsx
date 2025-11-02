@@ -17,15 +17,15 @@ const CompletedWorkoutHistoryList = () => {
     const [hours, minutes, seconds] = duration.split(":");
     const hoursText = hours === "00"
       ? ""
-      : `${hours}hr `;
+      : `${hours}hr `.replace(/^0/, "");
     const minutesText = minutes === "00"
       ? ""
-      : `${minutes}min `;
+      : `${minutes}min `.replace(/^0/, "");
     const secondsText = seconds === "00"
       ? ""
-      : `${seconds}s`;
+      : `${seconds}s`.replace(/^0/, "");
 
-    return `${hoursText.replace(/^0/, "")}${minutesText.replace(/^0/, "")}${secondsText.replace(/^0/, "")}`;
+    return `${hoursText}${minutesText}${secondsText}`;
   }
 
   return (
