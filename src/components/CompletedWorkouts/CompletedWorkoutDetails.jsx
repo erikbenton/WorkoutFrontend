@@ -22,7 +22,7 @@ const CompletedWorkoutDetails = () => {
         {completedWorkout.completedExerciseGroups.map(group =>
           <li key={group.id}>
             <Link to={`/exercises/${group.exercise.id}`}>{group.exercise.name}</Link>
-            {group.note && <p>{group.note}</p>}
+            {group.comment && <p>{group.comment}</p>}
             <ol>
               {group.completedExerciseSets.map(set =>
                 <li key={set.id}>
