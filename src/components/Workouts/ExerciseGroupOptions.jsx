@@ -1,6 +1,6 @@
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { removeExerciseGroup, shiftExerciseGroup } from "../../reducers/focusedWorkout";
+import { removeExerciseGroup, setRestTimeModalStatus, shiftExerciseGroup } from "../../reducers/focusedWorkout";
 
 const ExerciseGroupOptions = ({ exerciseGroup }) => {
   const dispatch = useDispatch()
@@ -16,17 +16,27 @@ const ExerciseGroupOptions = ({ exerciseGroup }) => {
     }))
   }
 
+  const openRestTimeModal = () => {
+    dispatch(setRestTimeModalStatus({
+      isModalOpen: true,
+      groupKey: exerciseGroup.key
+    }));
+  }
+
   return (
-    <Dropdown className="d-inline">
-      <Dropdown.Toggle variant="outline-primary" id={`group_options_${exerciseGroup.key}`}>
-        options
-      </Dropdown.Toggle>
-      <Dropdown.Menu>
-        <Dropdown.Item onClick={() => shiftGroup(-1)}>shift up</Dropdown.Item>
-        <Dropdown.Item onClick={() => shiftGroup(1)}>shift down</Dropdown.Item>
-        <Dropdown.Item variant="danger" onClick={removeGroup}>remove group</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+    <>
+      <Dropdown className="d-inline">
+        <Dropdown.Toggle variant="outline-primary" id={`group_options_${exerciseGroup.key}`}>
+          options
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item onClick={() => shiftGroup(-1)}>shift up</Dropdown.Item>
+          <Dropdown.Item onClick={() => shiftGroup(1)}>shift down</Dropdown.Item>
+          <Dropdown.Item onClick={openRestTimeModal}>enter rest time</Dropdown.Item>
+          <Dropdown.Item variant="danger" onClick={removeGroup}>remove group</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    </>
   )
 }
 
