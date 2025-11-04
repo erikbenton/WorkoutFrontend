@@ -1,22 +1,22 @@
-import { useDispatch, useSelector } from "react-redux"
-import { addExerciseGroup, addMultipleExerciseGroups, setWorkout, updateWorkoutName } from "../../reducers/focusedWorkout"
-import { useEffect, useState } from "react"
-import ExerciseGroupsInput from "./ExerciseGroupsInputs"
-import { Link, useNavigate, useParams } from "react-router-dom"
-import workoutService from '../../services/workout'
-import useFetch from "../../hooks/useFetch"
+import { useDispatch, useSelector } from "react-redux";
+import { addExerciseGroup, addMultipleExerciseGroups, setWorkout, updateWorkoutName } from "../../reducers/focusedWorkout";
+import { useEffect, useState } from "react";
+import ExerciseGroupsInput from "./ExerciseGroupsInputs";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import workoutService from "../../services/workout";
+import useFetch from "../../hooks/useFetch";
 import ExercisesSelection from "../Exercises/ExercisesSelection";
-import { Button } from "react-bootstrap"
-import RestTimeModal from "./RestTimeModal"
+import { Button } from "react-bootstrap";
+import RestTimeModal from "./RestTimeModal";
 
 const WorkoutForm = (props) => {
   const [selectingExercises, setSelectingExercises] = useState(false);
   const [selectedExercises, setSelectedExercises] = useState([]);
-  const navigate = useNavigate()
-  const id = Number(useParams().id)
-  const workout = useSelector(state => state.focusedWorkout)
-  const { data: exercises, loading: loadingExercises, error: errorExercises } = useFetch('exercises')
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const id = Number(useParams().id);
+  const workout = useSelector(state => state.focusedWorkout);
+  const { data: exercises, loading: loadingExercises, error: errorExercises } = useFetch("exercises");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const intitialWorkout = props.workout
@@ -71,13 +71,12 @@ const WorkoutForm = (props) => {
     ? workout.exerciseGroups.find(group => workout.editingGroupKey === group.key)
     : null;
 
-
   return (
     <div>
       {workout.openRestTimeModal && <RestTimeModal show={workout.openRestTimeModal} exerciseGroup={editingExerciseGroup} />}
       <div className="container justify-content-center">
         <div className="justify-content-center">
-          <h1>{id ? 'Edit' : 'Create'} Workout</h1>
+          <h1>{id ? "Edit" : "Create"} Workout</h1>
           <form id="workout_form" onSubmit={id ? updateEditedWorkout : createNewWorkout}>
             <div className="row g-3 align-items-center mb-2">
               <div className="col-auto">
@@ -87,7 +86,7 @@ const WorkoutForm = (props) => {
                 <input
                   id="workoutName"
                   className="form-control"
-                  type='text'
+                  type="text"
                   value={workout.name ?? ""}
                   onChange={(e) => dispatch(updateWorkoutName({ ...workout, name: e.target.value }))}
                 />
@@ -98,7 +97,7 @@ const WorkoutForm = (props) => {
             <Button variant="outline-primary" type="button" onClick={() => dispatch(addExerciseGroup(exercises[0]))}>Add exercise</Button>
             <Button type="button" onClick={() => setSelectingExercises(true)}>Add multiple exercises</Button>
             <br />
-            <Button variant="success" type="submit">{id ? 'Update' : 'Create'}</Button>
+            <Button variant="success" type="submit">{id ? "Update" : "Create"}</Button>
             <Link to={id ? `/workouts/${id}` : "/workouts"}>
               <Button variant="warning" type="button">
                 Cancel
@@ -111,4 +110,4 @@ const WorkoutForm = (props) => {
   )
 }
 
-export default WorkoutForm
+export default WorkoutForm;

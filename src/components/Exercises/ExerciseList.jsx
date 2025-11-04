@@ -1,8 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { useEffect, useState } from 'react'
-import { initializeExercises } from '../../reducers/exercises'
+import { useState } from 'react'
 import { Button, Table } from 'react-bootstrap'
+import useFetch from '../../hooks/useFetch'
 
 const ExerciseListRow = ({ exercise }) => {
   return (
@@ -18,17 +17,11 @@ const ExerciseList = () => {
   const [nameFilter, setNameFilter] = useState("");
   const [bodyPartFilter, setBodyPartFilter] = useState("");
   const [equipmentFilter, setEquipmentFilter] = useState("");
-  const exercises = useSelector(state => state.exercises)
-  const dispatch = useDispatch()
+  const { data: exercises, loading, error } = useFetch("exercises");
   const navigate = useNavigate()
 
-  useEffect(() => {
-    dispatch(initializeExercises())
-  }, [dispatch])
-
-  if (!exercises) {
-    return <div>Loading data...</div>
-  }
+  if (loading) return <div>Loading data...</div>
+  if (error) return <di>{error}</di>
 
   const filteredExercises = exercises
     .filter(ex => {
