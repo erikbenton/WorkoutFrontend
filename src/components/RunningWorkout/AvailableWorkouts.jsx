@@ -23,15 +23,23 @@ const AvailableWorkouts = () => {
   return (
     <div>
       <h1>Choose a workout</h1>
-      <ul>
-        {workouts.map(workout => (
+      <ul className="no-bullets">
+        {workouts.map(workout =>
           <li key={workout.id}>
-            <Link onClick={() => selectWorkout(workout)}>
-              {workout.name}
-            </Link>
-            <p>{formatExerciseNames(workout.exerciseNames)}</p>
-          </li>
-        ))}
+            <div className="card my-2 p-2 col-xs-12 col-md-11 col-lg-7">
+              <div className="row">
+                <Link
+                  className="col-auto"
+                  onClick={() => selectWorkout(workout)}
+                >
+                  {workout.name}
+                </Link>
+              </div>
+              <div className="row">
+                <p className="card-text">{formatExerciseNames(workout.exerciseNames)}</p>
+              </div>
+            </div>
+          </li>)}
       </ul>
       <Button variant="primary" type="button" onClick={startEmptyWorkout}>Start an Empty Workout</Button>
     </div>
