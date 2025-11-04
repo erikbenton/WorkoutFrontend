@@ -2,6 +2,7 @@ import { useMatch, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ElapsedTimer from "./ElapsedTime";
 import { Navbar, Nav } from "react-bootstrap";
+import CountdownTimer from "./CountdownTimer";
 
 const Menu = () => {
   const match = useMatch("/runningWorkout");
@@ -39,11 +40,16 @@ const Menu = () => {
         </Navbar.Collapse>
       </Nav>
       <Nav className="ms-auto me-5">
+        {runningWorkout && runningWorkout.showRestTimer && (
+          <Nav.Item className="me-3">
+            <CountdownTimer startTime={Date.now()} totalTime={runningWorkout.restTime} />
+          </Nav.Item>
+        )}
         {runningWorkout && (
-            <Nav.Item>
-              <ElapsedTimer startTime={Date.parse(runningWorkout.startTime)} />
-            </Nav.Item>
-          )}
+          <Nav.Item>
+            <ElapsedTimer startTime={Date.parse(runningWorkout.startTime)} />
+          </Nav.Item>
+        )}
       </Nav>
     </Navbar>
   )

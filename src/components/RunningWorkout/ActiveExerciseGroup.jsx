@@ -92,7 +92,7 @@ const ActiveExerciseGroup = ({
           </div>
         }
         {exerciseGroup.exerciseSets.map(set => (
-          <ActiveExerciseSet key={set.key} groupKey={exerciseGroup.key} set={set} />
+          <ActiveExerciseSet key={set.key} groupKey={exerciseGroup.key} restTime={exerciseGroup.restTime} set={set} />
         ))}
         <div className="row justify-content-center">
           <Button className="col-3" type="button" onClick={addSet}>Add set</Button>

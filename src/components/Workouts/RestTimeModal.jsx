@@ -32,7 +32,7 @@ const RestTimeModal = ({ show, exerciseGroup }) => {
         : 0;
       const secondsTick = `${(secondsNum < 10 ? '0' : '')}${secondsNum}`;
       const newMinutesTick = `${(newMinutes < 10 ? '0' : '')}${newMinutes}`;
-      newRestTime = `${newMinutesTick}:${secondsTick}`
+      newRestTime = `00:${newMinutesTick}:${secondsTick}`
     }
     setRestTime(newRestTime);
   }
@@ -51,7 +51,7 @@ const RestTimeModal = ({ show, exerciseGroup }) => {
         : newMinutes;
       const minutesTick = `${(minutesNum < 10 ? '0' : '')}${minutesNum}`;
       const newSecondsTick = `${(newSeconds < 10 ? '0' : '')}${newSeconds}`;
-      newRestTime = `${minutesTick}:${newSecondsTick}`
+      newRestTime = `00:${minutesTick}:${newSecondsTick}`
     }
     setRestTime(newRestTime);
   }
@@ -59,8 +59,8 @@ const RestTimeModal = ({ show, exerciseGroup }) => {
   if (!exerciseGroup) return;
 
   const ticks = restTime ? restTime.split(":") : null;
-  const minutes = ticks ? ticks[0] : "";
-  const seconds = ticks ? ticks[1] : "";
+  const minutes = ticks ? ticks[1] : "";
+  const seconds = ticks ? ticks[2] : "";
 
   return (
     <Modal

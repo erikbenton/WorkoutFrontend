@@ -1,10 +1,13 @@
 import { useDispatch } from "react-redux";
-import { updateExerciseSet, removeExerciseSet } from "../../reducers/runningWorkout";
-import { Button, CloseButton } from "react-bootstrap";
+import { updateExerciseSet, removeExerciseSet, restartRestTimer } from "../../reducers/runningWorkout";
+import { Button } from "react-bootstrap";
+import { useState } from "react";
 
 
-const ActiveExerciseSet = ({ groupKey, set }) => {
+const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
   const dispatch = useDispatch();
+  // needed so user can edit set without resetting rest timer
+  const [completed, setCompleted ] = useState(false);
 
   const updateSet = (e, set) => {
     const [field] = e.target.id.split("_");
@@ -32,6 +35,10 @@ const ActiveExerciseSet = ({ groupKey, set }) => {
         field: "completed",
         value
       }));
+      if (restTime && value && !completed) {
+        setCompleted(true);
+        dispatch(restartRestTimer(restTime))
+      }
     } else {
       alert("A set's reps must be non-negative.")
     }

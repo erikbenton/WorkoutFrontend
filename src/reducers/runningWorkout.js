@@ -15,7 +15,9 @@ const initializeWorkout = workout => {
         initializeWorkoutExerciseGroup(group, group.exercise)).map(toKeyedObject)
       : [],
     startTime: now.toISOString(),
-    endTime: null
+    endTime: null,
+    showRestTimer: false,
+    restTime: null
   }
 }
 
@@ -24,6 +26,7 @@ const initializeWorkoutExerciseGroup = (exerciseGroup, exercise) => {
     exercise,
     exerciseGroupId: exerciseGroup ? exerciseGroup.id : null,
     note: exerciseGroup ? exerciseGroup.note : null,
+    restTime: exerciseGroup ? exerciseGroup.restTime : null,
     comment: null,
     exerciseSets: exerciseGroup
       ? exerciseGroup.exerciseSets.map(initializeExerciseSet).map(toKeyedObject)
@@ -59,6 +62,10 @@ const activeWorkoutSlice = createSlice({
         [field]: value === "" ? null : value
       };
       return updatedRunningWorkout;
+    },
+    setRestTimer(state, action) {
+      const { showRestTimer, restTime } = action.payload;
+      return { ...state, showRestTimer, restTime };
     },
     selectActiveExerciseGroup(state, action) {
       const index = action.payload;
@@ -145,10 +152,20 @@ export const initializeRunningWorkout = (id) => {
   }
 }
 
+export const restartRestTimer = (restTime) => {
+  return dispatch => {
+    dispatch(setRestTimer({ showRestTimer: false, restTime: null }))
+    setTimeout(() => {
+      dispatch(setRestTimer({ showRestTimer: true, restTime }))
+    }, 0);
+  }
+}
+
 export const {
   initializeActiveWorkout,
   clearRunningWorkout,
   updateRunningWorkout,
+  setRestTimer,
   selectActiveExerciseGroup,
   updateActiveExerciseGroupExercise,
   clearActiveExerciseGroup,
