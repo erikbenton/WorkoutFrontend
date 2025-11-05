@@ -65,7 +65,7 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
           onChange={updateExerciseSetMaxReps}
         />
       </div>
-      <div className="col-5">
+      <div className="col-4">
         <input
           type='number'
           className="form-control"
@@ -74,7 +74,7 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
           onChange={updateExerciseSetWeight}
         />
       </div>
-      <div className="col-1 p-0">
+      <div className="col-2">
         <Button variant="danger" type="button" onClick={removeSet}>X</Button>
       </div>
     </div>
@@ -85,11 +85,11 @@ const ExerciseSetsInput = ({ exerciseGroup }) => {
   return (
     <div>
       {exerciseGroup.exerciseSets.length > 0 &&
-        <div className="row row-cols-auto m-1 text-center">
+        <div className="row row-cols-auto m-1 text-center align-items-center">
           <span className="col-3">Min Reps</span>
           <span className="col-3">Max Reps</span>
-          <span className="col-5">Weight</span>
-          <span className="col-1"></span>
+          <span className="col-4">Weight</span>
+          <span className="col-2 col-sm-4"></span>
         </div>
       }
       {exerciseGroup.exerciseSets.map(set =>

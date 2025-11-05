@@ -36,9 +36,9 @@ const ExerciseGroupInput = ({ exerciseGroup, exercises }) => {
 
   return (
     <div className="col-12 card mb-2 pb-1">
-      <div className="my-2 pe-2 row row-cols-auto justify-content-center align-items-center">
-        <label className="col-auto">Exercise</label>
-        <div className="col-4">
+      <div className="card-text my-2 pe-2 row row-cols-auto justify-content-center align-items-center">
+        <label className="ps-4 col-auto">Exercise</label>
+        <div className="col-md-3">
           <select
             id={`exercise_${exerciseGroup.key}`}
             className="form-select"
@@ -50,7 +50,7 @@ const ExerciseGroupInput = ({ exerciseGroup, exercises }) => {
             )}
           </select>
         </div>
-        <div className="col">
+        <div className="col col-md-5 col-lg-6">
           <input
             type='text'
             className="form-control"
@@ -60,7 +60,7 @@ const ExerciseGroupInput = ({ exerciseGroup, exercises }) => {
             onChange={updateExerciseGroupNote}
           />
         </div>
-        <div className="col">
+        <div className="col ms-lg-auto">
           <ExerciseGroupOptions exerciseGroup={exerciseGroup} />
         </div>
       </div>
