@@ -1,6 +1,8 @@
 import { Button } from 'react-bootstrap'
 import { removeExerciseSet, updateExerciseSet } from '../../reducers/focusedWorkout'
 import { useDispatch } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
   const dispatch = useDispatch()
@@ -47,7 +49,7 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
 
   return (
     <div className="row row-cols-auto m-1 justify-content-center align-items-center">
-      <div className="col-3">
+      <div className="col-3 ps-0 ps-md-2">
         <input
           type='number'
           className="form-control"
@@ -56,7 +58,7 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
           onChange={updateExerciseSetMinReps}
         />
       </div>
-      <div className="col-3">
+      <div className="col-3 ps-0">
         <input
           type='number'
           className="form-control"
@@ -65,7 +67,7 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
           onChange={updateExerciseSetMaxReps}
         />
       </div>
-      <div className="col-4">
+      <div className="col-4 px-0">
         <input
           type='number'
           className="form-control"
@@ -74,8 +76,10 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
           onChange={updateExerciseSetWeight}
         />
       </div>
-      <div className="col-2">
-        <Button variant="danger" type="button" onClick={removeSet}>X</Button>
+      <div className="col-2 p-0 text-center">
+        <Button variant="danger" type="button" onClick={removeSet}>
+          <FontAwesomeIcon icon={faTrash} />
+        </Button>
       </div>
     </div>
   )
@@ -86,9 +90,9 @@ const ExerciseSetsInput = ({ exerciseGroup }) => {
     <div>
       {exerciseGroup.exerciseSets.length > 0 &&
         <div className="row row-cols-auto m-1 text-center align-items-center">
-          <span className="col-3">Min Reps</span>
-          <span className="col-3">Max Reps</span>
-          <span className="col-4">Weight</span>
+          <span className="col-3 ps-0 ps-md-2">Min Reps</span>
+          <span className="col-3 ps-0">Max Reps</span>
+          <span className="col-4 px-0">Weight</span>
           <span className="col-2 col-sm-4"></span>
         </div>
       }

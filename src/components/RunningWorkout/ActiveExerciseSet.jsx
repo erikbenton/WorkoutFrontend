@@ -2,6 +2,8 @@ import { useDispatch } from "react-redux";
 import { updateExerciseSet, removeExerciseSet, restartRestTimer } from "../../reducers/runningWorkout";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash, faClipboardQuestion, faCheck } from '@fortawesome/free-solid-svg-icons'
 
 
 const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
@@ -74,21 +76,23 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
         />
       </div>
       <Button
-        className="col-2"
+        className="col-auto"
         type="button"
         variant={set.completed ? "success" : "primary"}
         onClick={() => toggleSetCompleted(set, !set.completed)}
       >
-        {set.completed ? 'edit' : 'complete'}
+        {set.completed
+          ? <FontAwesomeIcon icon={faCheck} />
+          : <FontAwesomeIcon icon={faClipboardQuestion} />}
       </Button>
       <Button
-        className="col-1"
+        className="col-auto"
         variant="danger"
         type="button"
         disabled={set.completed}
         onClick={() => removeSet(set)}
       >
-        X
+        <FontAwesomeIcon icon={faTrash} />
       </Button>
     </div>
   )

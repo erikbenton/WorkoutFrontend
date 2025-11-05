@@ -76,8 +76,8 @@ const RestTimeModal = ({ show, exerciseGroup }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="row row-cols-auto m-1 justify-content-center align-items-center">
-          <div className="col-2">
+        <div className="row row-cols-auto m-1 ms-lg-5 justify-content-center align-items-center">
+          <div className="col-3 col-lg-2">
             <input
               type='number'
               id="restTimeMinutes"
@@ -86,8 +86,8 @@ const RestTimeModal = ({ show, exerciseGroup }) => {
               onChange={(e) => updateRestTimeMinutes(e)}
             />
           </div>
-          <label className="col-auto">min</label>
-          <div className="col-2">
+          <label className="col-auto ps-0">min</label>
+          <div className="col-3 col-lg-2">
             <input
               type='number'
               id="restTimeSeconds"
@@ -96,8 +96,8 @@ const RestTimeModal = ({ show, exerciseGroup }) => {
               onChange={(e) => updateRestTimeSeconds(e)}
             />
           </div>
-          <label className="col-auto">sec</label>
-          <Button variant="warning" onClick={() => setRestTime(null)}>Clear</Button>
+          <label className="col-auto ps-0">sec</label>
+          <Button variant="warning" className="ms-auto m-lg-auto" onClick={() => setRestTime(null)}>Clear</Button>
         </div>
       </Modal.Body>
       <Modal.Footer>

@@ -99,7 +99,7 @@ const ActiveExerciseGroup = ({
         </div>
         <div className="row row-cols-auto my-3 align-items-center">
           <label className="col-form-label">Comment</label>
-          <div className="col-5">
+          <div className="col-9">
             <input
               type="text"
               className="form-control"
