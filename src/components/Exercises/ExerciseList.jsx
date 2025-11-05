@@ -1,7 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
-import { Button, Table } from 'react-bootstrap'
-import useFetch from '../../hooks/useFetch'
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Button, Table } from "react-bootstrap";
+import useFetch from "../../hooks/useFetch";
+import { useSelector } from "react-redux";
 
 const ExerciseListRow = ({ exercise }) => {
   return (
@@ -14,6 +15,8 @@ const ExerciseListRow = ({ exercise }) => {
 }
 
 const ExerciseList = () => {
+  const bodyParts = useSelector(state => state.bodyParts);
+  const equipments = useSelector(state => state.equipment);
   const [nameFilter, setNameFilter] = useState("");
   const [bodyPartFilter, setBodyPartFilter] = useState("");
   const [equipmentFilter, setEquipmentFilter] = useState("");
@@ -33,7 +36,7 @@ const ExerciseList = () => {
   return (
     <div>
       <h2>Exercises</h2>
-      <Table striped>
+      <Table striped className="table-sm">
         <thead>
           <tr>
             <th>Name
@@ -46,22 +49,30 @@ const ExerciseList = () => {
                 onChange={(e) => setNameFilter(e.target.value)} />
             </th>
             <th>Body Part
-              <input
-                className="form-control"
-                id="exercise_bodyParts_filter"
-                type="text"
-                placeholder="filter by body part"
+              <select
+                className="form-select"
+                id="bodyPartFilter"
                 value={bodyPartFilter}
-                onChange={(e) => setBodyPartFilter(e.target.value)} />
+                onChange={(e) => setBodyPartFilter(e.target.value)}
+              >
+                <option value=""></option>
+                {bodyParts.map(bp => (
+                  <option key={bp.bodyPart} value={bp.bodyPart}>{bp.bodyPart}</option>
+                ))}
+              </select>
             </th>
             <th>Equipment
-              <input
-              className="form-control"
-                id="exercise_equipment_filter"
-                type="text"
-                placeholder="filter by equipment"
+              <select
+                className="form-select"
+                id="equipmentFilter"
                 value={equipmentFilter}
-                onChange={(e) => setEquipmentFilter(e.target.value)} />
+                onChange={(e) => setEquipmentFilter(e.target.value)}
+              >
+                <option value=""></option>
+                {equipments.map(eq => (
+                  <option key={eq.equipment} value={eq.equipment}>{eq.equipment}</option>
+                ))}
+              </select>
             </th>
           </tr>
         </thead>

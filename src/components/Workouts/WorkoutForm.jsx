@@ -93,10 +93,8 @@ const WorkoutForm = (props) => {
               </div>
             </div>
             <ExerciseGroupsInput exerciseGroups={workout.exerciseGroups} exercises={exercises} />
-            <br />
             <Button variant="outline-primary" type="button" onClick={() => dispatch(addExerciseGroup(exercises[0]))}>Add exercise</Button>
             <Button type="button" onClick={() => setSelectingExercises(true)}>Add multiple exercises</Button>
-            <br />
             <Button variant="success" type="submit">{id ? "Update" : "Create"}</Button>
             <Link to={id ? `/workouts/${id}` : "/workouts"}>
               <Button variant="warning" type="button">

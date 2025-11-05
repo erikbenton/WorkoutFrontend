@@ -62,8 +62,8 @@ const ExerciseForm = (props) => {
       <h1>{props.exercise ? 'Edit' : 'Create'} Exercise</h1>
       <form onSubmit={saveExercise}>
         <div className="my-2 pe-2 row row-cols-auto align-items-center">
-          <label className="col-2">Name</label>
-          <div className="col-3">
+          <label className="col-3 col-md-2">Name</label>
+          <div className="col-9">
             <input
               className="form-control"
               id={`name_${exercise.id}`}
@@ -74,7 +74,7 @@ const ExerciseForm = (props) => {
           </div>
         </div>
         <div className="my-2 pe-2 row row-cols-auto align-items-center">
-          <label className="col-2">Body Part</label>
+          <label className="col-3 col-md-2">Body Part</label>
           <div className="col-auto">
             <select
               className="form-select"
@@ -89,7 +89,7 @@ const ExerciseForm = (props) => {
           </div>
         </div>
         <div className="my-2 pe-2 row row-cols-auto align-items-center">
-          <label className="col-2">Equipment</label>
+          <label className="col-3 col-md-2">Equipment</label>
           <div className="col-auto">
             <select
               className="form-select"
@@ -104,7 +104,7 @@ const ExerciseForm = (props) => {
           </div>
         </div>
         <div className="my-2 pe-2 row align-items-center">
-          <label className="col-2">Instructions</label>
+          <label className="col-3 col-md-2">Instructions</label>
           <div className="col">
             <textarea
               className="form-control"
