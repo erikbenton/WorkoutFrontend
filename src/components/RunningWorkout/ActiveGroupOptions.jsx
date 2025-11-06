@@ -1,6 +1,8 @@
 import { Dropdown } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { shiftExerciseGroup, removeExerciseGroup } from "../../reducers/runningWorkout"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 
 const ActiveGroupOptions = ({ exerciseGroup }) => {
   const dispatch = useDispatch()
@@ -17,9 +19,9 @@ const ActiveGroupOptions = ({ exerciseGroup }) => {
   }
 
   return (
-    <Dropdown className="d-inline">
+    <Dropdown drop="down-centered" className="ms-auto d-inline">
       <Dropdown.Toggle variant="outline-primary" id={`group_options_${exerciseGroup.key}`} size="sm">
-        options
+        <FontAwesomeIcon icon={faEllipsisVertical} />
       </Dropdown.Toggle>
       <Dropdown.Menu>
         <Dropdown.Item onClick={() => shiftGroup(exerciseGroup, -1)}>shift up</Dropdown.Item>

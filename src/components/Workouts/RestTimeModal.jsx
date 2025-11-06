@@ -28,7 +28,7 @@ const RestTimeModal = ({ show, exerciseGroup }) => {
       newRestTime = null;
     } else {
       const secondsNum = restTime
-        ? Number(restTime.split(":")[1])
+        ? Number(restTime.split(":")[2])
         : 0;
       const secondsTick = `${(secondsNum < 10 ? '0' : '')}${secondsNum}`;
       const newMinutesTick = `${(newMinutes < 10 ? '0' : '')}${newMinutes}`;
@@ -47,7 +47,7 @@ const RestTimeModal = ({ show, exerciseGroup }) => {
       newRestTime = null;
     } else {
       const minutesNum = restTime
-        ? Number(restTime.split(":")[0]) + newMinutes
+        ? Number(restTime.split(":")[1]) + newMinutes
         : newMinutes;
       const minutesTick = `${(minutesNum < 10 ? '0' : '')}${minutesNum}`;
       const newSecondsTick = `${(newSeconds < 10 ? '0' : '')}${newSeconds}`;

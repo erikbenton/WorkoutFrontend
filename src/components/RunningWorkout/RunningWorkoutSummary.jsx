@@ -34,13 +34,19 @@ const RunningWorkoutSummary = ({
 
   return (
     <div>
-      <ol>
+      <ol className="no-bullets">
         {runningWorkout.exerciseGroups.map((group, index) => (
           <li key={group.key}>
-            <Link onClick={() => selectExerciseGroup(index)}>
-              {group.exercise.name} - {group.exerciseSets.length} sets
-            </Link>
-            <ActiveGroupOptions key={group.key} exerciseGroup={group} />
+            <div className="card p-2 mb-1">
+              <div className="row align-items-center">
+                <Link className="col-auto" onClick={() => selectExerciseGroup(index)}>
+                  {group.exercise.name} - {group.exerciseSets.length} sets
+                </Link>
+                <div className="ms-auto col-auto">
+                  <ActiveGroupOptions key={group.key} exerciseGroup={group} />
+                </div>
+              </div>
+            </div>
           </li>
         ))}
       </ol>

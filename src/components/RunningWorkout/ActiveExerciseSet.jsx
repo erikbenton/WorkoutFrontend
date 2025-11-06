@@ -53,10 +53,10 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
 
   return (
     <div className="row row-cols-auto m-1">
-      <div className="col-3">
+      <div className="col-3 px-1">
         <input
           disabled={set.completed}
-          className="form-control"
+          className="form-control pe-1"
           type="number"
           id={`reps_${set.key}`}
           value={set.reps ?? ""}

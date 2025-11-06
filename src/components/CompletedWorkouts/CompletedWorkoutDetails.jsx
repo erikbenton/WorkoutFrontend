@@ -15,21 +15,28 @@ const CompletedWorkoutDetails = () => {
     return dateNoTime;
   }
 
+  const totalReps = group => group.completedExerciseSets.reduce((acc, curr) => acc + curr.reps, 0);
+  const totalWeight = group => group.completedExerciseSets.reduce((acc, curr) => acc + (curr.weight ?? 0), 0);
+
   return (
     <>
       <h1>{completedWorkout.name} - {getFormatedCompletion(completedWorkout)}</h1>
-      <ol>
+      <p>Duration: {completedWorkout.duration}</p>
+      <ol className="no-bullets">
         {completedWorkout.completedExerciseGroups.map(group =>
           <li key={group.id}>
-            <Link to={`/exercises/${group.exercise.id}`}>{group.exercise.name}</Link>
-            {group.comment && <p>{group.comment}</p>}
-            <ol>
-              {group.completedExerciseSets.map(set =>
-                <li key={set.id}>
-                  {set.reps} reps {set.weight ? `x ${set.weight} lbs` : ''}
-                </li>
-              )}
-            </ol>
+            <div className="card my-2">
+              <Link className="p-2" to={`/exercises/${group.exercise.id}`}>{group.exercise.name}</Link>
+              {group.comment && <p>{group.comment}</p>}
+              <ol className="list-group list-group-flush">
+                {group.completedExerciseSets.map(set =>
+                  <li className="list-group-item" key={set.id}>
+                    {set.reps} reps {set.weight ? `x ${set.weight} lbs` : ''}
+                  </li>
+                )}
+                <span className="card-footer">Reps: {totalReps(group)} {totalWeight(group) === 0 ? "" : `Weight: ${totalWeight(group)}`}lbs </span>
+              </ol>
+            </div>
           </li>
         )}
       </ol>

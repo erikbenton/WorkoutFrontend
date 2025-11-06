@@ -54,21 +54,27 @@ const WorkoutDetails = () => {
     ${set.maxReps ? set.maxReps : ""}`;
 
   const weightText = set => set.weight !== null ? `x ${set.weight} lbs` : "reps"
+  const restText = restTime => restTime.split(":").slice(1).join(":");
 
   return (
     <>
       <h2>{workout.name}</h2>
-      <ol>
+      <ol className="no-bullets">
         {workout.exerciseGroups.map(group =>
           <li key={group.key}>
-            <Link to={`/exercises/${group.exercise.id}`}>{group.exercise.name}</Link>
-            {group.note && <p>{group.note}</p>}
-            <ol>
-              {group.exerciseSets.map(set =>
-                <li key={set.key}>
-                  {repsText(set)} {weightText(set)}
-                </li>)}
-            </ol>
+            <div className="card my-2 p-2">
+              <div className="row">
+                <Link className="col-auto" to={`/exercises/${group.exercise.id}`}>{group.exercise.name}</Link>
+                {group.restTime && <span className="col-auto ms-auto">{restText(group.restTime)} Rest</span>}
+              </div>
+              {group.note && <p>{group.note}</p>}
+              <ol className="list-group list-group-flush">
+                {group.exerciseSets.map(set =>
+                  <li className="list-group-item" key={set.key}>
+                    {repsText(set)} {weightText(set)}
+                  </li>)}
+              </ol>
+            </div>
           </li>
         )}
       </ol>

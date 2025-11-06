@@ -20,6 +20,11 @@ const ExercisesSelection = ({ setSelectingExercises, setSelectedExercises, selec
     }
   }
 
+  const cancelSelection = () => {
+    setSelectedExercises([]);
+    setSelectingExercises(false);
+  }
+
   if (loading) return <h2>Loading exercises...</h2>
 
   return (
@@ -33,6 +38,7 @@ const ExercisesSelection = ({ setSelectingExercises, setSelectedExercises, selec
         ))}
       </ul>
       <Button type="button" onClick={() => setSelectingExercises(false)}>Done</Button>
+      <Button type="button" variant="warning" onClick={cancelSelection}>Cancel</Button>
     </div>
   )
 }

@@ -11,6 +11,8 @@ import ActiveExerciseSet from "./ActiveExerciseSet";
 import { useEffect } from "react";
 import ReplaceExercise from "../Exercises/ReplaceExercise";
 import { Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
 
 const ActiveExerciseGroup = ({
   exerciseGroup,
@@ -79,7 +81,9 @@ const ActiveExerciseGroup = ({
               {exerciseGroup.exercise.name}
             </Link>
           </h2>
-          <Button className="col-auto" type="button" onClick={replaceExercise}>replace exercise</Button>
+          <Button className="col-auto" type="button" onClick={replaceExercise}>
+            <FontAwesomeIcon icon={faRotateRight} />
+          </Button>
         </div>
         <div className="row">
           {exerciseGroup.note && <p>{exerciseGroup.note}</p>}
