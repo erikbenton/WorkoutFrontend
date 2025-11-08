@@ -26,16 +26,21 @@ const CompletedWorkoutDetails = () => {
         {completedWorkout.completedExerciseGroups.map(group =>
           <li key={group.id}>
             <div className="card my-2">
-              <Link className="p-2" to={`/exercises/${group.exercise.id}`}>{group.exercise.name}</Link>
-              {group.comment && <p>{group.comment}</p>}
-              <ol className="list-group list-group-flush">
-                {group.completedExerciseSets.map(set =>
-                  <li className="list-group-item" key={set.id}>
-                    {set.reps} reps {set.weight ? `x ${set.weight} lbs` : ''}
-                  </li>
-                )}
-                <span className="card-footer">Reps: {totalReps(group)} {totalWeight(group) === 0 ? "" : `Weight: ${totalWeight(group)}`}lbs </span>
-              </ol>
+              <div className="card-body">
+                <Link className="" to={`/exercises/${group.exercise.id}`}>{group.exercise.name}</Link>
+                {group.comment && <p className="card-text">{group.comment}</p>}
+                <ol className="list-group list-group-flush">
+                  {group.completedExerciseSets.map(set =>
+                    <li className="list-group-item ps-0" key={set.id}>
+                      {set.reps} reps {set.weight ? `x ${set.weight} lbs` : ''}
+                    </li>
+                  )}
+                </ol>
+              </div>
+              <span className="card-footer">
+                <span className="badge text-bg-primary">Reps: {totalReps(group)}</span>
+                <span className="ms-1 badge text-bg-success">{totalWeight(group) === 0 ? "" : `Weight: ${totalWeight(group)} lbs`}</span>
+              </span>
             </div>
           </li>
         )}
