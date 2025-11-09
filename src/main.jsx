@@ -9,6 +9,9 @@ import focusedWorkoutReducer from './reducers/focusedWorkout'
 import runningWorkoutReducer from './reducers/runningWorkout.js'
 import App from './App.jsx'
 import "./index.css"
+import { loadFromLocalStorage, saveToLocalStorage } from './utils/helper.js'
+
+const preloadedState = loadFromLocalStorage();
 
 const store = configureStore({
   reducer: {
@@ -16,8 +19,11 @@ const store = configureStore({
     equipment: equipmentReducer,
     focusedWorkout: focusedWorkoutReducer,
     runningWorkout: runningWorkoutReducer,
-  }
-})
+  },
+  preloadedState
+});
+
+store.subscribe(() => saveToLocalStorage(store.getState()));
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

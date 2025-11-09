@@ -9,7 +9,7 @@ import { faTrash, faClipboardQuestion, faCheck } from '@fortawesome/free-solid-s
 const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
   const dispatch = useDispatch();
   // needed so user can edit set without resetting rest timer
-  const [completed, setCompleted ] = useState(false);
+  const [completed, setCompleted ] = useState(set.completed);
 
   const updateSet = (e, set) => {
     const [field] = e.target.id.split("_");

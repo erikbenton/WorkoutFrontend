@@ -17,7 +17,8 @@ const initializeWorkout = workout => {
     startTime: now.toISOString(),
     endTime: null,
     showRestTimer: false,
-    restTime: null
+    restTime: null,
+    restStartedAt: null
   }
 }
 
@@ -46,7 +47,7 @@ const initializeExerciseSet = exerciseSet => {
 }
 
 const activeWorkoutSlice = createSlice({
-  name: 'activeWorkout',
+  name: 'runningWorkout',
   initialState: null,
   reducers: {
     initializeActiveWorkout(state, action) {
@@ -64,8 +65,8 @@ const activeWorkoutSlice = createSlice({
       return updatedRunningWorkout;
     },
     setRestTimer(state, action) {
-      const { showRestTimer, restTime } = action.payload;
-      return { ...state, showRestTimer, restTime };
+      const { showRestTimer, restTime, restStartedAt } = action.payload;
+      return { ...state, showRestTimer, restTime, restStartedAt };
     },
     selectActiveExerciseGroup(state, action) {
       const index = action.payload;
@@ -154,9 +155,10 @@ export const initializeRunningWorkout = (id) => {
 
 export const restartRestTimer = (restTime) => {
   return dispatch => {
-    dispatch(setRestTimer({ showRestTimer: false, restTime: null }))
+    dispatch(setRestTimer({ showRestTimer: false, restTime: null, restStartedAt: null }))
     setTimeout(() => {
-      dispatch(setRestTimer({ showRestTimer: true, restTime }))
+      const now = new Date();
+      dispatch(setRestTimer({ showRestTimer: true, restTime, restStartedAt: now.toISOString() }))
     }, 0);
   }
 }

@@ -42,7 +42,7 @@ const Menu = () => {
       <Nav className="ms-auto me-5">
         {runningWorkout && runningWorkout.showRestTimer && (
           <Nav.Item className="me-3">
-            <CountdownTimer startTime={Date.now()} totalTime={runningWorkout.restTime} />
+            <CountdownTimer startTime={Date.parse(runningWorkout.restStartedAt)} totalTime={runningWorkout.restTime} />
           </Nav.Item>
         )}
         {runningWorkout && (
