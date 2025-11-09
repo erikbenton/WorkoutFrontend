@@ -76,7 +76,6 @@ export const formatExerciseNames = (exerciseNames) => {
 export const saveToLocalStorage = (state) => {
   try {
     const serializedState = JSON.stringify(state);
-    console.log('saving state');
     localStorage.setItem("workItOutState", serializedState);
   } catch (error) {
     console.error(error);
@@ -86,7 +85,6 @@ export const saveToLocalStorage = (state) => {
 export const loadFromLocalStorage = () => {
   try {
     const serializedState = localStorage.getItem("workItOutState");
-    console.log('loading state', serializedState);
     if (serializedState === null) {
       return undefined;
     }
