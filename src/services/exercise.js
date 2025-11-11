@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-const baseUrl = 'https://localhost:7185/api/exercises'
+const baseUrl = import.meta.env.DEV
+  ? import.meta.env.VITE_BASE_DEV_API_URL
+  : import.meta.env.VITE_BASE_PROD_API_URL
+const url = baseUrl + 'exercises'
 
 const getAll = async () => {
   const response = await axios.get(baseUrl)
@@ -8,22 +11,22 @@ const getAll = async () => {
 }
 
 const getDetails = async (id) => {
-  const response = await axios.get(`${baseUrl}/${id}`)
+  const response = await axios.get(`${url}/${id}`)
   return response.data
 }
 
 const create = async object => {
-  const response = await axios.post(baseUrl, object)
+  const response = await axios.post(url, object)
   return response.data
 }
 
 const update = async object => {
-  const response = await axios.put(`${baseUrl}/${object.id}`, object)
+  const response = await axios.put(`${url}/${object.id}`, object)
   return response.data
 }
 
 const remove = async object => {
-    const response = await axios.delete(`${baseUrl}/${object.id}`)
+    const response = await axios.delete(`${url}/${object.id}`)
   return response.data
 }
 

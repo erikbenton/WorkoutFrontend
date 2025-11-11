@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react"
 
-const baseUrl = import.meta.env.VITE_BASE_API_URL
+const baseUrl = import.meta.env.DEV
+  ? import.meta.env.VITE_BASE_DEV_API_URL
+  : import.meta.env.VITE_BASE_PROD_API_URL
 
 const useFetch = (url) => {
   const isMounted = useRef(false);
