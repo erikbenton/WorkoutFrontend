@@ -12,7 +12,7 @@ const Menu = () => {
   };
 
   return (
-    <Navbar collapseOnSelect expand="md" bg="light" variant="light">
+    <Navbar className="container-fluid" collapseOnSelect expand="md" bg="light" variant="light">
       <Nav>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

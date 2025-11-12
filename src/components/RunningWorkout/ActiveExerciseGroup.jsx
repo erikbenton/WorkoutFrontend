@@ -22,7 +22,7 @@ const ActiveExerciseGroup = ({
   setSelectingExercises,
   selectedExercises,
   setSelectedExercises }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!selectingExercises && selectedExercises.length > 0) {

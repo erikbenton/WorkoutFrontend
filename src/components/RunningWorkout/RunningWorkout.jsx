@@ -9,6 +9,7 @@ import { createCompletedWorkout } from "../../utils/helper";
 import completedWorkoutService from "../../services/completedWorkout"
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import ExerciseHistoryList from "../Exercises/ExerciseHistoryList";
 
 const RunningWorkout = () => {
   const [selectingExercises, setSelectingExercises] = useState(false);
@@ -66,8 +67,13 @@ const RunningWorkout = () => {
           setSelectedExercises={setSelectedExercises}
         />
       }
-      <Button variant="danger" type="button" onClick={cancelWorkout}>Cancel workout</Button>
-      <Button variant="success" type="button" onClick={completeWorkout}>Complete workout</Button>
+      <div className="container">
+        <div className="row justify-content-center">
+          <Button className="col-auto" variant="danger" type="button" onClick={cancelWorkout}>Cancel workout</Button>
+          <Button className="col-auto" variant="success" type="button" onClick={completeWorkout}>Complete workout</Button>
+        </div>
+      </div>
+      {runningWorkout.activeExerciseGroup && <ExerciseHistoryList exerciseId={runningWorkout.activeExerciseGroup.exercise.id} />}
     </div>
   )
 }
