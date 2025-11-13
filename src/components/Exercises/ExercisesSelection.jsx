@@ -29,16 +29,26 @@ const ExercisesSelection = ({ setSelectingExercises, setSelectedExercises, selec
 
   return (
     <div>
-      <ul>
+      <ul className="no-bullets">
         {exercises.map(exercise => (
           <li key={exercise.id}>
-            {exercise.name}
-            <input type="checkbox" onChange={(e) => setSelection(e, exercise)} />
+            <div className="card my-2 p-2 col-md-8 col-lg-5">
+              <div className="card-body p-0">
+                <div className="row row-cols-auto">
+                  <span className="col-auto">{exercise.name}</span>
+                  <div className="row ms-auto me-2">
+                    <input className="col-auto ms-auto" type="checkbox" onChange={(e) => setSelection(e, exercise)} />
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
         ))}
       </ul>
-      <Button type="button" onClick={() => setSelectingExercises(false)}>Done</Button>
-      <Button type="button" variant="warning" onClick={cancelSelection}>Cancel</Button>
+      <div className="row row-cols-auto justify-content-center mb-2">
+        <Button className="col-auto" type="button" onClick={() => setSelectingExercises(false)}>Done</Button>
+        <Button className="col-auto" type="button" variant="warning" onClick={cancelSelection}>Cancel</Button>
+      </div>
     </div>
   )
 }

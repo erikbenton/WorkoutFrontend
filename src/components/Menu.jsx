@@ -9,30 +9,29 @@ const Menu = () => {
   const runningWorkout = useSelector(state => state.runningWorkout);
   const linkStyle = {
     padding: "0.25rem",
-    color: "white"
   };
 
   return (
-    <Navbar bg="primary" className="ps-1 mb-2" collapseOnSelect expand="md" data-bs-theme="dark" style={{color: "white"}}>
+    <Navbar bg="primary" className="ps-1 mb-2 text-light" collapseOnSelect expand="md" data-bs-theme="dark">
       <Nav>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="#" to="/" as="span">
-              <Link style={linkStyle} to="/">Home</Link>
+              <Link className="text-light" style={linkStyle} to="/">Home</Link>
             </Nav.Link>
             <Nav.Link href="#" to="/Workouts" as="span">
-              <Link style={linkStyle} to="/Workouts">Workouts</Link>
+              <Link className="text-light" style={linkStyle} to="/Workouts">Workouts</Link>
             </Nav.Link>
             <Nav.Link href="#" to="/Exercises" as="span">
-              <Link style={linkStyle} to="/Exercises">Exercises</Link>
+              <Link className="text-light" style={linkStyle} to="/Exercises">Exercises</Link>
             </Nav.Link>
             <Nav.Link href="#" to="/completedWorkouts" as="span">
-              <Link style={linkStyle} to="/completedWorkouts">Workout History</Link>
+              <Link className="text-light" style={linkStyle} to="/completedWorkouts">Workout History</Link>
             </Nav.Link>
             <Nav.Link href="#" as="span">
               {(!match || !runningWorkout)
-                && <Link style={linkStyle} to="/runningWorkout">
+                && <Link className="text-light" style={linkStyle} to="/runningWorkout">
                   {runningWorkout ? "Continue Workout" : "Do a Workout"}
                 </Link>
               }
