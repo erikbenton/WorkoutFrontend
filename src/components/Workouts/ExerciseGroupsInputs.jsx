@@ -25,10 +25,10 @@ const ExerciseGroupInput = ({ exerciseGroup, setReplacementExerciseGroup, setSel
     <div className="col-12 card mb-2 pb-1">
       <div className="card-body pt-1">
         <div className="card-text my-2 pe-2 row row-cols-auto align-items-center">
-          <div className="col-md-3">
-            <h4 className="m-0">{exerciseGroup.exercise.name}</h4>
+          <div className="col-8 col-sm-9">
+            <h4 className="m-0 fs-5 ">{exerciseGroup.exercise.name}</h4>
           </div>
-          <div className="col ms-auto">
+          <div className="col-auto ms-auto">
             <ExerciseGroupOptions
               exerciseGroup={exerciseGroup}
               setSelectingExercises={setSelectingExercises}
@@ -37,9 +37,9 @@ const ExerciseGroupInput = ({ exerciseGroup, setReplacementExerciseGroup, setSel
           </div>
         </div>
         <div className="row">
-          <div className="col">
+          <div className="col px-3">
             <textarea
-              className="form-control"
+              className="form-control px-1"
               placeholder="Note"
               id={`note_${exerciseGroup.key}`}
               value={exerciseGroup.note ?? ''}

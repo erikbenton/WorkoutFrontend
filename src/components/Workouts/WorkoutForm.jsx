@@ -93,40 +93,38 @@ const WorkoutForm = (props) => {
   return (
     <div>
       {workout.openRestTimeModal && <RestTimeModal show={workout.openRestTimeModal} exerciseGroup={editingExerciseGroup} />}
-      <div className="container justify-content-center">
-        <div className="justify-content-center">
-          <h1>{id ? "Edit" : "Create"} Workout</h1>
-          <form id="workout_form" onSubmit={id ? updateEditedWorkout : createNewWorkout}>
-            <div className="row g-3 align-items-center mb-2">
-              <div className="col-auto">
-                <label className="col-form-label fw-semibold fs-5">Name</label>
-              </div>
-              <div className="col">
-                <input
-                  id="workoutName"
-                  className="form-control"
-                  type="text"
-                  value={workout.name ?? ""}
-                  onChange={(e) => dispatch(updateWorkoutName({ ...workout, name: e.target.value }))}
-                />
-              </div>
+      <div className="justify-content-center">
+        <h1>{id ? "Edit" : "Create"} Workout</h1>
+        <form id="workout_form" onSubmit={id ? updateEditedWorkout : createNewWorkout}>
+          <div className="row g-3 align-items-center mb-2">
+            <div className="col-auto">
+              <label className="col-form-label fw-semibold fs-5">Name</label>
             </div>
-            <ExerciseGroupsInput
-              exerciseGroups={workout.exerciseGroups}
-              setReplacementExerciseGroup={setReplacementExerciseGroup}
-              setSelectingExercises={setSelectingExercises}
-            />
-            <div className="row justify-content-center">
-              <Button className="col-auto mb-2" type="button" onClick={() => setSelectingExercises(true)}>Add exercises</Button>
+            <div className="col">
+              <input
+                id="workoutName"
+                className="form-control"
+                type="text"
+                value={workout.name ?? ""}
+                onChange={(e) => dispatch(updateWorkoutName({ ...workout, name: e.target.value }))}
+              />
             </div>
-            <Button variant="success" type="submit">{id ? "Update" : "Create"}</Button>
-            <Link to={id ? `/workouts/${id}` : "/workouts"}>
-              <Button variant="warning" type="button">
-                Cancel
-              </Button>
-            </Link>
-          </form>
-        </div>
+          </div>
+          <ExerciseGroupsInput
+            exerciseGroups={workout.exerciseGroups}
+            setReplacementExerciseGroup={setReplacementExerciseGroup}
+            setSelectingExercises={setSelectingExercises}
+          />
+          <div className="row justify-content-center">
+            <Button className="col-auto mb-2" type="button" onClick={() => setSelectingExercises(true)}>Add exercises</Button>
+          </div>
+          <Button variant="success" type="submit">{id ? "Update" : "Create"}</Button>
+          <Link to={id ? `/workouts/${id}` : "/workouts"}>
+            <Button variant="warning" type="button">
+              Cancel
+            </Button>
+          </Link>
+        </form>
       </div>
     </div>
   )
