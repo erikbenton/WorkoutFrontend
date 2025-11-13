@@ -1,21 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addExerciseGroup, addMultipleExerciseGroups, setWorkout, updateWorkoutName } from "../../reducers/focusedWorkout";
+import { addMultipleExerciseGroups, replaceExerciseGroupExercise, setWorkout, updateWorkoutName } from "../../reducers/focusedWorkout";
 import { useEffect, useState } from "react";
 import ExerciseGroupsInput from "./ExerciseGroupsInputs";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import workoutService from "../../services/workout";
-import useFetch from "../../hooks/useFetch";
 import ExercisesSelection from "../Exercises/ExercisesSelection";
 import { Button } from "react-bootstrap";
 import RestTimeModal from "./RestTimeModal";
+import ReplaceExercise from "../Exercises/ReplaceExercise";
 
 const WorkoutForm = (props) => {
   const [selectingExercises, setSelectingExercises] = useState(false);
   const [selectedExercises, setSelectedExercises] = useState([]);
+  const [replacementExerciseGroup, setReplacementExerciseGroup] = useState(null);
   const navigate = useNavigate();
   const id = Number(useParams().id);
   const workout = useSelector(state => state.focusedWorkout);
-  const { data: exercises, loading: loadingExercises, error: errorExercises } = useFetch("exercises");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,12 +26,24 @@ const WorkoutForm = (props) => {
   }, [dispatch, props])
 
   useEffect(() => {
-    if (!selectingExercises && selectedExercises.length > 0) {
+    if (!selectingExercises && selectedExercises.length > 0 && replacementExerciseGroup) {
+      const exercisesToAdd = [...selectedExercises];
+      dispatch(replaceExerciseGroupExercise({
+        groupKey: replacementExerciseGroup.key,
+        replacementExercise: exercisesToAdd[0]
+      }));
+      setReplacementExerciseGroup(null);
+      setSelectedExercises([])
+    }
+  }, [dispatch, selectingExercises, selectedExercises, replacementExerciseGroup])
+
+  useEffect(() => {
+    if (!selectingExercises && selectedExercises.length > 0 && !replacementExerciseGroup) {
       const exercisesToAdd = [...selectedExercises]
       dispatch(addMultipleExerciseGroups(exercisesToAdd));
       setSelectedExercises([]);
     }
-  }, [dispatch, selectingExercises, selectedExercises])
+  }, [dispatch, selectingExercises, selectedExercises, replacementExerciseGroup])
 
   const createNewWorkout = async (e) => {
     e.preventDefault()
@@ -55,10 +67,17 @@ const WorkoutForm = (props) => {
     }
   }
 
-  if (errorExercises) return <h1>Exercise error</h1>
-
-  if (!workout || loadingExercises) {
+  if (!workout) {
     return <div>Loading data...</div>
+  }
+
+  if (selectingExercises && replacementExerciseGroup) {
+    return (
+      <ReplaceExercise
+        selectedExercises={selectedExercises}
+        setSelectedExercises={setSelectedExercises}
+        setSelectingExercises={setSelectingExercises} />
+    )
   }
 
   if (selectingExercises) return (
@@ -80,9 +99,9 @@ const WorkoutForm = (props) => {
           <form id="workout_form" onSubmit={id ? updateEditedWorkout : createNewWorkout}>
             <div className="row g-3 align-items-center mb-2">
               <div className="col-auto">
-                <label className="col-form-label">Name</label>
+                <label className="col-form-label fw-semibold fs-5">Name</label>
               </div>
-              <div className="col-auto">
+              <div className="col">
                 <input
                   id="workoutName"
                   className="form-control"
@@ -92,9 +111,14 @@ const WorkoutForm = (props) => {
                 />
               </div>
             </div>
-            <ExerciseGroupsInput exerciseGroups={workout.exerciseGroups} exercises={exercises} />
-            <Button variant="outline-primary" type="button" onClick={() => dispatch(addExerciseGroup(exercises[0]))}>Add exercise</Button>
-            <Button type="button" onClick={() => setSelectingExercises(true)}>Add multiple exercises</Button>
+            <ExerciseGroupsInput
+              exerciseGroups={workout.exerciseGroups}
+              setReplacementExerciseGroup={setReplacementExerciseGroup}
+              setSelectingExercises={setSelectingExercises}
+            />
+            <div className="row justify-content-center">
+              <Button className="col-auto mb-2" type="button" onClick={() => setSelectingExercises(true)}>Add exercises</Button>
+            </div>
             <Button variant="success" type="submit">{id ? "Update" : "Create"}</Button>
             <Link to={id ? `/workouts/${id}` : "/workouts"}>
               <Button variant="warning" type="button">

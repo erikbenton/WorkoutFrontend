@@ -4,7 +4,7 @@ import { removeExerciseGroup, setRestTimeModalStatus, shiftExerciseGroup } from 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 
-const ExerciseGroupOptions = ({ exerciseGroup }) => {
+const ExerciseGroupOptions = ({ exerciseGroup, setSelectingExercises, setReplacementExerciseGroup }) => {
   const dispatch = useDispatch()
 
   const removeGroup = () => {
@@ -25,6 +25,11 @@ const ExerciseGroupOptions = ({ exerciseGroup }) => {
     }));
   }
 
+    const replaceExercise = (group) => {
+    setSelectingExercises(true);
+    setReplacementExerciseGroup(group)
+  }
+
   return (
     <>
       <DropdownButton
@@ -33,6 +38,7 @@ const ExerciseGroupOptions = ({ exerciseGroup }) => {
         drop="down-centered"
         title={<FontAwesomeIcon icon={faEllipsisVertical} />}
       >
+        <Dropdown.Item onClick={() => replaceExercise(exerciseGroup)}>replace exercise</Dropdown.Item>
         <Dropdown.Item onClick={() => shiftGroup(-1)}>shift up</Dropdown.Item>
         <Dropdown.Item onClick={() => shiftGroup(1)}>shift down</Dropdown.Item>
         <Dropdown.Item onClick={openRestTimeModal}>enter rest time</Dropdown.Item>

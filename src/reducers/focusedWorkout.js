@@ -45,6 +45,13 @@ const workoutSlice = createSlice({
     resetWorkout() {
       return toKeyedObject(initialWorkout)
     },
+    replaceExerciseGroupExercise(state, action) {
+      const { groupKey, replacementExercise } = action.payload;
+      const groupToUpdate = state.exerciseGroups.find(group => group.key === groupKey);
+      const updatedGroup = { ...groupToUpdate, exercise: replacementExercise};
+      state.exerciseGroups = state.exerciseGroups.map(group => group.key === groupKey ? updatedGroup : group);
+      return state;
+    },
     addExerciseGroup(state, action) {
       const exercise = action.payload
       state.exerciseGroups = state.exerciseGroups
@@ -147,6 +154,7 @@ export const updateWorkoutName = updatedWorkout => {
 export const {
   setWorkout,
   resetWorkout,
+  replaceExerciseGroupExercise,
   addExerciseGroup,
   addMultipleExerciseGroups,
   addExerciseSet,
