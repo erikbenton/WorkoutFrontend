@@ -26,25 +26,27 @@ const App = () => {
   }, [dispatch])
 
   return (
-    <div className="container">
+    <div className="container-flex">
       <Menu />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/* Workout routes */}
-        <Route path="/workouts" element={<WorkoutList />} />
-        <Route path="/workouts/:id" element={<WorkoutDetails />} />
-        <Route path="/workouts/create" element={<WorkoutForm workout={null} />} />
-        <Route path="/workouts/edit/:id" element={<EditWorkoutForm />} />
-        {/* Exercise routes */}
-        <Route path="/exercises" element={<ExerciseList />} />
-        <Route path="/exercises/:id" element={<ExerciseDetails />} />
-        <Route path="/exercises/create" element={<ExerciseForm exercise={null} />} />
-        <Route path="/exercises/edit/:id" element={<EditExerciseForm />} />
-        <Route path="/runningWorkout" element={<RunningWorkout />} />
-        {/* Completed Workout routes */}
-        <Route path="/completedWorkouts" element={<CompletedWorkoutHistoryList />} />
-        <Route path="/completedWorkouts/:id" element={<CompletedWorkoutDetails />} />
-      </Routes>
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* Workout routes */}
+          <Route path="/workouts" element={<WorkoutList />} />
+          <Route path="/workouts/:id" element={<WorkoutDetails />} />
+          <Route path="/workouts/create" element={<WorkoutForm workout={null} />} />
+          <Route path="/workouts/edit/:id" element={<EditWorkoutForm />} />
+          {/* Exercise routes */}
+          <Route path="/exercises" element={<ExerciseList />} />
+          <Route path="/exercises/:id" element={<ExerciseDetails />} />
+          <Route path="/exercises/create" element={<ExerciseForm exercise={null} />} />
+          <Route path="/exercises/edit/:id" element={<EditExerciseForm />} />
+          <Route path="/runningWorkout" element={<RunningWorkout />} />
+          {/* Completed Workout routes */}
+          <Route path="/completedWorkouts" element={<CompletedWorkoutHistoryList />} />
+          <Route path="/completedWorkouts/:id" element={<CompletedWorkoutDetails />} />
+        </Routes>
+      </div>
     </div>
   )
 }

@@ -50,7 +50,9 @@ const RunningWorkoutSummary = ({
           </li>
         ))}
       </ol>
-      <Button type="button" onClick={() => setSelectingExercises(true)}>Add exercises</Button>
+      <div className="row justify-content-center mb-2">
+        <Button className="col-auto" type="button" onClick={() => setSelectingExercises(true)}>Add exercises</Button>
+      </div>
     </div>
   )
 }

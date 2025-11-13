@@ -1,7 +1,7 @@
 import useFetch from "../../hooks/useFetch";
 
-const ExerciseHistoryList = ({ exerciseId }) => {
-  const { data: exerciseHistory, loading, error } = useFetch(`completedExerciseGroups/${exerciseId}`);
+const ExerciseHistoryList = ({ exercise }) => {
+  const { data: exerciseHistory, loading, error } = useFetch(`completedExerciseGroups/${exercise.id}`);
 
   if (loading) return <p>Loading history...</p>
   if (error) return <p>Error fetching exercise history</p>
@@ -17,13 +17,14 @@ const ExerciseHistoryList = ({ exerciseId }) => {
   const totalWeight = group => group.completedExerciseSets.reduce((acc, curr) => acc + (curr.weight ?? 0), 0);
 
   return (
-    <div>
+    <div className="mt-3">
+      <h4>{exercise.name} history</h4>
       <ol className="no-bullets">
         {exerciseHistory.map(group => (
           <li key={group.completedExerciseGroupId}>
             <div className="card my-2">
               <div className="card-header d-flex align-items-center">
-                <span className="card-text mb-1">{group.month}/{group.day}/{group.year}</span>
+                <span className="card-text">{group.month}/{group.day}/{group.year}</span>
                 <span className="ms-auto">{getDateDiff(group)} days since</span>
               </div>
               <div className="card-body">

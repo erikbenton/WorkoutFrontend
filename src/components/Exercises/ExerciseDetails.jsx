@@ -30,7 +30,7 @@ const ExerciseDetails = () => {
       <Link to="/exercises"><Button variant="outline-primary">View all exercises</Button></Link>
       <Button variant="success" type="button" onClick={() => navigate(`/exercises/edit/${exercise.id}`)}>Edit</Button>
       <Button variant="danger" type="button" onClick={deleteExercise}>Delete?</Button>
-      <ExerciseHistoryList exerciseId={exercise.id} />
+      <ExerciseHistoryList exercise={exercise} />
     </div>
   )
 }

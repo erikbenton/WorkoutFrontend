@@ -19,7 +19,7 @@ const ElapsedTimer = ({ startTime }) => {
 
   return (
     <>
-      <span style={{fontFamily: "monospace"}}>
+      <span style={{fontFamily: "monospace", color: "white"}}>
         {formatTime(time)}
       </span>
     </>

@@ -28,7 +28,7 @@ const CountdownTimer = ({ startTime, totalTime }) => {
 
   return (
     <>
-      <span className={sign === "-" ? "bg-danger-subtle" : ""} style={{ fontFamily: "monospace" }}>
+      <span className={sign === "-" ? "bg-danger-subtle" : ""} style={{ fontFamily: "monospace", color: "white" }}>
         {formatTime(countDownTime)}
       </span>
     </>

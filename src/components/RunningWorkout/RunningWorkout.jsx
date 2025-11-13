@@ -73,7 +73,7 @@ const RunningWorkout = () => {
           <Button className="col-auto" variant="success" type="button" onClick={completeWorkout}>Complete workout</Button>
         </div>
       </div>
-      {runningWorkout.activeExerciseGroup && <ExerciseHistoryList exerciseId={runningWorkout.activeExerciseGroup.exercise.id} />}
+      {runningWorkout.activeExerciseGroup && <ExerciseHistoryList exercise={runningWorkout.activeExerciseGroup.exercise} />}
     </div>
   )
 }
