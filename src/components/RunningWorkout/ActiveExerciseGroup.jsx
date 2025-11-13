@@ -74,64 +74,62 @@ const ActiveExerciseGroup = ({
   return (
     <div>
       <Button variant="outline-primary" type="button" onClick={backToSummary}>Back to summary</Button>
-      <div className="container">
-        <div className="row align-items-center">
-          <h2 className="col-auto">
-            <Link to={`/exercises/${exerciseGroup.exercise.id}`}>
-              {exerciseGroup.exercise.name}
-            </Link>
-          </h2>
-          <Button className="col-auto" type="button" onClick={replaceExercise}>
-            <FontAwesomeIcon icon={faRotateRight} />
-          </Button>
+      <div className="row align-items-center my-2">
+        <h2 className="col-auto m-0">
+          <Link to={`/exercises/${exerciseGroup.exercise.id}`}>
+            {exerciseGroup.exercise.name}
+          </Link>
+        </h2>
+        <Button className="col-auto py-0 px-1" type="button" onClick={replaceExercise}>
+          <FontAwesomeIcon icon={faRotateRight} />
+        </Button>
+      </div>
+      <div className="row">
+        {exerciseGroup.note && <p>{exerciseGroup.note}</p>}
+      </div>
+      {exerciseGroup.exerciseSets.length > 0 &&
+        <div className="row row-cols-auto m-1 justify-content-center align-items-center text-center">
+          <span className="col-3">Reps</span>
+          <span className="col-5">Weight</span>
+          <span className="col-4"></span>
         </div>
-        <div className="row">
-          {exerciseGroup.note && <p>{exerciseGroup.note}</p>}
+      }
+      {exerciseGroup.exerciseSets.map(set => (
+        <ActiveExerciseSet key={set.key} groupKey={exerciseGroup.key} restTime={exerciseGroup.restTime} set={set} />
+      ))}
+      <div className="row justify-content-center">
+        <Button className="col-3 mt-2" type="button" onClick={addSet}>Add set</Button>
+      </div>
+      <div className="row row-cols-auto my-3 align-items-center">
+        <label className="col-form-label">Comment</label>
+        <div className="col-9">
+          <input
+            type="text"
+            className="form-control"
+            id={`comment_${exerciseGroup.key}`}
+            value={exerciseGroup.comment ?? ""}
+            onChange={(e) => updateGroup(e)}
+          />
         </div>
-        {exerciseGroup.exerciseSets.length > 0 &&
-          <div className="row row-cols-auto m-1 justify-content-center align-items-center text-center">
-            <span className="col-3">Reps</span>
-            <span className="col-5">Weight</span>
-            <span className="col-4"></span>
-          </div>
-        }
-        {exerciseGroup.exerciseSets.map(set => (
-          <ActiveExerciseSet key={set.key} groupKey={exerciseGroup.key} restTime={exerciseGroup.restTime} set={set} />
-        ))}
-        <div className="row justify-content-center">
-          <Button className="col-3" type="button" onClick={addSet}>Add set</Button>
-        </div>
-        <div className="row row-cols-auto my-3 align-items-center">
-          <label className="col-form-label">Comment</label>
-          <div className="col-9">
-            <input
-              type="text"
-              className="form-control"
-              id={`comment_${exerciseGroup.key}`}
-              value={exerciseGroup.comment ?? ""}
-              onChange={(e) => updateGroup(e)}
-            />
-          </div>
-        </div>
-        <div className="row justify-content-center mb-3">
-          <Button
-            className="col-3"
-            disabled={index === 0}
-            variant="outline-primary"
-            type="button"
-            onClick={() => shiftActiveExercise(-1)}
-          >
-            Prev Exercise
-          </Button>
-          <Button
-            className="col-3"
-            disabled={index === maxIndex}
-            type="button"
-            onClick={() => shiftActiveExercise(1)}
-          >
-            Next Exercise
-          </Button>
-        </div>
+      </div>
+      <div className="row justify-content-center mb-3">
+        <Button
+          className="col-4 col-md-2 text-nowrap"
+          disabled={index === 0}
+          variant="outline-primary"
+          type="button"
+          onClick={() => shiftActiveExercise(-1)}
+        >
+          Prev Exercise
+        </Button>
+        <Button
+          className="col-4 col-md-2 text-nowrap"
+          disabled={index === maxIndex}
+          type="button"
+          onClick={() => shiftActiveExercise(1)}
+        >
+          Next Exercise
+        </Button>
       </div>
     </div>
   )

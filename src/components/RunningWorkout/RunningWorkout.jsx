@@ -67,14 +67,12 @@ const RunningWorkout = () => {
           setSelectedExercises={setSelectedExercises}
         />
       }
-      <div className="container">
         {!selectingExercises &&
           <div className="row justify-content-center">
             <Button className="col-auto" variant="danger" type="button" onClick={cancelWorkout}>Cancel workout</Button>
             <Button className="col-auto" variant="success" type="button" onClick={completeWorkout}>Complete workout</Button>
           </div>
         }
-      </div>
       {runningWorkout.activeExerciseGroup && <ExerciseHistoryList exercise={runningWorkout.activeExerciseGroup.exercise} />}
     </div>
   )
