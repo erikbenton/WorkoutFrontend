@@ -67,12 +67,12 @@ const RunningWorkout = () => {
           setSelectedExercises={setSelectedExercises}
         />
       }
-        {!selectingExercises &&
-          <div className="row justify-content-center">
-            <Button className="col-auto" variant="danger" type="button" onClick={cancelWorkout}>Cancel workout</Button>
-            <Button className="col-auto" variant="success" type="button" onClick={completeWorkout}>Complete workout</Button>
-          </div>
-        }
+      {!selectingExercises &&
+        <div className="row justify-content-center">
+          <Button className="col-4 col-md-3 col-lg-2" variant="danger" type="button" onClick={cancelWorkout}>Cancel workout</Button>
+          <Button className="col-4 col-md-3 col-lg-2" variant="success" type="button" onClick={completeWorkout}>Finish workout</Button>
+        </div>
+      }
       {runningWorkout.activeExerciseGroup && <ExerciseHistoryList exercise={runningWorkout.activeExerciseGroup.exercise} />}
     </div>
   )

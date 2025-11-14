@@ -25,7 +25,7 @@ const ExerciseGroupOptions = ({ exerciseGroup, setSelectingExercises, setReplace
     }));
   }
 
-    const replaceExercise = (group) => {
+  const replaceExercise = (group) => {
     setSelectingExercises(true);
     setReplacementExerciseGroup(group)
   }
@@ -34,9 +34,11 @@ const ExerciseGroupOptions = ({ exerciseGroup, setSelectingExercises, setReplace
     <>
       <DropdownButton
         variant="outline-primary"
+        className="no-border no-toggle no-hover"
         id={`group_options_${exerciseGroup.key}`}
         drop="down-centered"
-        title={<FontAwesomeIcon icon={faEllipsisVertical} />}
+        title={<FontAwesomeIcon icon={faEllipsisVertical}
+        />}
       >
         <Dropdown.Item onClick={() => replaceExercise(exerciseGroup)}>replace exercise</Dropdown.Item>
         <Dropdown.Item onClick={() => shiftGroup(-1)}>shift up</Dropdown.Item>

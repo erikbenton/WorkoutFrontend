@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {
-  clearActiveExerciseGroup,
   updateExerciseGroup,
   addExerciseSet,
   selectActiveExerciseGroup,
@@ -37,10 +36,6 @@ const ActiveExerciseGroup = ({
     }
   }, [dispatch, selectingExercises, selectedExercises, setSelectedExercises, exerciseGroup])
 
-  const backToSummary = () => {
-    dispatch(clearActiveExerciseGroup())
-  }
-
   const updateGroup = (e) => {
     const [field] = e.target.id.split("_");
     const value = e.target.value;
@@ -73,14 +68,13 @@ const ActiveExerciseGroup = ({
 
   return (
     <div>
-      <Button variant="outline-primary" type="button" onClick={backToSummary}>Back to summary</Button>
-      <div className="row align-items-center my-2">
+      <div className="row my-2">
         <h2 className="col-auto m-0">
           <Link to={`/exercises/${exerciseGroup.exercise.id}`}>
             {exerciseGroup.exercise.name}
           </Link>
         </h2>
-        <Button className="col-auto py-0 px-1" type="button" onClick={replaceExercise}>
+        <Button className="col-auto mb-0 py-0 px-1" type="button" onClick={replaceExercise}>
           <FontAwesomeIcon icon={faRotateRight} />
         </Button>
       </div>

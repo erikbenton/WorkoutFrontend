@@ -52,7 +52,7 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
       <div className="col-3 ps-0 ps-md-2">
         <input
           type='number'
-          className="form-control"
+          className="form-control text-center"
           id={`minReps_${exerciseSet.key}`}
           value={exerciseSet.minReps ?? ''}
           onChange={updateExerciseSetMinReps}
@@ -61,7 +61,7 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
       <div className="col-3 ps-0">
         <input
           type='number'
-          className="form-control"
+          className="form-control text-center"
           id={`maxReps_${exerciseSet.key}`}
           value={exerciseSet.maxReps ?? ''}
           onChange={updateExerciseSetMaxReps}
@@ -70,7 +70,7 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
       <div className="col-4 px-0">
         <input
           type='number'
-          className="form-control"
+          className="form-control text-center"
           id={`weight_${exerciseSet.key}`}
           value={exerciseSet.weight ?? ''}
           onChange={updateExerciseSetWeight}

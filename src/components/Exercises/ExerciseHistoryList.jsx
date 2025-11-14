@@ -17,6 +17,8 @@ const ExerciseHistoryList = ({ exercise }) => {
   const totalReps = group => group.completedExerciseSets.reduce((acc, curr) => acc + curr.reps, 0);
   const totalWeight = group => group.completedExerciseSets.reduce((acc, curr) => acc + (curr.weight ?? 0), 0);
 
+  if (exerciseHistory.length === 0) return <div></div>
+
   return (
     <div className="mt-3">
       <hr />

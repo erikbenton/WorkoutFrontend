@@ -22,3 +22,14 @@ button a {
   list-style-type: none;
   padding-left: 0px;
 }
+
+.no-border button {
+  border: none;
+  border-radius: 50%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.no-toggle .dropdown-toggle::after {
+  display: none;
+}
