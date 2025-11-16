@@ -26,17 +26,21 @@ const WorkoutList = () => {
         <ul className="no-bullets">
           {workouts.map(workout =>
             <li key={workout.id}>
-              <div className="card my-2 p-2 col-xs-12 col-md-11 col-lg-7">
-                <div className="row">
-                  <Link
-                    className="col-auto"
-                    to={`/workouts/${workout.id}`}
-                  >
-                    {workout.name}
-                  </Link>
+              <div className="card my-2 col-xs-12 col-md-11 col-lg-7">
+                <div className="card-header">
+                  <div className="row">
+                    <Link
+                      className="col-auto"
+                      to={`/workouts/${workout.id}`}
+                    >
+                      {workout.name}
+                    </Link>
+                  </div>
                 </div>
-                <div className="row">
-                <p className="card-text">{formatExerciseNames(workout.exerciseNames)}</p>
+                <div className="card-body py-1">
+                  <div className="row">
+                    <p className="card-text">{formatExerciseNames(workout.exerciseNames)}</p>
+                  </div>
                 </div>
               </div>
             </li>)}

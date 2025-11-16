@@ -34,18 +34,22 @@ const CompletedWorkoutHistoryList = () => {
       <ul className="no-bullets">
         {completedWorkouts.map(workout =>
           <li key={workout.id}>
-            <div className="card my-2 p-2 col-md-8 col-lg-5">
-              <div className="row">
-                <Link
-                className="col-auto"
-                  to={`/completedWorkouts/${workout.id}`}
-                >
-                  {workout.name} - {getFormatedCompletion(workout)}
-                </Link>
+            <div className="card my-2 col-md-8 col-lg-5">
+              <div className="card-header">
+                <div className="row">
+                  <Link
+                    className="col-auto"
+                    to={`/completedWorkouts/${workout.id}`}
+                  >
+                    {workout.name} - {getFormatedCompletion(workout)}
+                  </Link>
+                </div>
               </div>
-              <div className="row">
-                <p className="card-text mb-1">{workout.numberOfExerciseGroups} exercises completed</p>
-                <p className="card-text">Duration: {formattedDuration(workout.duration)}</p>
+              <div className="card-body py-1">
+                <div className="row">
+                  <p className="card-text mb-1">{workout.numberOfExerciseGroups} exercises completed</p>
+                  <p className="card-text">Duration: {formattedDuration(workout.duration)}</p>
+                </div>
               </div>
             </div>
           </li>

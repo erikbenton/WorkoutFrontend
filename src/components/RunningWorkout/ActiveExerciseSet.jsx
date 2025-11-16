@@ -50,8 +50,6 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
   const repsPlaceholderText = set =>
     `${set.minReps ? set.minReps : ''}${(set.minReps && set.maxReps) ? '-' : ''}${set.maxReps ? set.maxReps : ''}`
 
-  const weightPlaceholderText = set => set.targetWeight ? `${set.targetWeight} lbs` : ''
-
   return (
     <div className="row row-cols-auto m-1">
       <div className="col-3 px-1">

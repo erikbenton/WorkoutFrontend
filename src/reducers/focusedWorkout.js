@@ -152,6 +152,18 @@ export const updateWorkoutName = updatedWorkout => {
   }
 }
 
+export const updateWorkoutDescription = updatedWorkout => {
+  return dispatch => {
+    const description = updatedWorkout.description === ""
+      ? null
+      : updatedWorkout.description
+    dispatch(updateWorkout({
+      ...updatedWorkout,
+      description
+    }))
+  }
+}
+
 export const {
   setWorkout,
   resetWorkout,

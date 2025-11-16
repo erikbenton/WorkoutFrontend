@@ -39,12 +39,12 @@ const ExerciseGroupInput = ({ exerciseGroup, setReplacementExerciseGroup, setSel
         <div className="row">
           <div className="col px-3">
             <textarea
-              className="form-control px-1"
+              className="form-control px-1 mb-2"
               placeholder="Note"
               id={`note_${exerciseGroup.key}`}
               value={exerciseGroup.note ?? ''}
               onChange={updateExerciseGroupNote}
-              rows={1}
+              rows={2}
             />
           </div>
         </div>

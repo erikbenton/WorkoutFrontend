@@ -52,7 +52,7 @@ const ExerciseList = () => {
               </th>
               <th>Body Part
                 <select
-                  className="form-select"
+                  className="form-select no-caret"
                   id="bodyPartFilter"
                   value={bodyPartFilter}
                   onChange={(e) => setBodyPartFilter(e.target.value)}
@@ -65,7 +65,7 @@ const ExerciseList = () => {
               </th>
               <th>Equipment
                 <select
-                  className="form-select"
+                  className="form-select no-caret"
                   id="equipmentFilter"
                   value={equipmentFilter}
                   onChange={(e) => setEquipmentFilter(e.target.value)}

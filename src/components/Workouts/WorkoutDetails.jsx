@@ -5,7 +5,7 @@ import { getWorkoutDetails } from "../../reducers/focusedWorkout";
 import { deleteWorkout } from "../../reducers/workouts";
 import { initializeRunningWorkout } from "../../reducers/runningWorkout";
 import { Button } from "react-bootstrap";
-import setTypes, { setTypeColor } from "../../utils/setTypes";
+import { setTypeColor } from "../../utils/setTypes";
 
 const WorkoutDetails = () => {
   const id = Number(useParams().id);
@@ -59,15 +59,27 @@ const WorkoutDetails = () => {
   return (
     <>
       <h2>{workout.name}</h2>
+      {workout.description &&
+        <p className="lead fs-6">
+          {workout.description}
+        </p>
+      }
       <ol className="no-bullets">
         {workout.exerciseGroups.map(group =>
           <li key={group.key}>
-            <div className="card my-2 p-2">
-              <div className="row">
-                <Link className="col-auto" to={`/exercises/${group.exercise.id}`}>{group.exercise.name}</Link>
-                {group.restTime && <span className="col-auto ms-auto">{restText(group.restTime)} Rest</span>}
+            <div className="card my-2">
+              <div className="card-header">
+                <div className="row">
+                  <Link className="col-auto" to={`/exercises/${group.exercise.id}`}>{group.exercise.name}</Link>
+                  {group.restTime && <span className="col-auto ms-auto">{restText(group.restTime)} Rest</span>}
+                </div>
               </div>
-              {group.note && <p>{group.note}</p>}
+              <div className="card-body">
+                {group.note &&
+                  <div className="card-text">
+                    <span>{group.note}</span>
+                  </div>}
+              </div>
               <ol className="list-group list-group-flush">
                 {group.exerciseSets.map(set =>
                   <li className="list-group-item" key={set.key}>

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addMultipleExerciseGroups, replaceExerciseGroupExercise, setWorkout, updateWorkoutName } from "../../reducers/focusedWorkout";
+import { addMultipleExerciseGroups, replaceExerciseGroupExercise, setWorkout, updateWorkoutDescription, updateWorkoutName } from "../../reducers/focusedWorkout";
 import { useEffect, useState } from "react";
 import ExerciseGroupsInput from "./ExerciseGroupsInputs";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -107,6 +107,18 @@ const WorkoutForm = (props) => {
                 type="text"
                 value={workout.name ?? ""}
                 onChange={(e) => dispatch(updateWorkoutName({ ...workout, name: e.target.value }))}
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col mb-2">
+              <textarea
+                className="form-control"
+                rows="3"
+                placeholder="Describe the workout..."
+                id={`description_${workout.key}`}
+                value={workout.description ?? ''}
+                onChange={(e) => dispatch(updateWorkoutDescription({ ...workout, description: e.target.value }))}
               />
             </div>
           </div>
