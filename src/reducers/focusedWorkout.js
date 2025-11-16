@@ -22,6 +22,7 @@ const initialExerciseSet = {
   minReps: null,
   maxReps: null,
   weight: null,
+  setType: null
 }
 
 const workoutSlice = createSlice({

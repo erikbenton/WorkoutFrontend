@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faClipboardQuestion, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { setTypeColor } from "../../utils/setTypes";
 
 
 const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
@@ -72,7 +73,8 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
           id={`weight_${set.key}`}
           value={set.weight ?? ""}
           onChange={(e) => updateSet(e, set)}
-          placeholder={weightPlaceholderText(set)}
+          style={{ color: setTypeColor(set) }}
+          placeholder={set.setType}
         />
       </div>
       <Button

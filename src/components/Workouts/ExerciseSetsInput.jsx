@@ -1,14 +1,15 @@
-import { Button } from 'react-bootstrap'
-import { removeExerciseSet, updateExerciseSet } from '../../reducers/focusedWorkout'
-import { useDispatch } from 'react-redux'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { Button } from "react-bootstrap"
+import { removeExerciseSet, updateExerciseSet } from "../../reducers/focusedWorkout"
+import { useDispatch } from "react-redux"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTrash } from "@fortawesome/free-solid-svg-icons"
+import setTypes, { setTypeColor } from "../../utils/setTypes";
 
 const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
   const dispatch = useDispatch()
 
   const updateExerciseSetMinReps = (e) => {
-    const minReps = e.target.value === '' ? null : e.target.value
+    const minReps = e.target.value === "" ? null : e.target.value
     dispatch(updateExerciseSet({
       exerciseGroupKey,
       exerciseSet: {
@@ -19,7 +20,7 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
   }
 
   const updateExerciseSetMaxReps = (e) => {
-    const maxReps = e.target.value === '' ? null : e.target.value
+    const maxReps = e.target.value === "" ? null : e.target.value
     dispatch(updateExerciseSet({
       exerciseGroupKey,
       exerciseSet: {
@@ -29,13 +30,13 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
     }))
   }
 
-  const updateExerciseSetWeight = (e) => {
-    const weight = e.target.value === '' ? null : e.target.value
+  const updateExerciseSetType = (e) => {
+    const setType = e.target.value === "" ? null : e.target.value
     dispatch(updateExerciseSet({
       exerciseGroupKey,
       exerciseSet: {
         ...exerciseSet,
-        weight
+        setType
       }
     }))
   }
@@ -51,30 +52,38 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
     <div className="row row-cols-auto m-1 justify-content-center align-items-center">
       <div className="col-3 ps-0 ps-md-2">
         <input
-          type='number'
+          type="number"
           className="form-control text-center"
           id={`minReps_${exerciseSet.key}`}
-          value={exerciseSet.minReps ?? ''}
+          value={exerciseSet.minReps ?? ""}
           onChange={updateExerciseSetMinReps}
         />
       </div>
       <div className="col-3 ps-0">
         <input
-          type='number'
+          type="number"
           className="form-control text-center"
           id={`maxReps_${exerciseSet.key}`}
-          value={exerciseSet.maxReps ?? ''}
+          value={exerciseSet.maxReps ?? ""}
           onChange={updateExerciseSetMaxReps}
         />
       </div>
       <div className="col-4 px-0">
-        <input
-          type='number'
-          className="form-control text-center"
-          id={`weight_${exerciseSet.key}`}
-          value={exerciseSet.weight ?? ''}
-          onChange={updateExerciseSetWeight}
-        />
+        <select
+          value={exerciseSet.setType ?? ""}
+          className="form-select no-caret px-1 text-center"
+          style={{ color: setTypeColor(exerciseSet) }}
+          onChange={updateExerciseSetType}>
+          {Object.keys(setTypes).map(setType => (
+            <option
+              key={setTypes[setType].type}
+              style={{ color: setTypes[setType].color }}
+              value={setTypes[setType].type}
+            >
+              {setTypes[setType].type}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="col-2 p-0 text-center">
         <Button variant="danger" type="button" onClick={removeSet}>
@@ -92,7 +101,7 @@ const ExerciseSetsInput = ({ exerciseGroup }) => {
         <div className="row row-cols-auto m-1 text-center align-items-center">
           <span className="col-3 ps-0 ps-md-2">Min Reps</span>
           <span className="col-3 ps-0">Max Reps</span>
-          <span className="col-4 px-0">Weight</span>
+          <span className="col-4 px-0">Type</span>
           <span className="col-2 col-sm-4"></span>
         </div>
       }

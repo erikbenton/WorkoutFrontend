@@ -33,3 +33,14 @@ button a {
 .no-toggle .dropdown-toggle::after {
   display: none;
 }
+
+.form-select.no-caret {
+  background-image: none;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /*border: none; - if you want the border removed*/
+}

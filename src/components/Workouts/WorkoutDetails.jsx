@@ -5,6 +5,7 @@ import { getWorkoutDetails } from "../../reducers/focusedWorkout";
 import { deleteWorkout } from "../../reducers/workouts";
 import { initializeRunningWorkout } from "../../reducers/runningWorkout";
 import { Button } from "react-bootstrap";
+import setTypes, { setTypeColor } from "../../utils/setTypes";
 
 const WorkoutDetails = () => {
   const id = Number(useParams().id);
@@ -53,7 +54,6 @@ const WorkoutDetails = () => {
     ${set.minReps && set.maxReps ? "-" : ""}
     ${set.maxReps ? set.maxReps : ""}`;
 
-  const weightText = set => set.weight !== null ? `x ${set.weight} lbs` : "reps"
   const restText = restTime => restTime.split(":").slice(1).join(":");
 
   return (
@@ -71,7 +71,14 @@ const WorkoutDetails = () => {
               <ol className="list-group list-group-flush">
                 {group.exerciseSets.map(set =>
                   <li className="list-group-item" key={set.key}>
-                    {repsText(set)} {weightText(set)}
+                    <div className="row">
+                      <div className="col-3">
+                        {repsText(set)}
+                      </div>
+                      <div className="col-auto">
+                        <span className="badge" style={{ backgroundColor: setTypeColor(set) }}>{set.setType}</span>
+                      </div>
+                    </div>
                   </li>)}
               </ol>
             </div>

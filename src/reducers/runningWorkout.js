@@ -41,7 +41,7 @@ const initializeExerciseSet = exerciseSet => {
     weight: null,
     minReps: exerciseSet ? exerciseSet.minReps : null,
     maxReps: exerciseSet ? exerciseSet.maxReps : null,
-    targetWeight: exerciseSet ? exerciseSet.weight : null,
+    setType: exerciseSet ? exerciseSet.setType : null,
     completed: false
   }
 }
