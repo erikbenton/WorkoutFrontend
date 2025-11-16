@@ -51,11 +51,11 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
     `${set.minReps ? set.minReps : ''}${(set.minReps && set.maxReps) ? '-' : ''}${set.maxReps ? set.maxReps : ''}`
 
   return (
-    <div className="row row-cols-auto m-1">
+    <div className="row row-cols-auto m-1 align-items-center">
       <div className="col-3 px-1">
         <input
           disabled={set.completed}
-          className="form-control p-1 text-center"
+          className="form-control px-1 text-center"
           type="number"
           id={`reps_${set.key}`}
           value={set.reps ?? ""}
