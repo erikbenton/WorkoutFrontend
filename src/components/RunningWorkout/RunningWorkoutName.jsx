@@ -3,7 +3,8 @@ import { useState } from "react";
 import { updateRunningWorkout, clearActiveExerciseGroup } from "../../reducers/runningWorkout";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import RunningWorkoutOptions from "./RunningWorkoutOptions";
 
 const RunningWorkoutName = () => {
   const [editWorkoutName, setEditWorkoutName] = useState(false);
@@ -22,36 +23,36 @@ const RunningWorkoutName = () => {
 
   return (
     <div className="container">
-      <h1 className="row row-cols-auto align-items-center" onDoubleClick={() => setEditWorkoutName(true)}>
-        {editWorkoutName
+      <div className="row row-cols-auto mb-2 align-items-center">
+        <div className="px-0 col-auto">
+          <Button
+            variant="primary"
+            type="button"
+            disabled={!runningWorkout.activeExerciseGroup}
+            onClick={backToSummary}
+          >
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </Button>
+        </div>
+        <div className="col-auto">
+          <span className="fs-1">
+            {editWorkoutName
           ? <div className="col-auto px-0">
             <input
               type="text"
               id="name"
-              className="form-control d-inline pe-0"
+              className="form-control pe-0"
               value={runningWorkout.name}
               onChange={(e) => updateWorkoutName(e)}
-              onBlur={() => setEditWorkoutName(false)}
             />
           </div>
           : runningWorkout.name}
-        <div className="col-auto">
-
-          <Button variant={editWorkoutName ? "success" : "primary"} className="p-1" size="sm" type="button" onClick={() => setEditWorkoutName(!editWorkoutName)}>
-            <FontAwesomeIcon icon={faPen} />
-          </Button>
+          </span>
         </div>
-        {runningWorkout.activeExerciseGroup &&
-          <Button
-            variant="outline-primary"
-            className="ms-auto"
-            type="button"
-            onClick={backToSummary}
-          >
-            Summary
-          </Button>
-        }
-      </h1>
+        <div className="col-auto ms-auto">
+          <RunningWorkoutOptions editWorkoutName={editWorkoutName} setEditWorkoutName={setEditWorkoutName} />
+        </div>
+      </div>
     </div>
   )
 }

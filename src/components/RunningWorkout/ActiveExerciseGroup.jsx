@@ -10,9 +10,7 @@ import ActiveExerciseSet from "./ActiveExerciseSet";
 import { useEffect } from "react";
 import ReplaceExercise from "../Exercises/ReplaceExercise";
 import { Button } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
-import { cancelExerciseSelection, setSelectingExercises } from "../../reducers/exerciseSelection";
+import { cancelExerciseSelection } from "../../reducers/exerciseSelection";
 
 const ActiveExerciseGroup = ({
   exerciseGroup,
@@ -52,10 +50,6 @@ const ActiveExerciseGroup = ({
     dispatch(selectActiveExerciseGroup(index + shift))
   }
 
-  const replaceExercise = () => {
-    dispatch(setSelectingExercises({ selectingExercises: true }));
-  }
-
   if (exerciseSelection.selectingExercises) return (
     <ReplaceExercise />
   )
@@ -68,9 +62,6 @@ const ActiveExerciseGroup = ({
             {exerciseGroup.exercise.name}
           </Link>
         </h2>
-        <Button className="col-auto mb-0 py-0 px-1" type="button" onClick={replaceExercise}>
-          <FontAwesomeIcon icon={faRotateRight} />
-        </Button>
       </div>
       <div className="row">
         {exerciseGroup.note && <p>{exerciseGroup.note}</p>}
