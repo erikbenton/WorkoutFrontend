@@ -4,7 +4,7 @@ import ExerciseSetsInput from './ExerciseSetsInput'
 import { Button } from 'react-bootstrap'
 import ExerciseGroupOptions from './ExerciseGroupOptions';
 
-const ExerciseGroupInput = ({ exerciseGroup, setReplacementExerciseGroup, setSelectingExercises }) => {
+const ExerciseGroupInput = ({ exerciseGroup, setReplacementExerciseGroup }) => {
   const dispatch = useDispatch()
 
   const addNewExerciseSet = () => {
@@ -31,7 +31,6 @@ const ExerciseGroupInput = ({ exerciseGroup, setReplacementExerciseGroup, setSel
           <div className="col-auto ms-auto">
             <ExerciseGroupOptions
               exerciseGroup={exerciseGroup}
-              setSelectingExercises={setSelectingExercises}
               setReplacementExerciseGroup={setReplacementExerciseGroup}
             />
           </div>
@@ -59,7 +58,7 @@ const ExerciseGroupInput = ({ exerciseGroup, setReplacementExerciseGroup, setSel
   )
 }
 
-const ExerciseGroupsInput = ({ exerciseGroups, exercises, setReplacementExerciseGroup, setSelectingExercises }) => {
+const ExerciseGroupsInput = ({ exerciseGroups, exercises, setReplacementExerciseGroup }) => {
   return (
     <div>
       {exerciseGroups.map(group => (
@@ -68,7 +67,6 @@ const ExerciseGroupsInput = ({ exerciseGroups, exercises, setReplacementExercise
           exerciseGroup={group}
           exercises={exercises}
           setReplacementExerciseGroup={setReplacementExerciseGroup}
-          setSelectingExercises={setSelectingExercises}
         />
       ))}
     </div>

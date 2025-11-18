@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   updateExerciseGroup,
@@ -12,29 +12,27 @@ import ReplaceExercise from "../Exercises/ReplaceExercise";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
+import { cancelExerciseSelection, setSelectingExercises } from "../../reducers/exerciseSelection";
 
 const ActiveExerciseGroup = ({
   exerciseGroup,
   index,
-  maxIndex,
-  selectingExercises,
-  setSelectingExercises,
-  selectedExercises,
-  setSelectedExercises }) => {
+  maxIndex}) => {
   const dispatch = useDispatch();
+  const exerciseSelection = useSelector(state => state.exerciseSelection);
 
   useEffect(() => {
-    if (!selectingExercises && selectedExercises.length > 0) {
-      const exercisesToAdd = [...selectedExercises]
+    if (!exerciseSelection.selectingExercises && exerciseSelection.exercisesSelected.length > 0) {
+      const exercisesToAdd = [...exerciseSelection.exercisesSelected]
       dispatch(updateExerciseGroup({
         groupKey: exerciseGroup.key,
         field: "exercise",
         value: exercisesToAdd[0]
       }));
       dispatch(updateActiveExerciseGroupExercise(exercisesToAdd[0]))
-      setSelectedExercises([]);
+      dispatch(cancelExerciseSelection());
     }
-  }, [dispatch, selectingExercises, selectedExercises, setSelectedExercises, exerciseGroup])
+  }, [dispatch, exerciseSelection, exerciseGroup])
 
   const updateGroup = (e) => {
     const [field] = e.target.id.split("_");
@@ -55,15 +53,11 @@ const ActiveExerciseGroup = ({
   }
 
   const replaceExercise = () => {
-    setSelectingExercises(true);
+    dispatch(setSelectingExercises({ selectingExercises: true }));
   }
 
-  if (selectingExercises) return (
-    <ReplaceExercise
-      setSelectingExercises={setSelectingExercises}
-      setSelectedExercises={setSelectedExercises}
-      selectedExercises={selectedExercises}
-    />
+  if (exerciseSelection.selectingExercises) return (
+    <ReplaceExercise />
   )
 
   return (

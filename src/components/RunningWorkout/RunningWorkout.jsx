@@ -3,7 +3,6 @@ import { clearRunningWorkout } from "../../reducers/runningWorkout";
 import AvailableWorkouts from "./AvailableWorkouts";
 import ActiveExerciseGroup from "./ActiveExerciseGroup";
 import RunningWorkoutSummary from "./RunningWorkoutSummary";
-import { useState } from "react";
 import RunningWorkoutName from "./RunningWorkoutName";
 import { createCompletedWorkout } from "../../utils/helper";
 import completedWorkoutService from "../../services/completedWorkout"
@@ -12,9 +11,8 @@ import { Button } from "react-bootstrap";
 import ExerciseHistoryList from "../Exercises/ExerciseHistoryList";
 
 const RunningWorkout = () => {
-  const [selectingExercises, setSelectingExercises] = useState(false);
-  const [selectedExercises, setSelectedExercises] = useState([]);
   const runningWorkout = useSelector(state => state.runningWorkout);
+  const exerciseSelection = useSelector(state => state.exerciseSelection);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -50,24 +48,15 @@ const RunningWorkout = () => {
     <div>
       <RunningWorkoutName />
       {!runningWorkout.activeExerciseGroup
-        ? <RunningWorkoutSummary
-          selectingExercises={selectingExercises}
-          setSelectingExercises={setSelectingExercises}
-          selectedExercises={selectedExercises}
-          setSelectedExercises={setSelectedExercises}
-        />
+        ? <RunningWorkoutSummary />
         : <ActiveExerciseGroup
           exerciseGroup={runningWorkout.exerciseGroups
             .find(group => group.key === runningWorkout.activeExerciseGroup.key)}
           index={runningWorkout.activeExerciseGroup.index}
           maxIndex={runningWorkout.exerciseGroups.length - 1}
-          selectingExercises={selectingExercises}
-          setSelectingExercises={setSelectingExercises}
-          selectedExercises={selectedExercises}
-          setSelectedExercises={setSelectedExercises}
         />
       }
-      {!selectingExercises &&
+      {!exerciseSelection.selectingExercises &&
         <div className="row justify-content-center">
           <Button className="col-4 col-md-3 col-lg-2" variant="danger" type="button" onClick={cancelWorkout}>Cancel workout</Button>
           <Button className="col-4 col-md-3 col-lg-2" variant="success" type="button" onClick={completeWorkout}>Finish workout</Button>

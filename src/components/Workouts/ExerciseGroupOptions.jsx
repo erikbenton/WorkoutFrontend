@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux';
 import { removeExerciseGroup, setRestTimeModalStatus, shiftExerciseGroup } from "../../reducers/focusedWorkout";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
+import { setSelectingExercises } from '../../reducers/exerciseSelection';
 
-const ExerciseGroupOptions = ({ exerciseGroup, setSelectingExercises, setReplacementExerciseGroup }) => {
+const ExerciseGroupOptions = ({ exerciseGroup, setReplacementExerciseGroup }) => {
   const dispatch = useDispatch()
 
   const removeGroup = () => {
@@ -26,7 +27,7 @@ const ExerciseGroupOptions = ({ exerciseGroup, setSelectingExercises, setReplace
   }
 
   const replaceExercise = (group) => {
-    setSelectingExercises(true);
+    dispatch(setSelectingExercises({ selectingExercises: true }));
     setReplacementExerciseGroup(group)
   }
 

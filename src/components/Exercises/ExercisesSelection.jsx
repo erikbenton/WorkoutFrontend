@@ -1,28 +1,35 @@
 import { useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 import { Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { addExerciseToSelection, cancelExerciseSelection, removeExerciseFromSelection, setSelectingExercises } from "../../reducers/exerciseSelection";
 
-const ExercisesSelection = ({ setSelectingExercises, setSelectedExercises, selectedExercises, maxSelection }) => {
+const ExercisesSelection = ({ maxSelection }) => {
   const { data: exercises, loading } = useFetch('exercises');
+  const dispatch = useDispatch();
+  const exerciseSelection = useSelector(state => state.exerciseSelection);
 
   useEffect(() => {
-    if (maxSelection && selectedExercises.length >= maxSelection) {
-      setSelectingExercises(false);
+    if (maxSelection && exerciseSelection.exercisesSelected.length >= maxSelection) {
+      dispatch(setSelectingExercises({ selectingExercises: false }));
     }
-  }, [maxSelection, selectedExercises, setSelectingExercises])
+  }, [maxSelection, dispatch, exerciseSelection])
 
   const setSelection = (e, exercise) => {
     const { checked } = e.target
     if (checked) {
-      setSelectedExercises(curr => curr.concat(exercise))
+      dispatch(addExerciseToSelection({ exercise }));
     } else {
-      setSelectedExercises(curr => curr.filter(ex => ex.id !== exercise.id))
+      dispatch(removeExerciseFromSelection({ exercise }));
     }
   }
 
   const cancelSelection = () => {
-    setSelectedExercises([]);
-    setSelectingExercises(false);
+    dispatch(cancelExerciseSelection());
+  }
+
+  const doneSelecting = () => {
+    dispatch(setSelectingExercises({ selectingExercises: false }))
   }
 
   if (loading) return <h2>Loading exercises...</h2>
@@ -46,7 +53,7 @@ const ExercisesSelection = ({ setSelectingExercises, setSelectedExercises, selec
         ))}
       </ul>
       <div className="row row-cols-auto justify-content-center mb-2">
-        <Button className="col-auto" type="button" onClick={() => setSelectingExercises(false)}>Done</Button>
+        <Button className="col-auto" type="button" onClick={doneSelecting}>Done</Button>
         <Button className="col-auto" type="button" variant="warning" onClick={cancelSelection}>Cancel</Button>
       </div>
     </div>

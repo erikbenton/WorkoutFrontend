@@ -10,7 +10,7 @@ import { setTypeColor } from "../../utils/setTypes";
 const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
   const dispatch = useDispatch();
   // needed so user can edit set without resetting rest timer
-  const [completed, setCompleted ] = useState(set.completed);
+  const [completed, setCompleted] = useState(set.completed);
 
   const updateSet = (e, set) => {
     const [field] = e.target.id.split("_");
@@ -85,15 +85,16 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
           ? <FontAwesomeIcon icon={faCheck} />
           : <FontAwesomeIcon icon={faClipboardQuestion} />}
       </Button>
-      <Button
-        className="col-auto"
-        variant="danger"
-        type="button"
-        disabled={set.completed}
-        onClick={() => removeSet(set)}
-      >
-        <FontAwesomeIcon icon={faTrash} />
-      </Button>
+      <div className="col">
+        <Button
+          variant="danger"
+          type="button"
+          disabled={set.completed}
+          onClick={() => removeSet(set)}
+        >
+          <FontAwesomeIcon icon={faTrash} />
+        </Button>
+      </div>
     </div>
   )
 }

@@ -1,14 +1,10 @@
 import ExercisesSelection from "./ExercisesSelection"
 
 
-const ReplaceExercise = ({ setSelectingExercises, setSelectedExercises, selectedExercises }) => {
+const ReplaceExercise = () => {
 
   return (
-    <ExercisesSelection
-      setSelectingExercises={setSelectingExercises}
-      setSelectedExercises={setSelectedExercises}
-      selectedExercises={selectedExercises}
-      maxSelection={1}
+    <ExercisesSelection maxSelection={1}
     />
   )
 }

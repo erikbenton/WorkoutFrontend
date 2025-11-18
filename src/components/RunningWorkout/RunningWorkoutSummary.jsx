@@ -5,31 +5,31 @@ import { useEffect } from "react";
 import ExercisesSelection from "../Exercises/ExercisesSelection";
 import ActiveGroupOptions from "./ActiveGroupOptions";
 import { Button } from "react-bootstrap";
+import { cancelExerciseSelection, setSelectingExercises } from "../../reducers/exerciseSelection";
 
-const RunningWorkoutSummary = ({
-  selectingExercises,
-  setSelectingExercises,
-  selectedExercises,
-  setSelectedExercises }) => {
-  const runningWorkout = useSelector(state => state.runningWorkout)
+const RunningWorkoutSummary = () => {
+  const runningWorkout = useSelector(state => state.runningWorkout);
+  const exerciseSelection = useSelector(state => state.exerciseSelection);
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (!selectingExercises && selectedExercises.length > 0) {
-      const exercisesToAdd = [...selectedExercises]
+    if (!exerciseSelection.selectingExercises && exerciseSelection.exercisesSelected.length > 0) {
+      const exercisesToAdd = [...exerciseSelection.exercisesSelected];
       dispatch(addMultipleExerciseGroups(exercisesToAdd));
-      setSelectedExercises([]);
+      dispatch(cancelExerciseSelection());
     }
-  }, [dispatch, selectingExercises, selectedExercises, setSelectedExercises])
+  }, [dispatch, exerciseSelection])
 
   const selectExerciseGroup = (index) => {
     dispatch(selectActiveExerciseGroup(index))
   }
 
-  if (selectingExercises) return (
-    <ExercisesSelection
-      setSelectingExercises={setSelectingExercises}
-      setSelectedExercises={setSelectedExercises} />
+  const startSelectingExercises = () => {
+    dispatch(setSelectingExercises({ selectingExercises: true }));
+  }
+
+  if (exerciseSelection.selectingExercises) return (
+    <ExercisesSelection />
   )
 
   return (
@@ -53,7 +53,7 @@ const RunningWorkoutSummary = ({
         ))}
       </ol>
       <div className="row justify-content-center mb-2">
-        <Button className="col-auto" type="button" onClick={() => setSelectingExercises(true)}>Add exercises</Button>
+        <Button className="col-auto" type="button" onClick={startSelectingExercises}>Add exercises</Button>
       </div>
     </div>
   )

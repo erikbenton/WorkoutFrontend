@@ -10,6 +10,7 @@ import runningWorkoutReducer from './reducers/runningWorkout.js'
 import App from './App.jsx'
 import "./index.css"
 import { loadFromLocalStorage, saveToLocalStorage } from './utils/helper.js'
+import exerciseSelectionReducer from './reducers/exerciseSelection.js'
 
 const preloadedState = loadFromLocalStorage();
 
@@ -19,6 +20,7 @@ const store = configureStore({
     equipment: equipmentReducer,
     focusedWorkout: focusedWorkoutReducer,
     runningWorkout: runningWorkoutReducer,
+    exerciseSelection: exerciseSelectionReducer
   },
   preloadedState
 });

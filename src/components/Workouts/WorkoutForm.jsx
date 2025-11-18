@@ -8,14 +8,14 @@ import ExercisesSelection from "../Exercises/ExercisesSelection";
 import { Button } from "react-bootstrap";
 import RestTimeModal from "./RestTimeModal";
 import ReplaceExercise from "../Exercises/ReplaceExercise";
+import { cancelExerciseSelection, setSelectingExercises } from "../../reducers/exerciseSelection";
 
 const WorkoutForm = (props) => {
-  const [selectingExercises, setSelectingExercises] = useState(false);
-  const [selectedExercises, setSelectedExercises] = useState([]);
   const [replacementExerciseGroup, setReplacementExerciseGroup] = useState(null);
   const navigate = useNavigate();
   const id = Number(useParams().id);
   const workout = useSelector(state => state.focusedWorkout);
+  const exerciseSelection = useSelector(state => state.exerciseSelection);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,24 +26,25 @@ const WorkoutForm = (props) => {
   }, [dispatch, props])
 
   useEffect(() => {
-    if (!selectingExercises && selectedExercises.length > 0 && replacementExerciseGroup) {
-      const exercisesToAdd = [...selectedExercises];
-      dispatch(replaceExerciseGroupExercise({
-        groupKey: replacementExerciseGroup.key,
-        replacementExercise: exercisesToAdd[0]
-      }));
-      setReplacementExerciseGroup(null);
-      setSelectedExercises([])
-    }
-  }, [dispatch, selectingExercises, selectedExercises, replacementExerciseGroup])
+    if (!exerciseSelection.selectingExercises
+      && exerciseSelection.exercisesSelected.length > 0) {
 
-  useEffect(() => {
-    if (!selectingExercises && selectedExercises.length > 0 && !replacementExerciseGroup) {
-      const exercisesToAdd = [...selectedExercises]
-      dispatch(addMultipleExerciseGroups(exercisesToAdd));
-      setSelectedExercises([]);
+      const exercisesToAdd = [...exerciseSelection.exercisesSelected];
+
+      if (replacementExerciseGroup) {
+        dispatch(replaceExerciseGroupExercise({
+          groupKey: replacementExerciseGroup.key,
+          replacementExercise: exercisesToAdd[0]
+        }));
+        setReplacementExerciseGroup(null);
+
+      } else {
+        dispatch(addMultipleExerciseGroups(exercisesToAdd));
+      }
+
+      dispatch(cancelExerciseSelection());
     }
-  }, [dispatch, selectingExercises, selectedExercises, replacementExerciseGroup])
+  }, [dispatch, exerciseSelection, replacementExerciseGroup]);
 
   const createNewWorkout = async (e) => {
     e.preventDefault()
@@ -67,23 +68,22 @@ const WorkoutForm = (props) => {
     }
   }
 
+  const startExerciseSelection = () => {
+    dispatch(setSelectingExercises({ selectingExercises: true }));
+  }
+
   if (!workout) {
     return <div>Loading data...</div>
   }
 
-  if (selectingExercises && replacementExerciseGroup) {
+  if (exerciseSelection.selectingExercises && replacementExerciseGroup) {
     return (
-      <ReplaceExercise
-        selectedExercises={selectedExercises}
-        setSelectedExercises={setSelectedExercises}
-        setSelectingExercises={setSelectingExercises} />
+      <ReplaceExercise />
     )
   }
 
-  if (selectingExercises) return (
-    <ExercisesSelection
-      setSelectingExercises={setSelectingExercises}
-      setSelectedExercises={setSelectedExercises} />
+  if (exerciseSelection.selectingExercises) return (
+    <ExercisesSelection />
   )
 
   const editingExerciseGroup = workout.editingGroupKey
@@ -125,10 +125,9 @@ const WorkoutForm = (props) => {
           <ExerciseGroupsInput
             exerciseGroups={workout.exerciseGroups}
             setReplacementExerciseGroup={setReplacementExerciseGroup}
-            setSelectingExercises={setSelectingExercises}
           />
           <div className="row justify-content-center">
-            <Button className="col-auto mb-2" type="button" onClick={() => setSelectingExercises(true)}>Add exercises</Button>
+            <Button className="col-auto mb-2" type="button" onClick={startExerciseSelection}>Add exercises</Button>
           </div>
           <Button variant="success" type="submit">{id ? "Update" : "Create"}</Button>
           <Link to={id ? `/workouts/${id}` : "/workouts"}>
