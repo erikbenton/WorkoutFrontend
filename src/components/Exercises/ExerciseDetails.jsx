@@ -30,7 +30,7 @@ const ExerciseDetails = () => {
         <section>Equipment: {exercise.equipment}</section>
         <section>Instructions: {exercise.instructions ?? 'No instructions'}</section>
         <Link to="/exercises"><Button variant="outline-primary">View all exercises</Button></Link>
-        <Button variant="success" type="button" onClick={() => navigate(`/exercises/edit/${exercise.id}`)}>Edit</Button>
+        <Button variant="success" className="mx-1" type="button" onClick={() => navigate(`/exercises/edit/${exercise.id}`)}>Edit</Button>
         <Button variant="danger" type="button" onClick={deleteExercise}>Delete?</Button>
       </div>
       <ExerciseHistoryTabs exercise={exercise} />
