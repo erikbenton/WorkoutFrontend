@@ -1,17 +1,13 @@
-import useFetch from "../../hooks/useFetch";
 
 const ExerciseHistoryList = ({ exercise, exerciseHistory }) => {
-  //const { data: exerciseHistory, loading, error } = useFetch(`completedExerciseGroups/${exercise.id}`);
-
-  // if (loading) return <p>Loading history...</p>
-  // if (error) return <p>Error fetching exercise history</p>
 
   const getDateDiff = (group) => {
     const now = new Date();
+    const trimmedNow = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const then = new Date(group.year, group.month - 1, group.day);
     const convertToDaysFactor = 1000 * 60 * 60 * 24;
     // subtract one due to truncation of "then" date
-    return Math.round((now - then) / convertToDaysFactor) - 1;
+    return Math.round((trimmedNow - then) / convertToDaysFactor);
   }
 
   const totalReps = group => group.completedExerciseSets.reduce((acc, curr) => acc + curr.reps, 0);
