@@ -93,7 +93,7 @@ const ActiveExerciseGroup = ({
       </div>
       <div className="row justify-content-center mb-3">
         <Button
-          className="col-4 col-md-2 text-nowrap"
+          className="col-4 col-md-2 text-nowrap me-1"
           disabled={index === 0}
           variant="outline-primary"
           type="button"
@@ -102,7 +102,7 @@ const ActiveExerciseGroup = ({
           Prev Exercise
         </Button>
         <Button
-          className="col-4 col-md-2 text-nowrap"
+          className="col-4 col-md-2 text-nowrap ms-1"
           disabled={index === maxIndex}
           type="button"
           onClick={() => shiftActiveExercise(1)}

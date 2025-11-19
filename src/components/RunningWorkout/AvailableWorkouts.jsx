@@ -21,7 +21,7 @@ const AvailableWorkouts = () => {
   if (error) return <h1>Error getting workouts</h1>
 
   return (
-    <div>
+    <div className="container">
       <h1>Choose a workout</h1>
       <ul className="no-bullets">
         {workouts.map(workout =>

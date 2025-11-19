@@ -4,9 +4,11 @@ import ActiveExerciseGroup from "./ActiveExerciseGroup";
 import RunningWorkoutSummary from "./RunningWorkoutSummary";
 import RunningWorkoutName from "./RunningWorkoutName";
 import ExerciseHistoryList from "../Exercises/ExerciseHistoryList";
+import ExerciseHistoryTabs from "../Exercises/ExerciseHistoryTabs";
 
 const RunningWorkout = () => {
   const runningWorkout = useSelector(state => state.runningWorkout);
+  const exerciseSelection = useSelector(state => state.exerciseSelection);
 
   // if no running workout, show list of available workouts
   if (!runningWorkout) {
@@ -18,18 +20,25 @@ const RunningWorkout = () => {
   // if no exercise is active in the workout
   // show a summary of the workout
   return (
-    <div>
-      <RunningWorkoutName />
-      {!runningWorkout.activeExerciseGroup
-        ? <RunningWorkoutSummary />
-        : <ActiveExerciseGroup
-          exerciseGroup={runningWorkout.exerciseGroups
-            .find(group => group.key === runningWorkout.activeExerciseGroup.key)}
-          index={runningWorkout.activeExerciseGroup.index}
-          maxIndex={runningWorkout.exerciseGroups.length - 1}
-        />
+    <div className="container-flex">
+      {!exerciseSelection.selectingExercises &&
+        <RunningWorkoutName />
       }
-      {runningWorkout.activeExerciseGroup && <ExerciseHistoryList exercise={runningWorkout.activeExerciseGroup.exercise} />}
+      <div className="container">
+        {!runningWorkout.activeExerciseGroup
+          ? <RunningWorkoutSummary />
+          : <ActiveExerciseGroup
+            exerciseGroup={runningWorkout.exerciseGroups
+              .find(group => group.key === runningWorkout.activeExerciseGroup.key)}
+            index={runningWorkout.activeExerciseGroup.index}
+            maxIndex={runningWorkout.exerciseGroups.length - 1}
+          />
+        }
+      </div>
+      {!exerciseSelection.selectingExercises
+        && runningWorkout.activeExerciseGroup
+        && <ExerciseHistoryTabs exercise={runningWorkout.activeExerciseGroup.exercise} />
+      }
     </div>
   )
 }

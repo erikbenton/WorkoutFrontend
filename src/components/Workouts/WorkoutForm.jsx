@@ -91,7 +91,7 @@ const WorkoutForm = (props) => {
     : null;
 
   return (
-    <div>
+    <div className="container">
       {workout.openRestTimeModal && <RestTimeModal show={workout.openRestTimeModal} exerciseGroup={editingExerciseGroup} />}
       <div className="justify-content-center">
         <h1>{id ? "Edit" : "Create"} Workout</h1>

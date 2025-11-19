@@ -57,7 +57,7 @@ const WorkoutDetails = () => {
   const restText = restTime => restTime.split(":").slice(1).join(":");
 
   return (
-    <>
+    <div className="container">
       <h2>{workout.name}</h2>
       {workout.description &&
         <p className="lead fs-6">
@@ -101,7 +101,7 @@ const WorkoutDetails = () => {
       <Button variant="success" onClick={navigateToEditWorkoutForm}>Edit Workout</Button>
       <Button onClick={navigateToRunningWorkout}>Run this Workout</Button>
       <Button variant="danger" type="button" onClick={() => removeWorkout(workout)}>Delete?</Button>
-    </>
+    </div>
   )
 }
 

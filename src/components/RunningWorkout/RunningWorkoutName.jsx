@@ -24,17 +24,18 @@ const RunningWorkoutName = () => {
   return (
     <div className="container">
       <div className="row row-cols-auto mb-2 align-items-center">
-        <div className="px-0 col-auto">
+        <div className="px-0 col-auto h-100">
           <Button
-            variant="primary"
+            variant={runningWorkout.activeExerciseGroup ? "outline-primary" : "outline-secondary"}
             type="button"
             disabled={!runningWorkout.activeExerciseGroup}
+            className="no-outline-button"
             onClick={backToSummary}
           >
             <FontAwesomeIcon icon={faChevronLeft} />
           </Button>
         </div>
-        <div className="col-auto">
+        <div className="col-auto ps-0">
           <span className="fs-1">
             {editWorkoutName
           ? <div className="col-auto px-0">

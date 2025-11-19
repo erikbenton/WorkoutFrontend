@@ -58,7 +58,7 @@ const ExerciseForm = (props) => {
   }
 
   return (
-    <>
+    <div className="container">
       <h1>{props.exercise ? 'Edit' : 'Create'} Exercise</h1>
       <form onSubmit={saveExercise}>
         <div className="my-2 pe-2 row row-cols-auto align-items-center">
@@ -122,7 +122,7 @@ const ExerciseForm = (props) => {
           </Button>
         </Link>
       </form >
-    </>
+    </div>
   )
 }
 

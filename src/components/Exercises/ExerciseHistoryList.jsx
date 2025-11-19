@@ -1,10 +1,10 @@
 import useFetch from "../../hooks/useFetch";
 
-const ExerciseHistoryList = ({ exercise }) => {
-  const { data: exerciseHistory, loading, error } = useFetch(`completedExerciseGroups/${exercise.id}`);
+const ExerciseHistoryList = ({ exercise, exerciseHistory }) => {
+  //const { data: exerciseHistory, loading, error } = useFetch(`completedExerciseGroups/${exercise.id}`);
 
-  if (loading) return <p>Loading history...</p>
-  if (error) return <p>Error fetching exercise history</p>
+  // if (loading) return <p>Loading history...</p>
+  // if (error) return <p>Error fetching exercise history</p>
 
   const getDateDiff = (group) => {
     const now = new Date();
@@ -20,8 +20,7 @@ const ExerciseHistoryList = ({ exercise }) => {
   if (exerciseHistory.length === 0) return <div></div>
 
   return (
-    <div className="mt-3">
-      <hr />
+    <div className="mt-3 container">
       <h4>{exercise.name} history</h4>
       <ol className="no-bullets">
         {exerciseHistory.map(group => (

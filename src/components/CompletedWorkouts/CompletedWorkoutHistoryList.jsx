@@ -29,7 +29,7 @@ const CompletedWorkoutHistoryList = () => {
   }
 
   return (
-    <div>
+    <div className="container">
       <h2>Workout History</h2>
       <ul className="no-bullets">
         {completedWorkouts.map(workout =>

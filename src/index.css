@@ -44,3 +44,12 @@ select {
   appearance: none;
   /*border: none; - if you want the border removed*/
 }
+
+.no-tab-margin ul, li, button {
+  margin: 0;
+}
+
+.no-outline-button {
+  outline: none;
+  border: none !important;
+}

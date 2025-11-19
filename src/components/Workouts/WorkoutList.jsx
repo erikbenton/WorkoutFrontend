@@ -19,7 +19,7 @@ const WorkoutList = () => {
   if (error) return <h1>Unable to get workouts: {error.status}</h1>;
 
   return (
-    <div>
+    <div className="container">
       <h2>Workouts</h2>
       {
         workouts &&

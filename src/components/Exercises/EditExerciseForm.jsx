@@ -10,7 +10,11 @@ const EditExerciseForm = () => {
   if (!exercise) return <h1>Cannot find exercise</h1>
   if (error) return <h1>{error}</h1>
 
-  return <ExerciseForm exercise={exercise} />
+  return (
+    <div className="container">
+      <ExerciseForm exercise={exercise} />
+    </div>
+  );
 }
 
 export default EditExerciseForm;

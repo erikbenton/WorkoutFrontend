@@ -23,8 +23,8 @@ const ExerciseList = () => {
   const { data: exercises, loading, error } = useFetch("exercises");
   const navigate = useNavigate()
 
-  if (loading) return <div>Loading data...</div>
-  if (error) return <di>{error}</di>
+  if (loading) return <h1>Loading workouts...</h1>;
+  if (error) return <h1>{error}</h1>
 
   const filteredExercises = exercises
     .filter(ex => {
@@ -34,7 +34,7 @@ const ExerciseList = () => {
     });
 
   return (
-    <div>
+    <div className="container">
       <h2>Exercises</h2>
       <div className="container-flex">
 

@@ -19,7 +19,7 @@ const CompletedWorkoutDetails = () => {
   const totalWeight = group => group.completedExerciseSets.reduce((acc, curr) => acc + (curr.weight ?? 0), 0);
 
   return (
-    <>
+    <div className="container">
       <h1>{completedWorkout.name} - {getFormatedCompletion(completedWorkout)}</h1>
       <p>Duration: {completedWorkout.duration}</p>
       <ol className="no-bullets">
@@ -52,7 +52,7 @@ const CompletedWorkoutDetails = () => {
           Workout Histories
         </Button>
       </Link>
-    </>
+    </div>
   )
 }
 

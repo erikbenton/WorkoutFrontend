@@ -3,6 +3,7 @@ import useFetch from '../../hooks/useFetch'
 import exerciseService from '../../services/exercise'
 import { Button } from 'react-bootstrap'
 import ExerciseHistoryList from './ExerciseHistoryList'
+import ExerciseHistoryTabs from './ExerciseHistoryTabs'
 
 const ExerciseDetails = () => {
   const id = Number(useParams().id)
@@ -22,16 +23,18 @@ const ExerciseDetails = () => {
   if (error) return <div>Error: {error}</div>
 
   return (
-    <div>
-      <h1>{exercise.name}</h1>
-      <section>Body Part: {exercise.bodyPart}</section>
-      <section>Equipment: {exercise.equipment}</section>
-      <section>Instructions: {exercise.instructions ?? 'No instructions'}</section>
-      <Link to="/exercises"><Button variant="outline-primary">View all exercises</Button></Link>
-      <Button variant="success" type="button" onClick={() => navigate(`/exercises/edit/${exercise.id}`)}>Edit</Button>
-      <Button variant="danger" type="button" onClick={deleteExercise}>Delete?</Button>
-      <ExerciseHistoryList exercise={exercise} />
-    </div>
+    <>
+      <div className="container">
+        <h1>{exercise.name}</h1>
+        <section>Body Part: {exercise.bodyPart}</section>
+        <section>Equipment: {exercise.equipment}</section>
+        <section>Instructions: {exercise.instructions ?? 'No instructions'}</section>
+        <Link to="/exercises"><Button variant="outline-primary">View all exercises</Button></Link>
+        <Button variant="success" type="button" onClick={() => navigate(`/exercises/edit/${exercise.id}`)}>Edit</Button>
+        <Button variant="danger" type="button" onClick={deleteExercise}>Delete?</Button>
+      </div>
+      <ExerciseHistoryTabs exercise={exercise} />
+    </>
   )
 }
 export default ExerciseDetails

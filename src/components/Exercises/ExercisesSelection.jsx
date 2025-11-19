@@ -35,7 +35,7 @@ const ExercisesSelection = ({ maxSelection }) => {
   if (loading) return <h2>Loading exercises...</h2>
 
   return (
-    <div>
+    <div className="container">
       <ul className="no-bullets">
         {exercises.map(exercise => (
           <li key={exercise.id}>
@@ -53,8 +53,8 @@ const ExercisesSelection = ({ maxSelection }) => {
         ))}
       </ul>
       <div className="row row-cols-auto justify-content-center mb-2">
-        <Button className="col-auto" type="button" onClick={doneSelecting}>Done</Button>
-        <Button className="col-auto" type="button" variant="warning" onClick={cancelSelection}>Cancel</Button>
+        <Button className="col-auto me-2" type="button" onClick={doneSelecting}>Done</Button>
+        <Button className="col-auto ms-2" type="button" variant="warning" onClick={cancelSelection}>Cancel</Button>
       </div>
     </div>
   )
