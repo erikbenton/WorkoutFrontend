@@ -97,10 +97,12 @@ const WorkoutDetails = () => {
           </li>
         )}
       </ol>
-      <Link to="/workouts"><Button variant="outline-primary">View all workouts</Button></Link>
-      <Button variant="success" onClick={navigateToEditWorkoutForm}>Edit Workout</Button>
-      <Button onClick={navigateToRunningWorkout}>Run this Workout</Button>
-      <Button variant="danger" type="button" onClick={() => removeWorkout(workout)}>Delete?</Button>
+      <div className="row justify-content-evenly">
+        <Link className="col-auto col-md-2 px-0" to="/workouts"><Button className="w-100" variant="outline-primary">All workouts</Button></Link>
+        <Button className="col-2" variant="success" onClick={navigateToEditWorkoutForm}>Edit</Button>
+        <Button className="col-2" onClick={navigateToRunningWorkout}>Run</Button>
+        <Button variant="danger col-auto col-md-2" type="button" onClick={() => removeWorkout(workout)}>Delete?</Button>
+      </div>
     </div>
   )
 }
