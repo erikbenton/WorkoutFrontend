@@ -3,8 +3,14 @@ import { useSelector } from "react-redux";
 import ElapsedTimer from "./ElapsedTime";
 import { Navbar, Nav } from "react-bootstrap";
 import CountdownTimer from "./CountdownTimer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBook,
+  faClipboardList,
+  faDumbbell,
+  faHouse,
+  faPersonRunning } from "@fortawesome/free-solid-svg-icons";
 
-const Menu = () => {
+const MobileMenu = () => {
   const match = useMatch("/runningWorkout");
   const runningWorkout = useSelector(state => state.runningWorkout);
   const linkStyle = {
@@ -12,34 +18,42 @@ const Menu = () => {
   };
 
   return (
-    <Navbar bg="primary" className="ps-1 mb-1 text-light w-100" collapseOnSelect data-bs-theme="dark">
+    <Navbar bg="primary" className="ps-1 mb-1 text-light" collapseOnSelect data-bs-theme="dark">
       <Nav>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="#" to="/" as="span">
-              <Link className="text-light" style={linkStyle} to="/">Home</Link>
+              <Link className="text-light" style={linkStyle} to="/">
+                <FontAwesomeIcon icon={faHouse} />
+              </Link>
             </Nav.Link>
             <Nav.Link href="#" to="/Workouts" as="span">
-              <Link className="text-light" style={linkStyle} to="/Workouts">Workouts</Link>
+              <Link className="text-light" style={linkStyle} to="/Workouts">
+                <FontAwesomeIcon icon={faClipboardList} />
+              </Link>
             </Nav.Link>
             <Nav.Link href="#" to="/Exercises" as="span">
-              <Link className="text-light" style={linkStyle} to="/Exercises">Exercises</Link>
+              <Link className="text-light" style={linkStyle} to="/Exercises">
+                <FontAwesomeIcon icon={faDumbbell} />
+              </Link>
             </Nav.Link>
             <Nav.Link href="#" to="/completedWorkouts" as="span">
-              <Link className="text-light" style={linkStyle} to="/completedWorkouts">Workout History</Link>
+              <Link className="text-light" style={linkStyle} to="/completedWorkouts">
+                <FontAwesomeIcon icon={faBook} />
+              </Link>
             </Nav.Link>
             <Nav.Link href="#" as="span">
               {(!match || !runningWorkout)
                 && <Link className="text-light" style={linkStyle} to="/runningWorkout">
-                  {runningWorkout ? "Continue Workout" : "Do a Workout"}
+                  <FontAwesomeIcon icon={faPersonRunning} />
                 </Link>
               }
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Nav>
-      <Nav className="ms-auto me-5">
+      <Nav className="ms-auto me-3 me-md-5">
         {runningWorkout && runningWorkout.showRestTimer && (
           <Nav.Item className="me-3">
             <CountdownTimer startTime={Date.parse(runningWorkout.restStartedAt)} totalTime={runningWorkout.restTime} />
@@ -52,7 +66,7 @@ const Menu = () => {
         )}
       </Nav>
     </Navbar>
-  )
+  );
 }
 
-export default Menu;
+export default MobileMenu;

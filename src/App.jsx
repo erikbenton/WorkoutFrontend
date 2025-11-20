@@ -14,6 +14,7 @@ import ExerciseForm from "./components/Exercises/ExerciseForm";
 import EditWorkoutForm from "./components/Workouts/EditWorkoutForm";
 import RunningWorkout from "./components/RunningWorkout/RunningWorkout";
 import Menu from "./components/Menu";
+import MobileMenu from "./components/MobileMenu";
 import CompletedWorkoutDetails from "./components/CompletedWorkouts/CompletedWorkoutDetails";
 import CompletedWorkoutHistoryList from "./components/CompletedWorkouts/CompletedWorkoutHistoryList";
 
@@ -27,7 +28,12 @@ const App = () => {
 
   return (
     <div className="container-flex pb-3">
-      <Menu />
+      <div className="d-none d-md-flex">
+        <Menu />
+      </div>
+      <div className="d-md-none">
+        <MobileMenu />
+      </div>
       <Routes>
         <Route path="/" element={<Home />} />
         {/* Running Workout */}
