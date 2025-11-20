@@ -54,11 +54,6 @@ const getDataForChart = (history, getGroupDataValue) => {
 };
 
 const ExerciseHistoryChart = ({ label, exerciseHistory, getGroupDataValue }) => {
-
-  if (exerciseHistory.length === 0) {
-    return <div className="container fs-3 mt-3">No history to plot</div>
-  }
-
   const chartData = getDataForChart(exerciseHistory, getGroupDataValue);
 
   const options = {

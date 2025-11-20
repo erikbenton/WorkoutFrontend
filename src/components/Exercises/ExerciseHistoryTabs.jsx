@@ -20,24 +20,32 @@ const ExerciseHistoryTabs = ({ exercise }) => {
         className="no-tab-margin"
         fill
       >
-        <Tab eventKey="list" title="History">
-          <ExerciseHistoryList exercise={exercise} exerciseHistory={exerciseHistory} />
+        <Tab eventKey="list" title="Records">
+          {exerciseHistory.length === 0
+            ? <div className="container fs-3 mt-3">No history records</div>
+            : <ExerciseHistoryList exercise={exercise} exerciseHistory={exerciseHistory} />
+          }
         </Tab>
         <Tab eventKey="chart" title="Charts">
-          <ExerciseHistoryChart
-            label={`Max Weight (${exercise.name})`}
-            exerciseHistory={exerciseHistory}
-            getGroupDataValue={getMaxWeight} />
-          <hr className="mx-3" />
-          <ExerciseHistoryChart
-            label={`Max Est. PR (${exercise.name})`}
-            exerciseHistory={exerciseHistory}
-            getGroupDataValue={getMaxEstimatedPersonalRecord} />
-          <hr className="mx-3" />
-          <ExerciseHistoryChart
-            label={`Total Work (${exercise.name})`}
-            exerciseHistory={exerciseHistory}
-            getGroupDataValue={getTotalWork} />
+          {exerciseHistory.length <= 1
+            ? <div className="container fs-3 mt-3">No history to plot</div>
+            : (<>
+              <ExerciseHistoryChart
+                label={`Max Weight (${exercise.name})`}
+                exerciseHistory={exerciseHistory}
+                getGroupDataValue={getMaxWeight} />
+              <hr className="mx-3" />
+              <ExerciseHistoryChart
+                label={`Max Est. PR (${exercise.name})`}
+                exerciseHistory={exerciseHistory}
+                getGroupDataValue={getMaxEstimatedPersonalRecord} />
+              <hr className="mx-3" />
+              <ExerciseHistoryChart
+                label={`Total Work (${exercise.name})`}
+                exerciseHistory={exerciseHistory}
+                getGroupDataValue={getTotalWork} />
+            </>)
+          }
         </Tab>
       </Tabs>
     </div>

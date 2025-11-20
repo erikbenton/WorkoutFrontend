@@ -13,10 +13,6 @@ const ExerciseHistoryList = ({ exercise, exerciseHistory }) => {
   const totalReps = group => group.completedExerciseSets.reduce((acc, curr) => acc + curr.reps, 0);
   const totalWeight = group => group.completedExerciseSets.reduce((acc, curr) => acc + (curr.weight ?? 0), 0);
 
-  if (exerciseHistory.length === 0) {
-    return <div className="container fs-3 mt-3">No history to list</div>
-  }
-
   return (
     <div className="mt-3 container">
       <h4>{exercise.name} history</h4>
