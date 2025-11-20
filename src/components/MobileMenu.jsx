@@ -53,9 +53,9 @@ const MobileMenu = () => {
           </Nav>
         </Navbar.Collapse>
       </Nav>
-      <Nav className="ms-auto me-3 me-md-5">
+      <Nav className="ms-auto me-3">
         {runningWorkout && runningWorkout.showRestTimer && (
-          <Nav.Item className="me-3">
+          <Nav.Item className="me-1">
             <CountdownTimer startTime={Date.parse(runningWorkout.restStartedAt)} totalTime={runningWorkout.restTime} />
           </Nav.Item>
         )}

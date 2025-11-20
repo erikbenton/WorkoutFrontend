@@ -28,7 +28,7 @@ const ExerciseHistoryTabs = ({ exercise }) => {
         </Tab>
         <Tab eventKey="chart" title="Charts">
           {exerciseHistory.length <= 1
-            ? <div className="container fs-3 mt-3">No history to plot</div>
+            ? <div className="container fs-3 mt-3">Not enough history to plot</div>
             : (<>
               <ExerciseHistoryChart
                 label={`Max Weight (${exercise.name})`}

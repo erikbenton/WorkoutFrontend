@@ -41,7 +41,7 @@ const Menu = () => {
       </Nav>
       <Nav className="ms-auto me-5">
         {runningWorkout && runningWorkout.showRestTimer && (
-          <Nav.Item className="me-3">
+          <Nav.Item className="me-1">
             <CountdownTimer startTime={Date.parse(runningWorkout.restStartedAt)} totalTime={runningWorkout.restTime} />
           </Nav.Item>
         )}
