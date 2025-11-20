@@ -26,7 +26,7 @@ const App = () => {
   }, [dispatch])
 
   return (
-    <div className="container-flex">
+    <div className="container-flex pb-3">
       <Menu />
       <Routes>
         <Route path="/" element={<Home />} />

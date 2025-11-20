@@ -84,11 +84,11 @@ const WorkoutDetails = () => {
                 {group.exerciseSets.map(set =>
                   <li className="list-group-item" key={set.key}>
                     <div className="row">
-                      <div className="col-3">
+                      <div className="col-3 col-md-2">
                         {repsText(set)}
                       </div>
-                      <div className="col-auto">
-                        <span className="badge" style={{ backgroundColor: setTypeColor(set) }}>{set.setType}</span>
+                      <div className="col-4 col-md-3">
+                        <span className="badge py-2 w-100" style={{ backgroundColor: setTypeColor(set) }}>{set.setType}</span>
                       </div>
                     </div>
                   </li>)}
@@ -97,12 +97,10 @@ const WorkoutDetails = () => {
           </li>
         )}
       </ol>
-      <div className="row justify-content-evenly">
-        <Link className="col-auto col-md-2 px-0" to="/workouts"><Button className="w-100" variant="outline-primary">All workouts</Button></Link>
-        <Button className="col-2" variant="success" onClick={navigateToEditWorkoutForm}>Edit</Button>
-        <Button className="col-2" onClick={navigateToRunningWorkout}>Run</Button>
-        <Button variant="danger col-auto col-md-2" type="button" onClick={() => removeWorkout(workout)}>Delete?</Button>
-      </div>
+      <Link className="me-1" to="/workouts"><Button variant="outline-primary">All workouts</Button></Link>
+      <Button className="me-1" variant="success" onClick={navigateToEditWorkoutForm}>Edit</Button>
+      <Button className="me-1" onClick={navigateToRunningWorkout}>Run</Button>
+      <Button variant="danger" type="button" onClick={() => removeWorkout(workout)}>Delete?</Button>
     </div>
   )
 }

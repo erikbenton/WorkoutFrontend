@@ -129,7 +129,7 @@ const WorkoutForm = (props) => {
           <div className="row justify-content-center">
             <Button className="col-auto mb-2" type="button" onClick={startExerciseSelection}>Add exercises</Button>
           </div>
-          <Button variant="success" type="submit">{id ? "Update" : "Create"}</Button>
+          <Button variant="success" className="me-1" type="submit">{id ? "Update" : "Create"}</Button>
           <Link to={id ? `/workouts/${id}` : "/workouts"}>
             <Button variant="warning" type="button">
               Cancel

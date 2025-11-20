@@ -1,7 +1,8 @@
 import { Tab, Tabs } from "react-bootstrap";
 import ExerciseHistoryList from "./ExerciseHistoryList";
 import useFetch from "../../hooks/useFetch";
-import MaxWeightChart from "../Charts/MaxWeightChart";
+import ExerciseHistoryChart from "../Charts/ExerciseHistoryChart";
+import { getMaxWeight, getMaxEstimatedPersonalRecord, getTotalWork } from "../../utils/chartHelper";
 
 
 const ExerciseHistoryTabs = ({ exercise }) => {
@@ -23,7 +24,20 @@ const ExerciseHistoryTabs = ({ exercise }) => {
           <ExerciseHistoryList exercise={exercise} exerciseHistory={exerciseHistory} />
         </Tab>
         <Tab eventKey="chart" title="Charts">
-          <MaxWeightChart exercise={exercise} exerciseHistory={exerciseHistory} />
+          <ExerciseHistoryChart
+            label={`Max Weight (${exercise.name})`}
+            exerciseHistory={exerciseHistory}
+            getGroupDataValue={getMaxWeight} />
+          <hr className="mx-3" />
+          <ExerciseHistoryChart
+            label={`Max Est. PR (${exercise.name})`}
+            exerciseHistory={exerciseHistory}
+            getGroupDataValue={getMaxEstimatedPersonalRecord} />
+          <hr className="mx-3" />
+          <ExerciseHistoryChart
+            label={`Total Work (${exercise.name})`}
+            exerciseHistory={exerciseHistory}
+            getGroupDataValue={getTotalWork} />
         </Tab>
       </Tabs>
     </div>

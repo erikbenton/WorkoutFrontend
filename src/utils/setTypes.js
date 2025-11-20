@@ -1,52 +1,67 @@
 const setTypes = {
   nullType: {
     type: null,
-    color: "inherit"
+    color: "inherit",
+    placeholder: ""
   },
   warmup: {
     type: "warm up",
-    color: "#198754"
+    color: "#20c997",
+    placeholder: "warm-up-placeholder"
   },
   work: {
     type: "work",
-    color: "#0d6efd"
+    color: "#0d6efd",
+    placeholder: "work-placeholder"
   },
   light: {
     type: "light",
-    color: "#0dcaf0"
+    color: "#0dcaf0",
+    placeholder: "light-placeholder"
   },
   heavy: {
     type: "heavy",
-    color: "#dc3545"
+    color: "#dc3545",
+    placeholder: "heavy-placeholder"
   },
   formFocused: {
     type: "form-focused",
-    color: "#20c997"
+    color: "#198754",
+    placeholder: "form-focused-placeholder"
   },
   explosive: {
     type: "explosive",
-    color: "#fd7e14"
+    color: "#fd7e14",
+    placeholder: "explosive-placeholder"
   },
   slow: {
     type: "slow",
-    color: "gray"
+    color: "gray",
+    placeholder: "slow-placeholder"
   }
 };
 
-const getTypeToColorDict = () => {
-  const typeToColor = {};
+const getTypeToValuesDict = () => {
+  const typeToValues = {};
   for (let key in setTypes) {
-    typeToColor[setTypes[key].type] = setTypes[key].color
+    const { color, placeholder } = setTypes[key];
+    typeToValues[setTypes[key].type] = { color, placeholder }
   }
-  return typeToColor;
+  return typeToValues;
 };
 
-const typeToColor = getTypeToColorDict();
+const typeToValues = getTypeToValuesDict();
 
 export const setTypeColor = (set) => {
-  return typeToColor[set.setType]
-  ? typeToColor[set.setType]
+  return typeToValues[set.setType].color
+  ? typeToValues[set.setType].color
   : "inherit"
+};
+
+export const setTypePlaceholderClass = (set) => {
+  return typeToValues[set.setType].placeholder
+  ? typeToValues[set.setType].placeholder
+  : ""
 };
 
 export default setTypes;

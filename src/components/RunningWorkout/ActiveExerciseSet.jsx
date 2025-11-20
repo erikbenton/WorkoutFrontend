@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faClipboardQuestion, faCheck } from '@fortawesome/free-solid-svg-icons'
-import { setTypeColor } from "../../utils/setTypes";
+import { setTypePlaceholderClass, setTypeColor } from "../../utils/setTypes";
 
 
 const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
@@ -47,7 +47,7 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
     }
   }
 
-  const repsPlaceholderText = set =>
+  const repsPlaceholderText =
     `${set.minReps ? set.minReps : ''}${(set.minReps && set.maxReps) ? '-' : ''}${set.maxReps ? set.maxReps : ''}`
 
   return (
@@ -60,13 +60,13 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
           id={`reps_${set.key}`}
           value={set.reps ?? ""}
           onChange={(e) => updateSet(e, set)}
-          placeholder={repsPlaceholderText(set)}
+          placeholder={repsPlaceholderText}
         />
       </div>
       <div className="col-5">
         <input
           disabled={set.completed}
-          className="form-control text-center"
+          className={"form-control text-center " + setTypePlaceholderClass(set)}
           type="number"
           id={`weight_${set.key}`}
           value={set.weight ?? ""}

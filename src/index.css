@@ -53,3 +53,31 @@ select {
   outline: none;
   border: none !important;
 }
+
+.warm-up-placeholder::placeholder {
+  color: #20c997;
+}
+
+.work-placeholder::placeholder {
+  color: #0d6efd;
+}
+
+.light-placeholder::placeholder {
+  color: #0dcaf0;
+}
+
+.heavy-placeholder::placeholder {
+  color: #dc3545;
+}
+
+.form-focused-placeholder::placeholder {
+  color: #198754;
+}
+
+.explosive-placeholder::placeholder {
+  color: #fd7e14;
+}
+
+.slow-placeholder::placeholder {
+  color: gray;
+}
