@@ -26,8 +26,8 @@ button a {
 .no-border button {
   border: none;
   border-radius: 50%;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  width: 45px;
+  height: 45px;
 }
 
 .no-toggle .dropdown-toggle::after {
@@ -42,7 +42,6 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  /*border: none; - if you want the border removed*/
 }
 
 .no-tab-margin ul, li, button {
