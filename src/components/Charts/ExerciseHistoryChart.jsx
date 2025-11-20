@@ -27,6 +27,7 @@ const getDataForChart = (history, getGroupDataValue) => {
   const timePeriod = 1000 * 60 * 60 * 24 * numOfDays;
   const startDate = latestDate - timePeriod;
 
+  // dict to map date to history data to grab data next
   const dateToHistory = {};
   for (let group of history) {
     const key = `${group.year}-${group.month - 1}-${group.day}`;
@@ -34,12 +35,19 @@ const getDataForChart = (history, getGroupDataValue) => {
     dateToHistory[key] = [dateLabel, getGroupDataValue(group)]
   }
 
+  // use the dict to look up if there is data that date
+  // if not add an empty data point
   const chartData = [];
   for (let i = 0; i <= numOfDays; i++) {
     const day = new Date(startDate + i * (1000 * 60 * 60 * 24));
     const key = `${day.getFullYear()}-${day.getMonth()}-${day.getDate()}`;
-    const dataPoint = dateToHistory[key] ?? [null, null];
+    const dataPoint = dateToHistory[key] ?? ["", null];
     chartData.push(dataPoint);
+  }
+
+  // trim the empty starting datapoints
+  while(chartData[0][0] == "") {
+    chartData.shift();
   }
 
   return chartData;
@@ -67,10 +75,11 @@ const ExerciseHistoryChart = ({ label, exerciseHistory, getGroupDataValue }) => 
   };
 
   const data = {
+    labels: chartData.map(dp => dp[0]),
     datasets: [
       {
         label,
-        data: chartData,
+        data: chartData.map(dp => dp[1]),
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
         spanGaps: true
