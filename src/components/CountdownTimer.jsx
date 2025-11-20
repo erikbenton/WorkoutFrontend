@@ -31,7 +31,7 @@ const CountdownTimer = ({ startTime, totalTime }) => {
     <>
       <span
         className={(sign === "-" ? "rounded-pill text-bg-secondary" : "rounded-pill text-bg-primary") + " badge"}
-        style={{ fontFamily: "monospace", color: "white" }}
+        style={{ fontFamily: "monospace", color: "white", fontSize: "0.85rem" }}
       >
         {formatTime(countDownTime)}
       </span>
