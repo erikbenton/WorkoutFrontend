@@ -131,7 +131,11 @@ const activeWorkoutSlice = createSlice({
     addExerciseSet(state, action) {
       const groupKey = action.payload.groupKey;
       const exerciseGroup = { ...state.exerciseGroups.find(group => group.key === groupKey) };
-      exerciseGroup.exerciseSets = exerciseGroup.exerciseSets.concat(toKeyedObject(initializeExerciseSet(null)));
+      const setLength = exerciseGroup.exerciseSets.length;
+      const newExerciseSet = setLength > 0
+        ? initializeExerciseSet(exerciseGroup.exerciseSets[setLength - 1])
+        : initializeExerciseSet(null);
+      exerciseGroup.exerciseSets = exerciseGroup.exerciseSets.concat(toKeyedObject(newExerciseSet));
       state.exerciseGroups = state.exerciseGroups.map(group => group.key === groupKey ? exerciseGroup : group);
       return state;
     },
