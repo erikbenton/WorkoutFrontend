@@ -7,7 +7,7 @@ const CountdownTimer = ({ startTime, totalTime }) => {
   const [hours, minutes, seconds] = totalTime.split(":");
   const totalTimeSeconds = (hours * 60 * 60) + (minutes * 60) + Number(seconds);
   const startTimeRef = useRef(startTime);
-  const totalTimeRef = useRef(totalTimeSeconds);
+  const totalTimeRef = useRef(totalTimeSeconds * 1000);
   const [time, setTime] = useState(0);
 
   useEffect(() => {
@@ -20,15 +20,19 @@ const CountdownTimer = ({ startTime, totalTime }) => {
     return () => clearInterval(intervalId);
   }, [])
 
-  // Make sure the count down time is "rounding up"
-  // eg: 59,999 msec -> 60 sec, not 59 sec
-  const countDownTimeActual = (totalTimeRef.current * 1000) - Math.floor(time / 1000) * 1000;
+  // Make sure the count down time is rounding up to the sec
+  // eg: 59,999 msec -> 59.999 -> 60 sec, not 59 sec
+  //     59,001 msec -> 59.001 -> 60 sec, not 59 sec
+  const countDownTimeActual = Math.ceil((totalTimeRef.current - time) / 1000) * 1000;
   const countDownTime = Math.abs(countDownTimeActual);
   const sign = countDownTimeActual > 0 ? "" : "-";
 
   return (
     <>
-      <span className={sign === "-" ? "bg-danger-subtle" : ""} style={{ fontFamily: "monospace", color: "white" }}>
+      <span
+        className={(sign === "-" ? "rounded-pill text-bg-secondary" : "rounded-pill text-bg-primary") + " badge"}
+        style={{ fontFamily: "monospace", color: "white" }}
+      >
         {formatTime(countDownTime)}
       </span>
     </>
