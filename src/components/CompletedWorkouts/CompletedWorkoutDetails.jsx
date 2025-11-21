@@ -1,10 +1,12 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { Button } from "react-bootstrap";
+import completedWorkoutService from "../../services/completedWorkout";
 
 
 const CompletedWorkoutDetails = () => {
   const id = Number(useParams().id);
+  const navigate = useNavigate();
   const { data: completedWorkout, loading, error } = useFetch(`completedWorkouts/${id}`);
 
   if (loading) return <h1>Loading workout...</h1>
@@ -13,6 +15,18 @@ const CompletedWorkoutDetails = () => {
   const getFormatedCompletion = (workout) => {
     const dateNoTime = workout.createdAt.split("T")[0];
     return dateNoTime;
+  }
+
+  const deleteWorkout = async (workout) => {
+    const response = confirm(`Delete workout ${workout.name}?`);
+    if (response) {
+      try {
+        await completedWorkoutService.remove(workout.id)
+        navigate("/completedWorkouts");
+      } catch (error) {
+        console.error(error);
+      }
+    }
   }
 
   const totalReps = group => group.completedExerciseSets.reduce((acc, curr) => acc + curr.reps, 0);
@@ -41,7 +55,9 @@ const CompletedWorkoutDetails = () => {
               </div>
               <span className="card-footer">
                 <span className="badge text-bg-primary">Reps: {totalReps(group)}</span>
-                <span className="ms-1 badge text-bg-success">{totalWeight(group) === 0 ? "" : `Weight: ${totalWeight(group)} lbs`}</span>
+                <span className="ms-1 badge text-bg-success">
+                  {totalWeight(group) === 0 ? "" : `Weight: ${totalWeight(group)} lbs`}
+                </span>
               </span>
             </div>
           </li>
@@ -52,6 +68,14 @@ const CompletedWorkoutDetails = () => {
           Workout Histories
         </Button>
       </Link>
+      <Button
+        variant="danger"
+        type="button"
+        className="ms-1"
+        onClick={() => deleteWorkout(completedWorkout)}
+      >
+        Delete?
+      </Button>
     </div>
   )
 }
