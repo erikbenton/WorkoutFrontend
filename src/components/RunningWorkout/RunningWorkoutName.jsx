@@ -43,7 +43,7 @@ const RunningWorkoutName = () => {
               type="text"
               id="name"
               className="form-control pe-0"
-              value={runningWorkout.name}
+              value={runningWorkout.name ?? ""}
               onChange={(e) => updateWorkoutName(e)}
             />
           </div>

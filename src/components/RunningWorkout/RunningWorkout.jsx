@@ -3,7 +3,6 @@ import AvailableWorkouts from "./AvailableWorkouts";
 import ActiveExerciseGroup from "./ActiveExerciseGroup";
 import RunningWorkoutSummary from "./RunningWorkoutSummary";
 import RunningWorkoutName from "./RunningWorkoutName";
-import ExerciseHistoryList from "../Exercises/ExerciseHistoryList";
 import ExerciseHistoryTabs from "../Exercises/ExerciseHistoryTabs";
 
 const RunningWorkout = () => {

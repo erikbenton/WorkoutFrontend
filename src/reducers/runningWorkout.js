@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { toKeyedObject, findIndexOfKey, swapObjects } from '../utils/helper'
+import { toKeyedObject, findIndexOfKey, swapObjects, createCompletedWorkout } from '../utils/helper'
 import workoutService from "../services/workout";
+import completedWorkoutService from "../services/completedWorkout";
 
 const initializeWorkout = workout => {
   const now = new Date()
@@ -164,6 +165,16 @@ export const restartRestTimer = (restTime) => {
       const now = new Date();
       dispatch(setRestTimer({ showRestTimer: true, restTime, restStartedAt: now.toISOString() }))
     }, 0);
+  }
+}
+
+export const saveCompleteWorkout = (workout) => {
+  return async (dispatch) => {
+    const completedWorkout = createCompletedWorkout(workout);
+    const savedCompletedWorkout = await completedWorkoutService
+      .create(completedWorkout);
+    dispatch(clearRunningWorkout());
+    return savedCompletedWorkout;
   }
 }
 

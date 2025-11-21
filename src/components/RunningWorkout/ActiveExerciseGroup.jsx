@@ -11,13 +11,18 @@ import { useEffect } from "react";
 import ReplaceExercise from "../Exercises/ReplaceExercise";
 import { Button } from "react-bootstrap";
 import { cancelExerciseSelection } from "../../reducers/exerciseSelection";
+import { saveCompleteWorkout } from "../../reducers/runningWorkout";
+import { useNavigate } from "react-router-dom";
 
 const ActiveExerciseGroup = ({
   exerciseGroup,
   index,
-  maxIndex}) => {
+  maxIndex }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const exerciseSelection = useSelector(state => state.exerciseSelection);
+  const runningWorkout = useSelector(state => state.runningWorkout);
+  let workoutIsFinished = false;
 
   useEffect(() => {
     if (!exerciseSelection.selectingExercises && exerciseSelection.exercisesSelected.length > 0) {
@@ -48,6 +53,20 @@ const ActiveExerciseGroup = ({
 
   const shiftActiveExercise = shift => {
     dispatch(selectActiveExerciseGroup(index + shift))
+  }
+
+  const completeWorkout = async () => {
+    try {
+      const savedCompletedWorkout = await dispatch(saveCompleteWorkout(runningWorkout));
+      navigate(`/completedWorkouts/${savedCompletedWorkout.id}`);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  if (index === maxIndex) {
+    workoutIsFinished = exerciseGroup.exerciseSets
+      .reduce((any, set) => any && set.completed, true)
   }
 
   if (exerciseSelection.selectingExercises) return (
@@ -109,6 +128,16 @@ const ActiveExerciseGroup = ({
         >
           Next Exercise
         </Button>
+        {workoutIsFinished &&
+          <Button
+            className="col-4 col-md-2 text-nowrap mt-2"
+            variant="success"
+            type="button"
+            onClick={completeWorkout}
+          >
+            Finish Workout
+          </Button>
+        }
       </div>
     </div>
   )

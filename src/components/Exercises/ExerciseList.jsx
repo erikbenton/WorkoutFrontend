@@ -23,7 +23,7 @@ const ExerciseList = () => {
   const { data: exercises, loading, error } = useFetch("exercises");
   const navigate = useNavigate()
 
-  if (loading) return <h1>Loading workouts...</h1>;
+  if (loading) return <h1>Loading exercises...</h1>;
   if (error) return <h1>{error}</h1>
 
   const filteredExercises = exercises
