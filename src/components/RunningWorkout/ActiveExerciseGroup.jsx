@@ -66,8 +66,20 @@ const ActiveExerciseGroup = ({
       <div className="row">
         {exerciseGroup.note && <p>{exerciseGroup.note}</p>}
       </div>
+      <div className="row row-cols-auto mb-2 align-items-center">
+        <div className="col-12">
+          <input
+            type="text"
+            className="form-control"
+            id={`comment_${exerciseGroup.key}`}
+            value={exerciseGroup.comment ?? ""}
+            placeholder="Comment..."
+            onChange={(e) => updateGroup(e)}
+          />
+        </div>
+      </div>
       {exerciseGroup.exerciseSets.length > 0 &&
-        <div className="row row-cols-auto m-1 justify-content-center align-items-center text-center">
+        <div className="row row-cols-auto mx-1 mb-1 mt-3 justify-content-center align-items-center text-center">
           <span className="col-3">Reps</span>
           <span className="col-5">Weight</span>
           <span className="col-4"></span>
@@ -77,21 +89,9 @@ const ActiveExerciseGroup = ({
         <ActiveExerciseSet key={set.key} groupKey={exerciseGroup.key} restTime={exerciseGroup.restTime} set={set} />
       ))}
       <div className="row justify-content-center">
-        <Button className="col-3 mt-2" type="button" onClick={addSet}>Add set</Button>
+        <Button className="col-3 mt-2" type="button" onClick={addSet}>Add Set</Button>
       </div>
-      <div className="row row-cols-auto my-3 align-items-center">
-        <label className="col-form-label">Comment</label>
-        <div className="col-9">
-          <input
-            type="text"
-            className="form-control"
-            id={`comment_${exerciseGroup.key}`}
-            value={exerciseGroup.comment ?? ""}
-            onChange={(e) => updateGroup(e)}
-          />
-        </div>
-      </div>
-      <div className="row justify-content-center mb-3">
+      <div className="row justify-content-center my-3">
         <Button
           className="col-4 col-md-2 text-nowrap me-1"
           disabled={index === 0}

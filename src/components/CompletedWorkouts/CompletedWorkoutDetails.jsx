@@ -30,7 +30,7 @@ const CompletedWorkoutDetails = () => {
                 <Link to={`/exercises/${group.exercise.id}`}>{group.exercise.name}</Link>
               </div>
               <div className="card-body">
-                {group.comment && <p className="card-text">{group.comment}</p>}
+                {group.comment && <span className="card-text">{group.comment}</span>}
                 <ol className="list-group list-group-flush">
                   {group.completedExerciseSets.map(set =>
                     <li className="list-group-item ps-0" key={set.id}>
