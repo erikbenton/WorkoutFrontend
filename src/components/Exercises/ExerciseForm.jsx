@@ -66,7 +66,7 @@ const ExerciseForm = (props) => {
           <div className="col-9">
             <input
               className="form-control"
-              id={`name_${exercise.id}`}
+              id={`name`}
               type="text"
               value={exercise.name}
               onChange={setExerciseName}
@@ -78,7 +78,7 @@ const ExerciseForm = (props) => {
           <div className="col-auto">
             <select
               className="form-select"
-              id={`bodyPart_${exercise.id}`}
+              id={`bodyPart`}
               value={exercise.bodyPart}
               onChange={selectBodyPart}
             >
@@ -93,7 +93,7 @@ const ExerciseForm = (props) => {
           <div className="col-auto">
             <select
               className="form-select"
-              id={`equipment_${exercise.id}`}
+              id={`equipment`}
               value={exercise.equipment}
               onChange={selectEquipment}
             >
@@ -109,7 +109,7 @@ const ExerciseForm = (props) => {
             <textarea
               className="form-control"
               rows="3"
-              id={`instructions_${exercise.id}`}
+              id={`instructions`}
               value={exercise.instructions ?? ''}
               onChange={setExerciseIntructions}
             />
