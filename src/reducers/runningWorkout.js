@@ -146,6 +146,21 @@ const activeWorkoutSlice = createSlice({
       exerciseGroup.exerciseSets = exerciseGroup.exerciseSets.filter(set => set.key !== setKey);
       state.exerciseGroups = state.exerciseGroups.map(group => group.key === groupKey ? exerciseGroup : group);
       return state;
+    },
+    autofillExerciseSet(state, action) {
+      const { reps, weight } = action.payload;
+      
+      if (!state.activeExerciseGroup) return state;
+
+      const group = { ...state.exerciseGroups.find(g => g.key === state.activeExerciseGroup.key) };
+      const setIndex = group.exerciseSets.findIndex(set => !set.complete);
+      
+      if (setIndex === -1) return state;
+
+      const filledSet = { ...group.exerciseSets[setIndex], reps, weight };
+      group.exerciseSets = group.exerciseSets.map(set => set.key === filledSet.key ? filledSet : set);
+      state.exerciseGroups = state.exerciseGroups.map(g => g.key === group.key ? group : g);
+      return state;
     }
   }
 })
@@ -192,5 +207,6 @@ export const {
   addMultipleExerciseGroups,
   addExerciseSet,
   updateExerciseSet,
-  removeExerciseSet } = activeWorkoutSlice.actions
+  removeExerciseSet,
+  autofillExerciseSet } = activeWorkoutSlice.actions
 export default activeWorkoutSlice.reducer

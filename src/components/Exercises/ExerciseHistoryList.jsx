@@ -1,13 +1,22 @@
+import { useDispatch } from "react-redux";
+import { autofillExerciseSet } from "../../reducers/runningWorkout";
 
 const ExerciseHistoryList = ({ exercise, exerciseHistory }) => {
+  const dispatch = useDispatch();
 
   const getDateDiff = (group) => {
     const now = new Date();
     const trimmedNow = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const then = new Date(group.year, group.month - 1, group.day);
     const convertToDaysFactor = 1000 * 60 * 60 * 24;
-    // subtract one due to truncation of "then" date
     return Math.round((trimmedNow - then) / convertToDaysFactor);
+  }
+
+  const autoFillSet = (set) => {
+    dispatch(autofillExerciseSet({
+      reps: set.reps,
+      weight: set.weight
+    }));
   }
 
   const totalReps = group => group.completedExerciseSets.reduce((acc, curr) => acc + curr.reps, 0);
@@ -27,7 +36,7 @@ const ExerciseHistoryList = ({ exercise, exerciseHistory }) => {
               <div className="card-body py-1">
                 <ol className="list-group list-group-flush">
                   {group.completedExerciseSets.map(set => (
-                    <li key={set.id} className="list-group-item ps-0">
+                    <li key={set.id} className="list-group-item ps-0" onDoubleClick={() => autoFillSet(set)}>
                       {set.reps} reps {set.weight ? "x " + set.weight + " lbs" : ""}
                     </li>
                   ))}
