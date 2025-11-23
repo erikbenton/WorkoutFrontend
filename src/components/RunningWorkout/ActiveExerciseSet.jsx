@@ -38,7 +38,7 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
         field: "completed",
         value
       }));
-      if (restTime && value && !completed) {
+      if (value && !completed) {
         setCompleted(true);
         dispatch(restartRestTimer(restTime))
       }

@@ -176,6 +176,7 @@ export const initializeRunningWorkout = (id) => {
 export const restartRestTimer = (restTime) => {
   return dispatch => {
     dispatch(setRestTimer({ showRestTimer: false, restTime: null, restStartedAt: null }))
+    if (!restTime) return;
     setTimeout(() => {
       const now = new Date();
       dispatch(setRestTimer({ showRestTimer: true, restTime, restStartedAt: now.toISOString() }))
