@@ -153,7 +153,7 @@ const activeWorkoutSlice = createSlice({
       if (!state.activeExerciseGroup) return state;
 
       const group = { ...state.exerciseGroups.find(g => g.key === state.activeExerciseGroup.key) };
-      const setIndex = group.exerciseSets.findIndex(set => !set.complete);
+      const setIndex = group.exerciseSets.findIndex(set => !set.completed);
       
       if (setIndex === -1) return state;
 
