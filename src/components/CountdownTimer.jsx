@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { formatTime } from "../utils/helper";
+import alertNotification from "../assets/zapsplat_bell_small_hand_short_ring_002_84221.mp3"
 
 const INTERVAL_TIME = 100;
 
@@ -9,6 +10,7 @@ const CountdownTimer = ({ startTime, totalTime }) => {
   const startTimeRef = useRef(startTime);
   const totalTimeRef = useRef(totalTimeSeconds * 1000);
   const [time, setTime] = useState(0);
+  const [alerted, setAlerted] = useState(false);
 
   useEffect(() => {
     let intervalId;
@@ -26,6 +28,12 @@ const CountdownTimer = ({ startTime, totalTime }) => {
   const countDownTimeActual = Math.ceil((totalTimeRef.current - time) / 1000) * 1000;
   const countDownTime = Math.abs(countDownTimeActual);
   const sign = countDownTimeActual > 0 ? "" : "-";
+
+  if (countDownTime < 3 * 1000 && !alerted) {
+    const audio = new Audio(alertNotification);
+    audio.play();
+    setAlerted(true);
+  }
 
   return (
     <>
