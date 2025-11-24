@@ -1,9 +1,10 @@
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { removeExerciseGroup, setRestTimeModalStatus, shiftExerciseGroup } from "../../reducers/focusedWorkout";
+import { removeExerciseGroup, setEditingExerciseGroup, shiftExerciseGroup } from "../../reducers/focusedWorkout";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { setSelectingExercises } from '../../reducers/exerciseSelection';
+import { MODAL_TYPES, setModal } from '../../reducers/modals';
 
 const ExerciseGroupOptions = ({ exerciseGroup, setReplacementExerciseGroup }) => {
   const dispatch = useDispatch()
@@ -20,10 +21,10 @@ const ExerciseGroupOptions = ({ exerciseGroup, setReplacementExerciseGroup }) =>
   }
 
   const openRestTimeModal = () => {
-    dispatch(setRestTimeModalStatus({
-      isModalOpen: true,
+    dispatch(setEditingExerciseGroup({
       groupKey: exerciseGroup.key
     }));
+    dispatch(setModal({ openModal: MODAL_TYPES.UPDATE_REST }))
   }
 
   const replaceExercise = (group) => {

@@ -5,7 +5,6 @@ import { toKeyedObject, findIndexOfKey, swapObjects } from '../utils/helper'
 const initialWorkout = {
   name: '',
   exerciseGroups: [],
-  openRestTimeModal: false,
   editingGroupKey: null
 }
 
@@ -121,12 +120,11 @@ const workoutSlice = createSlice({
       state.exerciseGroups = state.exerciseGroups.map(group => group.key === exerciseGroup.key ? exerciseGroup : group)
       return state
     },
-    setRestTimeModalStatus(state, action) {
-      const { isModalOpen, groupKey } = action.payload;
+    setEditingExerciseGroup(state, action) {
+      const { groupKey } = action.payload;
       return {
         ...state,
-        openRestTimeModal: isModalOpen,
-        editingGroupKey: isModalOpen ? groupKey : null
+        editingGroupKey: groupKey
       };
     }
   }
@@ -185,6 +183,6 @@ export const {
   removeExerciseGroup,
   updateExerciseSet,
   removeExerciseSet,
-  setRestTimeModalStatus
+  setEditingExerciseGroup
 } = workoutSlice.actions
 export default workoutSlice.reducer

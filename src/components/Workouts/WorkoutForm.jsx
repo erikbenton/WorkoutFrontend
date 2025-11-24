@@ -1,5 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addMultipleExerciseGroups, replaceExerciseGroupExercise, setWorkout, updateWorkoutDescription, updateWorkoutName } from "../../reducers/focusedWorkout";
+import {
+  addMultipleExerciseGroups,
+  replaceExerciseGroupExercise,
+  setWorkout,
+  updateWorkoutDescription,
+  updateWorkoutName } from "../../reducers/focusedWorkout";
 import { useEffect, useState } from "react";
 import ExerciseGroupsInput from "./ExerciseGroupsInputs";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -9,12 +14,14 @@ import { Button } from "react-bootstrap";
 import RestTimeModal from "./RestTimeModal";
 import ReplaceExercise from "../Exercises/ReplaceExercise";
 import { cancelExerciseSelection, setSelectingExercises } from "../../reducers/exerciseSelection";
+import { MODAL_TYPES } from "../../reducers/modals";
 
 const WorkoutForm = (props) => {
   const [replacementExerciseGroup, setReplacementExerciseGroup] = useState(null);
   const navigate = useNavigate();
   const id = Number(useParams().id);
   const workout = useSelector(state => state.focusedWorkout);
+  const modals = useSelector(state => state.modals);
   const exerciseSelection = useSelector(state => state.exerciseSelection);
   const dispatch = useDispatch();
 
@@ -90,9 +97,11 @@ const WorkoutForm = (props) => {
     ? workout.exerciseGroups.find(group => workout.editingGroupKey === group.key)
     : null;
 
+  const showRestTimeModal = modals === MODAL_TYPES.UPDATE_REST;
+
   return (
     <div className="container">
-      {workout.openRestTimeModal && <RestTimeModal show={workout.openRestTimeModal} exerciseGroup={editingExerciseGroup} />}
+      {showRestTimeModal && <RestTimeModal show={showRestTimeModal} exerciseGroup={editingExerciseGroup} />}
       <div className="justify-content-center">
         <h1>{id ? "Edit" : "Create"} Workout</h1>
         <form id="workout_form" onSubmit={id ? updateEditedWorkout : createNewWorkout}>

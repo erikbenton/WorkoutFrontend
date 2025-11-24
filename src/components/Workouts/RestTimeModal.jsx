@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
-import { setRestTimeModalStatus, updateExerciseGroup } from "../../reducers/focusedWorkout";
+import { updateExerciseGroup } from "../../reducers/focusedWorkout";
+import { clearModal } from "../../reducers/modals";
 import { Modal, Button } from "react-bootstrap";
 import { useState } from "react";
 
@@ -8,7 +9,7 @@ const RestTimeModal = ({ show, exerciseGroup }) => {
   const dispatch = useDispatch();
 
   const closeModal = () => {
-    dispatch(setRestTimeModalStatus({ isModalOpen: false }));
+    dispatch(clearModal());
   }
 
   const saveRestTime = () => {
@@ -18,7 +19,7 @@ const RestTimeModal = ({ show, exerciseGroup }) => {
         restTime
       }
     }));
-    dispatch(setRestTimeModalStatus({ isModalOpen: false }));
+    dispatch(clearModal());
   }
 
   const updateRestTimeMinutes = (e) => {
