@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const MODAL_TYPES = Object.freeze({
   CANCEL_WORKOUT: "CANCEL_WORKOUT",
   START_WORKOUT : "START_WORKOUT",
+  DELETE_WORKOUT: "DELETE_WORKOUT",
   UPDATE_REST: "UPDATE_REST",
   CHANGE_SET: "CHANGE_SET",
   CONFIRM: "CONFIRM"

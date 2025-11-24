@@ -10,6 +10,11 @@ const ConfirmModal = ({ header, body, show, cancelModal, confirmModal }) => {
     dispatch(clearModal());
   }
 
+  const confirm = () => {
+    confirmModal();
+    closeModal();
+  }
+
   return (
     <Modal show={show} onHide={closeModal} centered>
       <Modal.Header closeButton>
@@ -22,7 +27,7 @@ const ConfirmModal = ({ header, body, show, cancelModal, confirmModal }) => {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={cancelModal ?? closeModal}>Close</Button>
-        <Button onClick={confirmModal}>Confirm</Button>
+        <Button onClick={confirm}>Confirm</Button>
       </Modal.Footer>
     </Modal>
   );

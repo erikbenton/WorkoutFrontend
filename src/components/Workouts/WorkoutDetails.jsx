@@ -6,6 +6,8 @@ import { deleteWorkout } from "../../reducers/workouts";
 import { initializeRunningWorkout } from "../../reducers/runningWorkout";
 import { Button } from "react-bootstrap";
 import { setTypeColor } from "../../utils/setTypes";
+import { MODAL_TYPES, setModal } from "../../reducers/modals";
+import ConfirmModal from "../Modals/ConfirmModal";
 
 const WorkoutDetails = () => {
   const id = Number(useParams().id);
@@ -13,6 +15,7 @@ const WorkoutDetails = () => {
   const dispatch = useDispatch();
   const workout = useSelector(state => state.focusedWorkout);
   const runningWorkout = useSelector(state => state.runningWorkout);
+  const modals = useSelector(state => state.modals);
 
   useEffect(() => {
     dispatch(getWorkoutDetails(id));
@@ -33,12 +36,14 @@ const WorkoutDetails = () => {
     navigate("/runningWorkout");
   }
 
-  const removeWorkout = (workout) => {
-    const response = confirm(`Delete workout ${workout.name}?`);
-    if (response) {
-      dispatch(deleteWorkout(workout));
-      navigate("/workouts");
-    }
+  const removeWorkout = () => {
+    console.log('workout', workout)
+    dispatch(deleteWorkout(workout));
+    navigate("/workouts");
+  }
+
+  const openDeleteModal = () => {
+    dispatch(setModal({ openModal: MODAL_TYPES.DELETE_WORKOUT }));
   }
 
   if (!workout.id) {
@@ -54,10 +59,20 @@ const WorkoutDetails = () => {
     ${set.minReps && set.maxReps ? "-" : ""}
     ${set.maxReps ? set.maxReps : ""}`;
 
+  // slice out the hours
   const restText = restTime => restTime.split(":").slice(1).join(":");
+  const showingDeleteModal = modals === MODAL_TYPES.DELETE_WORKOUT;
+  const showingRunWorkoutModal = modals === MODAL_TYPES.START_WORKOUT;
 
   return (
     <div className="container">
+      {showingDeleteModal &&
+        <ConfirmModal
+          show={showingDeleteModal}
+          header="Delete workout?"
+          body={`Delete workout ${workout.name}?`}
+          confirmModal={removeWorkout}
+        />}
       <h2>{workout.name}</h2>
       {workout.description &&
         <p className="lead fs-6">
@@ -100,7 +115,7 @@ const WorkoutDetails = () => {
       <Link className="me-1" to="/workouts"><Button variant="outline-primary">All workouts</Button></Link>
       <Button className="me-1" variant="success" onClick={navigateToEditWorkoutForm}>Edit</Button>
       <Button className="me-1" onClick={navigateToRunningWorkout}>Run</Button>
-      <Button variant="danger" type="button" onClick={() => removeWorkout(workout)}>Delete?</Button>
+      <Button variant="danger" type="button" onClick={openDeleteModal}>Delete?</Button>
     </div>
   )
 }
