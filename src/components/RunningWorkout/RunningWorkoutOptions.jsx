@@ -1,10 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { clearRunningWorkout, saveCompleteWorkout } from "../../reducers/runningWorkout";
+import { saveCompleteWorkout } from "../../reducers/runningWorkout";
 import { useNavigate } from "react-router-dom";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { setSelectingExercises } from "../../reducers/exerciseSelection";
+import { MODAL_TYPES, setModal } from "../../reducers/modals";
 
 const RunningWorkoutOptions = ({ editWorkoutName, setEditWorkoutName }) => {
   const dispatch = useDispatch();
@@ -12,10 +13,7 @@ const RunningWorkoutOptions = ({ editWorkoutName, setEditWorkoutName }) => {
   const navigate = useNavigate();
 
   const cancelWorkout = () => {
-    const cancelingWorkout = confirm("Cancel the current workout?")
-    if (cancelingWorkout) {
-      dispatch(clearRunningWorkout())
-    }
+    dispatch(setModal({ openModal: MODAL_TYPES.CANCEL_WORKOUT }));
   }
 
   const completeWorkout = async () => {
