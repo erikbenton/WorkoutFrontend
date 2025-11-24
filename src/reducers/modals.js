@@ -5,6 +5,7 @@ export const MODAL_TYPES = Object.freeze({
   START_WORKOUT : "START_WORKOUT",
   UPDATE_REST: "UPDATE_REST",
   CHANGE_SET: "CHANGE_SET",
+  CONFIRM: "CONFIRM"
 });
 
 const modalSlice = createSlice({

@@ -1,9 +1,17 @@
-import { Modal } from "react-bootstrap"
+import { Modal, Button } from "react-bootstrap"
+import { useDispatch } from "react-redux";
+import { clearModal } from "../../reducers/modals";
 
 
-const ConfirmModal = ({ header, body, cancelModal, confirmModal }) => {
+const ConfirmModal = ({ header, body, show, cancelModal, confirmModal }) => {
+  const dispatch = useDispatch();
+
+  const closeModal = () => {
+    dispatch(clearModal());
+  }
+
   return (
-    <Modal>
+    <Modal show={show} onHide={closeModal} centered>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           {header}
@@ -13,7 +21,7 @@ const ConfirmModal = ({ header, body, cancelModal, confirmModal }) => {
         {body}
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={cancelModal}>Close</Button>
+        <Button variant="secondary" onClick={cancelModal ?? closeModal}>Close</Button>
         <Button onClick={confirmModal}>Confirm</Button>
       </Modal.Footer>
     </Modal>
