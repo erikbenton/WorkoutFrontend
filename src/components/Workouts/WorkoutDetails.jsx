@@ -25,13 +25,15 @@ const WorkoutDetails = () => {
     navigate(`/workouts/edit/${workout.id}`);
   }
 
-  const navigateToRunningWorkout = () => {
+  const runWorkout = () => {
     if (runningWorkout) {
-      const response = confirm("There is already a workout running. Do you want to cancel that workout and run this one instead?");
-      if (!response) {
-        return; // don't reset the workout
-      }
+      dispatch(setModal({ openModal: MODAL_TYPES.START_WORKOUT }));
+    } else {
+      startWorkout();
     }
+  }
+
+  const startWorkout = () => {
     dispatch(initializeRunningWorkout(workout.id));
     navigate("/runningWorkout");
   }
@@ -72,6 +74,13 @@ const WorkoutDetails = () => {
           header="Delete workout?"
           body={`Delete workout ${workout.name}?`}
           confirmModal={removeWorkout}
+        />}
+      {showingRunWorkoutModal &&
+        <ConfirmModal
+          show={showingRunWorkoutModal}
+          header="Start workout"
+          body="There is already a workout running. Do you want to cancel that workout and run this one instead?"
+          confirmModal={startWorkout}
         />}
       <h2>{workout.name}</h2>
       {workout.description &&
@@ -114,7 +123,7 @@ const WorkoutDetails = () => {
       </ol>
       <Link className="me-1" to="/workouts"><Button variant="outline-primary">All workouts</Button></Link>
       <Button className="me-1" variant="success" onClick={navigateToEditWorkoutForm}>Edit</Button>
-      <Button className="me-1" onClick={navigateToRunningWorkout}>Run</Button>
+      <Button className="me-1" onClick={runWorkout}>Run</Button>
       <Button variant="danger" type="button" onClick={openDeleteModal}>Delete?</Button>
     </div>
   )
