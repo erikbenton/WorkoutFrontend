@@ -22,6 +22,7 @@ const RunningWorkout = () => {
   }
 
   const showCancelModal = modals === MODAL_TYPES.CANCEL_WORKOUT;
+  const showUpdateSetModal = modals === MODAL_TYPES.UPDATE_SET;
 
   // if no exercise is active in the workout
   // show a summary of the workout
@@ -34,6 +35,7 @@ const RunningWorkout = () => {
           header="Cancel workout"
           confirmModal={() => dispatch(clearRunningWorkout())}
         />}
+      {showUpdateSetModal && ""}
       {!exerciseSelection.selectingExercises &&
         <RunningWorkoutName />
       }

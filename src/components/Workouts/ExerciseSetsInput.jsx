@@ -27,7 +27,7 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
         ...exerciseSet,
         maxReps
       }
-    }))
+    }));
   }
 
   const updateExerciseSetType = (e) => {
@@ -38,7 +38,7 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
         ...exerciseSet,
         setType
       }
-    }))
+    }));
   }
 
   const removeSet = () => {

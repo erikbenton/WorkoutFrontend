@@ -19,7 +19,9 @@ const initializeWorkout = workout => {
     endTime: null,
     showRestTimer: false,
     restTime: null,
-    restStartedAt: null
+    restStartedAt: null,
+    editingGroupKey: null,
+    editingSetKey: null
   }
 }
 
@@ -103,6 +105,17 @@ const activeWorkoutSlice = createSlice({
       }
       return state
     },
+    shiftExerciseSet(state, action) {
+      const { shiftAmount, groupKey, setKey } = action.payload;
+      const group = { ...state.exerciseGroups.find(g => g.key === groupKey) };
+      const setIndex = findIndexOfKey(group.exerciseSets, setKey)
+      const shiftIndex = shiftAmount + setIndex
+      if (shiftIndex > -1 && shiftIndex < group.exerciseSets.length) {
+        group.exerciseSets = swapObjects(group.exerciseSets, setIndex, shiftIndex);
+        state.exerciseGroups = state.exerciseGroups.map(g => g.key === groupKey ? group : g);
+      }
+      return state;
+    },
     removeExerciseGroup(state, action) {
       const { groupKey } = action.payload;
       state.exerciseGroups = state.exerciseGroups.filter(group => group.key !== groupKey)
@@ -149,18 +162,22 @@ const activeWorkoutSlice = createSlice({
     },
     autofillExerciseSet(state, action) {
       const { reps, weight } = action.payload;
-      
+
       if (!state.activeExerciseGroup) return state;
 
       const group = { ...state.exerciseGroups.find(g => g.key === state.activeExerciseGroup.key) };
       const setIndex = group.exerciseSets.findIndex(set => !set.completed);
-      
+
       if (setIndex === -1) return state;
 
       const filledSet = { ...group.exerciseSets[setIndex], reps, weight };
       group.exerciseSets = group.exerciseSets.map(set => set.key === filledSet.key ? filledSet : set);
       state.exerciseGroups = state.exerciseGroups.map(g => g.key === group.key ? group : g);
       return state;
+    },
+    setEditingSetKey(state, action) {
+      const { setKey, groupKey } = action.payload;
+      return { ...state, editingSetKey: setKey, editingGroupKey: groupKey };
     }
   }
 })
@@ -204,10 +221,12 @@ export const {
   clearActiveExerciseGroup,
   updateExerciseGroup,
   shiftExerciseGroup,
+  shiftExerciseSet,
   removeExerciseGroup,
   addMultipleExerciseGroups,
   addExerciseSet,
   updateExerciseSet,
   removeExerciseSet,
-  autofillExerciseSet } = activeWorkoutSlice.actions
+  autofillExerciseSet,
+  setEditingSetKey } = activeWorkoutSlice.actions
 export default activeWorkoutSlice.reducer

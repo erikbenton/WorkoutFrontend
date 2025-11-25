@@ -11,7 +11,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import workoutService from "../../services/workout";
 import ExercisesSelection from "../Exercises/ExercisesSelection";
 import { Button } from "react-bootstrap";
-import RestTimeModal from "./RestTimeModal";
+import RestTimeModal from "../Modals/RestTimeModal";
 import ReplaceExercise from "../Exercises/ReplaceExercise";
 import { cancelExerciseSelection, setSelectingExercises } from "../../reducers/exerciseSelection";
 import { MODAL_TYPES } from "../../reducers/modals";

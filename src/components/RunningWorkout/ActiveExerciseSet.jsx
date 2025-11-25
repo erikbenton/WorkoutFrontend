@@ -1,11 +1,52 @@
 import { useDispatch } from "react-redux";
-import { updateExerciseSet, removeExerciseSet, restartRestTimer } from "../../reducers/runningWorkout";
-import { Button } from "react-bootstrap";
+import { updateExerciseSet, removeExerciseSet, restartRestTimer, shiftExerciseSet, setEditingSetKey } from "../../reducers/runningWorkout";
+import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faClipboardQuestion, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faClipboardQuestion, faCheck, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { setTypePlaceholderClass, setTypeColor } from "../../utils/setTypes";
+import { MODAL_TYPES, setModal } from "../../reducers/modals";
 
+const ActiveExerciseSetOptions = ({ set, groupKey }) => {
+  const dispatch = useDispatch();
+
+  const shiftSet = (set, shiftAmount) => {
+    dispatch(shiftExerciseSet({
+      setKey: set.key,
+      groupKey,
+      shiftAmount
+    }));
+  }
+
+  const removeSet = (set) => {
+    dispatch(removeExerciseSet({
+      groupKey,
+      setKey: set.key
+    }));
+  }
+
+  const editSet = () => {
+    dispatch(setEditingSetKey({ setKey: set.key, groupKey }));
+    dispatch(setModal({ openModal: MODAL_TYPES.UPDATE_SET }));
+  }
+
+
+  return (
+    <DropdownButton
+      variant="outline-primary"
+      className="no-border no-toggle no-hover"
+      id={`set_options_${set.key}`}
+      drop="down-centered"
+      title={<FontAwesomeIcon icon={faEllipsisVertical}
+      />}
+    >
+      <Dropdown.Item onClick={() => shiftSet(set, -1)}>shift up</Dropdown.Item>
+      <Dropdown.Item onClick={() => shiftSet(set, 1)}>shift down</Dropdown.Item>
+      <Dropdown.Item onClick={editSet}>edit down</Dropdown.Item>
+      <Dropdown.Item className="text-danger" onClick={() => removeSet(set)}>remove set</Dropdown.Item>
+    </DropdownButton>
+  )
+}
 
 const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
   const dispatch = useDispatch();
@@ -20,13 +61,6 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
       setKey: set.key,
       field,
       value
-    }));
-  }
-
-  const removeSet = (set) => {
-    dispatch(removeExerciseSet({
-      groupKey,
-      setKey: set.key
     }));
   }
 
@@ -86,14 +120,7 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
           : <FontAwesomeIcon icon={faClipboardQuestion} />}
       </Button>
       <div className="col">
-        <Button
-          variant="danger"
-          type="button"
-          disabled={set.completed}
-          onClick={() => removeSet(set)}
-        >
-          <FontAwesomeIcon icon={faTrash} />
-        </Button>
+        <ActiveExerciseSetOptions groupKey={groupKey} set={set} />
       </div>
     </div>
   )
