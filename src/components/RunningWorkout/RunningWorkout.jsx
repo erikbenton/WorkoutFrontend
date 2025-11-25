@@ -7,6 +7,7 @@ import ExerciseHistoryTabs from "../Exercises/ExerciseHistoryTabs";
 import { MODAL_TYPES } from "../../reducers/modals";
 import ConfirmModal from "../Modals/ConfirmModal";
 import { clearRunningWorkout } from "../../reducers/runningWorkout";
+import UpdateActiveSetModal from "../Modals/UpdateActiveSetModal";
 
 const RunningWorkout = () => {
   const runningWorkout = useSelector(state => state.runningWorkout);
@@ -23,6 +24,12 @@ const RunningWorkout = () => {
 
   const showCancelModal = modals === MODAL_TYPES.CANCEL_WORKOUT;
   const showUpdateSetModal = modals === MODAL_TYPES.UPDATE_SET;
+  const activeGroup = runningWorkout.activeExerciseGroup
+    ? runningWorkout.exerciseGroups.find(g => g.key === runningWorkout.activeExerciseGroup.key)
+    : null;
+  const activeSet = activeGroup && runningWorkout.editingSetKey
+    ? activeGroup.exerciseSets.find(s => s.key === runningWorkout.editingSetKey)
+    : null;
 
   // if no exercise is active in the workout
   // show a summary of the workout
@@ -35,7 +42,12 @@ const RunningWorkout = () => {
           header="Cancel workout"
           confirmModal={() => dispatch(clearRunningWorkout())}
         />}
-      {showUpdateSetModal && ""}
+      {showUpdateSetModal &&
+        <UpdateActiveSetModal
+          set={activeSet}
+          groupKey={activeGroup.key}
+          show={showUpdateSetModal}
+        />}
       {!exerciseSelection.selectingExercises &&
         <RunningWorkoutName />
       }
@@ -43,8 +55,7 @@ const RunningWorkout = () => {
         {!runningWorkout.activeExerciseGroup
           ? <RunningWorkoutSummary />
           : <ActiveExerciseGroup
-            exerciseGroup={runningWorkout.exerciseGroups
-              .find(group => group.key === runningWorkout.activeExerciseGroup.key)}
+            exerciseGroup={activeGroup}
             index={runningWorkout.activeExerciseGroup.index}
             maxIndex={runningWorkout.exerciseGroups.length - 1}
           />

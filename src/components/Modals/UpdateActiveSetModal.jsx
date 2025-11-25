@@ -1,8 +1,8 @@
 import { Modal, Button } from "react-bootstrap"
 import { useDispatch } from "react-redux";
 import { clearModal } from "../../reducers/modals";
-import { updateExerciseSet } from "../../reducers/runningWorkout";
-import setTypes, { setTypeColor } from "../../utils/setTypes";
+import { setEditingSetKey, updateExerciseSet } from "../../reducers/runningWorkout";
+import setTypes, { setTypeValues } from "../../utils/setTypes";
 import { useState } from "react";
 
 
@@ -13,6 +13,7 @@ const UpdateActiveSetModal = ({ set, groupKey, show }) => {
   const [setType, setSetType] = useState(set.setType);
 
   const closeModal = () => {
+    dispatch(setEditingSetKey({ groupKey: null, setKey: null }))
     dispatch(clearModal());
   }
 
@@ -56,11 +57,10 @@ const UpdateActiveSetModal = ({ set, groupKey, show }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="row row-cols-auto m-1 text-center align-items-center">
+        <div className="row row-cols-auto m-1 text-center justify-content-center align-items-center">
           <span className="col-3 ps-0 ps-md-2">Min Reps</span>
           <span className="col-3 ps-0">Max Reps</span>
           <span className="col-4 px-0">Type</span>
-          <span className="col-2 col-sm-4"></span>
         </div>
         <div className="row row-cols-auto m-1 justify-content-center align-items-center">
           <div className="col-3 ps-0 ps-md-2">
@@ -85,7 +85,7 @@ const UpdateActiveSetModal = ({ set, groupKey, show }) => {
             <select
               value={setType ?? ""}
               className="form-select no-caret px-1 text-center"
-              style={{ color: setTypeColor(set) }}
+              style={{ color: setTypeValues[setType].color }}
               onChange={updateSetType}>
               {Object.keys(setTypes).map(setType => (
                 <option

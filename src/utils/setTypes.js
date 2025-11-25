@@ -64,4 +64,6 @@ export const setTypePlaceholderClass = (set) => {
   : ""
 };
 
+export const setTypeValues = typeToValues;
+
 export default setTypes;
