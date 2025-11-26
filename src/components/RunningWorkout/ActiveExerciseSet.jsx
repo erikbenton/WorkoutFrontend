@@ -48,7 +48,7 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
       <div className="col-3 px-1 text-center">
         <input
           disabled={set.completed}
-          className="form-control px-1 text-center"
+          className="form-control px-1 text-center align-items-center"
           type="number"
           id={`reps_${set.key}`}
           value={set.reps ?? ""}
@@ -59,7 +59,7 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
       <div className="col-5">
         <input
           disabled={set.completed}
-          className={"form-control text-center " + setTypePlaceholderClass(set)}
+          className={"form-control text-center align-items-center " + setTypePlaceholderClass(set)}
           type="number"
           id={`weight_${set.key}`}
           value={set.weight ?? ""}
