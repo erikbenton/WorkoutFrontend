@@ -28,6 +28,20 @@ button a {
   border-radius: 50%;
   width: 45px;
   height: 45px;
+  transition: none;
+}
+
+.no-border button:hover {
+  background-color: white;
+  color: #0d6efd;
+  transition: none;
+}
+
+.no-border-btn {
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
 }
 
 .no-toggle .dropdown-toggle::after {
@@ -44,7 +58,9 @@ select {
   appearance: none;
 }
 
-.no-tab-margin ul, li, button {
+.no-tab-margin ul,
+li,
+button {
   margin: 0;
 }
 

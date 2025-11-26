@@ -40,7 +40,7 @@ const ActiveExerciseSetOptions = ({ set, groupKey, disabled }) => {
     >
       <Dropdown.Item onClick={() => shiftSet(-1)}>shift up</Dropdown.Item>
       <Dropdown.Item onClick={() => shiftSet(1)}>shift down</Dropdown.Item>
-      <Dropdown.Item onClick={editSet}>edit set</Dropdown.Item>
+      <Dropdown.Item onClick={editSet}>edit targets</Dropdown.Item>
       <Dropdown.Item className="text-danger" onClick={removeSet}>remove set</Dropdown.Item>
     </DropdownButton>
   );

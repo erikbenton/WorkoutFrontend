@@ -3,7 +3,7 @@ import { updateExerciseSet, restartRestTimer } from "../../reducers/runningWorko
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClipboardQuestion, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faPencil } from '@fortawesome/free-solid-svg-icons'
 import { setTypePlaceholderClass, setTypeColor } from "../../utils/setTypes";
 import ActiveExerciseSetOptions from "./AcitveExerciseSetOptions";
 
@@ -44,8 +44,8 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
     `${set.minReps ? set.minReps : ''}${(set.minReps && set.maxReps) ? '-' : ''}${set.maxReps ? set.maxReps : ''}`
 
   return (
-    <div className="row row-cols-auto m-1 align-items-center">
-      <div className="col-3 px-1">
+    <div className="row row-cols-auto m-1 align-items-center justify-content-center">
+      <div className="col-3 px-1 text-center">
         <input
           disabled={set.completed}
           className="form-control px-1 text-center"
@@ -68,17 +68,19 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
           placeholder={set.setType}
         />
       </div>
-      <Button
-        className="col-auto"
-        type="button"
-        variant={set.completed ? "success" : "primary"}
-        onClick={() => toggleSetCompleted(set, !set.completed)}
-      >
-        {set.completed
-          ? <FontAwesomeIcon icon={faCheck} />
-          : <FontAwesomeIcon icon={faClipboardQuestion} />}
-      </Button>
-      <div className="col">
+      <div className="col-2 col-md-1">
+        <Button
+          className="no-border-btn"
+          type="button"
+          variant={set.completed ? "success" : "primary"}
+          onClick={() => toggleSetCompleted(set, !set.completed)}
+        >
+          {set.completed
+            ? <FontAwesomeIcon icon={faCheck} />
+            : <FontAwesomeIcon icon={faPencil} />}
+        </Button>
+      </div>
+      <div className="col-1 ps-1 pe-0">
         <ActiveExerciseSetOptions disabled={set.completed} groupKey={groupKey} set={set} />
       </div>
     </div>

@@ -99,9 +99,9 @@ const ActiveExerciseGroup = ({
       </div>
       {exerciseGroup.exerciseSets.length > 0 &&
         <div className="row row-cols-auto mx-1 mb-1 mt-3 justify-content-center align-items-center text-center">
-          <span className="col-3">Reps</span>
-          <span className="col-5">Weight</span>
-          <span className="col-4"></span>
+          <span className="col-3 px-0">Reps</span>
+          <span className="col-5 me-2 me-md-4">Weight</span>
+          <span className="col-3 col-md-2"></span>
         </div>
       }
       {exerciseGroup.exerciseSets.map(set => (
