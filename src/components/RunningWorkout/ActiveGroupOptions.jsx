@@ -29,7 +29,7 @@ const ActiveGroupOptions = ({ exerciseGroup }) => {
     >
       <Dropdown.Item onClick={() => shiftGroup(exerciseGroup, -1)}>shift up</Dropdown.Item>
       <Dropdown.Item onClick={() => shiftGroup(exerciseGroup, 1)}>shift down</Dropdown.Item>
-      <Dropdown.Item variant="danger" onClick={() => removeGroup(exerciseGroup)}>remove group</Dropdown.Item>
+      <Dropdown.Item className="text-danger" onClick={() => removeGroup(exerciseGroup)}>remove group</Dropdown.Item>
     </DropdownButton>
   )
 }

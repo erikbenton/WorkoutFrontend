@@ -36,7 +36,7 @@ const RunningWorkoutName = () => {
           </Button>
         </div>
         <div className="col-auto ps-0">
-          <span className="fs-1">
+          <span className="fs-1 fw-medium">
             {editWorkoutName
           ? <div className="col-auto px-0">
             <input
