@@ -5,6 +5,7 @@ import completedWorkoutService from "../../services/completedWorkout";
 import { useDispatch, useSelector } from "react-redux";
 import { MODAL_TYPES, setModal } from "../../reducers/modals";
 import ConfirmModal from "../Modals/ConfirmModal";
+import CompletedExerciseGroupDetails from "./CompletedExerciseGroupDetails";
 
 
 const CompletedWorkoutDetails = () => {
@@ -37,9 +38,6 @@ const CompletedWorkoutDetails = () => {
 
   const showDeleteModal = modals === MODAL_TYPES.DELETE_WORKOUT;
 
-  const totalReps = group => group.completedExerciseSets.reduce((acc, curr) => acc + curr.reps, 0);
-  const totalWeight = group => group.completedExerciseSets.reduce((acc, curr) => acc + (curr.weight ?? 0), 0);
-
   return (
     <div className="container">
       {showDeleteModal &&
@@ -53,29 +51,7 @@ const CompletedWorkoutDetails = () => {
       <p>Duration: {completedWorkout.duration}</p>
       <ol className="no-bullets">
         {completedWorkout.completedExerciseGroups.map(group =>
-          <li key={group.id}>
-            <div className="card my-2">
-              <div className="card-header">
-                <Link to={`/exercises/${group.exercise.id}`}>{group.exercise.name}</Link>
-              </div>
-              <div className="card-body">
-                {group.comment && <span className="card-text">{group.comment}</span>}
-                <ol className="list-group list-group-flush">
-                  {group.completedExerciseSets.map(set =>
-                    <li className="list-group-item ps-0" key={set.id}>
-                      {set.reps} reps {set.weight ? `x ${set.weight} lbs` : ''}
-                    </li>
-                  )}
-                </ol>
-              </div>
-              <span className="card-footer">
-                <span className="badge text-bg-primary">Reps: {totalReps(group)}</span>
-                <span className="ms-1 badge text-bg-success">
-                  {totalWeight(group) === 0 ? "" : `Weight: ${totalWeight(group)} lbs`}
-                </span>
-              </span>
-            </div>
-          </li>
+          <CompletedExerciseGroupDetails key={group.id} group={group} />
         )}
       </ol>
       <Link to="/completedWorkouts">

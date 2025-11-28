@@ -39,7 +39,6 @@ const WorkoutDetails = () => {
   }
 
   const removeWorkout = () => {
-    console.log('workout', workout)
     dispatch(deleteWorkout(workout));
     navigate("/workouts");
   }
