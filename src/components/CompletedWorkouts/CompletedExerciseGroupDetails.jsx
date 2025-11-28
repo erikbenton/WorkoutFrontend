@@ -23,9 +23,9 @@ const CompletedExerciseGroupDetails = ({ group }) => {
             {group.completedExerciseSets.map(set =>
               <li className="list-group-item ps-0" key={set.id}>
                 <div className="row">
-                  <span className="col-3 text-end">{set.reps} reps</span>
+                  <span className="col-3 text-end pe-1">{set.reps} reps</span>
                   <span className="col-3 text-start ps-0">{set.weight ? `x ${set.weight} lbs` : ''}</span>
-                  <span className="badge py-2 w-100 col" style={{ backgroundColor: setTypeColor(set) }}>{set.setType}</span>
+                  <span className="badge py-2 col-4 col-md-3" style={{ backgroundColor: setTypeColor(set) }}>{set.setType}</span>
                 </div>
               </li>
             )}
