@@ -97,13 +97,13 @@ const WorkoutDetails = () => {
                   {group.restTime && <span className="col-auto ms-auto">{restText(group.restTime)} Rest</span>}
                 </div>
               </div>
-              {group.note &&
-                <div className="card-body">
+              <div className="card-body p-2">
+                {group.note &&
                   <div className="card-text">
                     <span>{group.note}</span>
+                    <hr />
                   </div>
-                </div>}
-              <div className="card-body p-2">
+                }
                 <ol className="list-group list-group-flush">
                   {group.exerciseSets.map(set =>
                     <li className="list-group-item" key={set.key}>
