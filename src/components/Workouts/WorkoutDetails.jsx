@@ -56,9 +56,9 @@ const WorkoutDetails = () => {
   }
 
   const repsText = set =>
-    `${set.minReps ? set.minReps : ""}
+    `${set.minReps ?? ""}
     ${set.minReps && set.maxReps ? "-" : ""}
-    ${set.maxReps ? set.maxReps : ""}`;
+    ${set.maxReps ?? ""}`;
 
   // slice out the hours
   const restText = restTime => restTime.split(":").slice(1).join(":");
@@ -66,7 +66,7 @@ const WorkoutDetails = () => {
   const showingRunWorkoutModal = modals === MODAL_TYPES.START_WORKOUT;
 
   return (
-    <div className="container">
+    <div className="container col-md-9 col-lg-6">
       {showingDeleteModal &&
         <ConfirmModal
           show={showingDeleteModal}
@@ -103,19 +103,24 @@ const WorkoutDetails = () => {
                     <span>{group.note}</span>
                   </div>
                 </div>}
-              <ol className="list-group list-group-flush">
-                {group.exerciseSets.map(set =>
-                  <li className="list-group-item" key={set.key}>
-                    <div className="row">
-                      <div className="col-3 col-md-2">
-                        {repsText(set)}
+              <div className="card-body p-2">
+                <ol className="list-group list-group-flush">
+                  {group.exerciseSets.map(set =>
+                    <li className="list-group-item" key={set.key}>
+                      <div className="row">
+                        <div className="col-2 col-md-2 text-end px-0">
+                          {repsText(set)}
+                        </div>
+                        <div className="col-auto">
+                          <span>reps</span>
+                        </div>
+                        <div className="col-6 mx-auto">
+                          <span className="badge py-2 w-100" style={{ backgroundColor: setTypeColor(set) }}>{set.setType}</span>
+                        </div>
                       </div>
-                      <div className="col-4 col-md-3">
-                        <span className="badge py-2 w-100" style={{ backgroundColor: setTypeColor(set) }}>{set.setType}</span>
-                      </div>
-                    </div>
-                  </li>)}
-              </ol>
+                    </li>)}
+                </ol>
+              </div>
             </div>
           </li>
         )}

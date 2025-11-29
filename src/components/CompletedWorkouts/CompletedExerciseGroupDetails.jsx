@@ -12,7 +12,7 @@ const CompletedExerciseGroupDetails = ({ group }) => {
         <div className="card-header">
           <Link to={`/exercises/${group.exercise.id}`}>{group.exercise.name}</Link>
         </div>
-        <div className="card-body">
+        <div className="card-body p-2">
           {group.comment &&
             <div>
               <span className="card-text">{group.comment ?? ""}</span>
