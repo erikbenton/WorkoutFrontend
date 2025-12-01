@@ -8,6 +8,7 @@ const initializeWorkout = workout => {
   return {
     name: workout ? workout.name : "New Workout",
     note: null,
+    description: workout ? workout.description : null,
     selectedWorkout: { ...workout },
     activeExerciseGroup: null,
     workoutId: workout ? workout.id : null,
