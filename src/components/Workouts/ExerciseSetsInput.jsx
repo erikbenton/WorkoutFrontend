@@ -10,24 +10,30 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
 
   const updateExerciseSetMinReps = (e) => {
     const minReps = e.target.value === "" ? null : e.target.value
-    dispatch(updateExerciseSet({
-      exerciseGroupKey,
-      exerciseSet: {
-        ...exerciseSet,
-        minReps
-      }
-    }))
+    const matches = e.target.value.match(/\d+/) ?? [""];
+    if (minReps === null || matches[0].length === minReps.length) {
+      dispatch(updateExerciseSet({
+        exerciseGroupKey,
+        exerciseSet: {
+          ...exerciseSet,
+          minReps
+        }
+      }));
+    }
   }
 
   const updateExerciseSetMaxReps = (e) => {
     const maxReps = e.target.value === "" ? null : e.target.value
-    dispatch(updateExerciseSet({
-      exerciseGroupKey,
-      exerciseSet: {
-        ...exerciseSet,
-        maxReps
-      }
-    }));
+    const matches = e.target.value.match(/\d+/) ?? [""];
+    if (maxReps === null || (matches[0].length === maxReps.length)) {
+      dispatch(updateExerciseSet({
+        exerciseGroupKey,
+        exerciseSet: {
+          ...exerciseSet,
+          maxReps
+        }
+      }));
+    }
   }
 
   const updateExerciseSetType = (e) => {
@@ -50,12 +56,13 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
 
   return (
     <div className="row row-cols-auto m-1 justify-content-center align-items-center">
-      <div className="col-3 ps-0 ps-md-2">
+      <div className="col-3 ps-0">
         <input
           type="number"
           className="form-control text-center"
           id={`minReps_${exerciseSet.key}`}
           value={exerciseSet.minReps ?? ""}
+          placeholder="reps"
           onChange={updateExerciseSetMinReps}
         />
       </div>
@@ -65,6 +72,8 @@ const ExerciseSetInput = ({ exerciseSet, exerciseGroupKey }) => {
           className="form-control text-center"
           id={`maxReps_${exerciseSet.key}`}
           value={exerciseSet.maxReps ?? ""}
+          placeholder="reps"
+          style={{ appearance: "textfield" }}
           onChange={updateExerciseSetMaxReps}
         />
       </div>
@@ -99,8 +108,8 @@ const ExerciseSetsInput = ({ exerciseGroup }) => {
     <div>
       {exerciseGroup.exerciseSets.length > 0 &&
         <div className="row row-cols-auto m-1 text-center align-items-center">
-          <span className="col-3 ps-0 ps-md-2">Min Reps</span>
-          <span className="col-3 ps-0">Max Reps</span>
+          <span className="col-3 ps-0">Min</span>
+          <span className="col-3 ps-0">Max</span>
           <span className="col-4 px-0">Type</span>
           <span className="col-2 col-sm-4"></span>
         </div>
