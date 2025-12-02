@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MODAL_TYPES, setModal } from "../../reducers/modals";
 import ConfirmModal from "../Modals/ConfirmModal";
 import CompletedExerciseGroupDetails from "./CompletedExerciseGroupDetails";
+import { reRunWorkout } from "../../reducers/runningWorkout";
 
 
 const CompletedWorkoutDetails = () => {
@@ -21,6 +22,11 @@ const CompletedWorkoutDetails = () => {
   const getFormatedCompletion = (workout) => {
     const dateNoTime = workout.createdAt.split("T")[0];
     return dateNoTime;
+  }
+
+  const reRunCompletedWorkout = () => {
+    dispatch(reRunWorkout(completedWorkout));
+    navigate("/runningWorkout")
   }
 
   const promptToDelete = () => {
@@ -59,6 +65,14 @@ const CompletedWorkoutDetails = () => {
           Workout Histories
         </Button>
       </Link>
+      <Button
+        variant="primary"
+        type="button"
+        className="ms-1"
+        onClick={reRunCompletedWorkout}
+      >
+        Re-run?
+      </Button>
       <Button
         variant="danger"
         type="button"

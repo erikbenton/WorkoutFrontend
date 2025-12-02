@@ -3,6 +3,24 @@ import { toKeyedObject, findIndexOfKey, swapObjects, createCompletedWorkout } fr
 import workoutService from "../services/workout";
 import completedWorkoutService from "../services/completedWorkout";
 
+const reRunCompletedWorkout = completedWorkout => {
+  completedWorkout.exerciseGroups = completedWorkout
+    .completedExerciseGroups.map(group => {
+      return {
+        ...group,
+        exerciseSets: group.completedExerciseSets.map(set => {
+          return { ...set }
+        })
+      }
+    });
+    console.log('completed workout id', completedWorkout.workoutId)
+  return {
+    ...initializeWorkout(completedWorkout),
+    id: undefined,
+    workoutId: completedWorkout.workoutId
+  };
+}
+
 const initializeWorkout = workout => {
   const now = new Date()
   return {
@@ -56,6 +74,9 @@ const activeWorkoutSlice = createSlice({
   reducers: {
     initializeActiveWorkout(state, action) {
       return initializeWorkout(action.payload)
+    },
+    reRunWorkout(state, action) {
+      return reRunCompletedWorkout(action.payload)
     },
     clearRunningWorkout() {
       return null;
@@ -214,6 +235,7 @@ export const saveCompleteWorkout = (workout) => {
 
 export const {
   initializeActiveWorkout,
+  reRunWorkout,
   clearRunningWorkout,
   updateRunningWorkout,
   setRestTimer,

@@ -129,14 +129,16 @@ const ActiveExerciseGroup = ({
           Next Exercise
         </Button>
         {workoutIsFinished &&
-          <Button
-            className="col-4 col-md-2 text-nowrap mt-2"
-            variant="success"
-            type="button"
-            onClick={completeWorkout}
-          >
-            Finish Workout
-          </Button>
+          <div className="row justify-content-center">
+            <Button
+              className="col-4 col-md-2 text-nowrap mt-2"
+              variant="success"
+              type="button"
+              onClick={completeWorkout}
+            >
+              Finish Workout
+            </Button>
+          </div>
         }
       </div>
     </div>

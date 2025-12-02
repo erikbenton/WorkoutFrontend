@@ -60,7 +60,7 @@ export const createCompletedWorkout = (workout) => {
     name: workout.name,
     note: workout.note,
     description: workout.description,
-    workoutId: workout.selectedWorkout ? workout.selectedWorkout.id : null,
+    workoutId: workout.workoutId,
     completedExerciseGroups,
     duration
   }
