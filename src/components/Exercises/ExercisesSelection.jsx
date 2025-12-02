@@ -39,7 +39,7 @@ const ExercisesSelection = ({ maxSelection }) => {
       <ul className="no-bullets">
         {exercises.map(exercise => (
           <li key={exercise.id}>
-            <div className="card my-2 p-2 col-md-8 col-lg-5">
+            <div className="card my-2 p-2 col-md-8 col-lg-5 ms-auto me-auto">
               <div className="card-body p-0">
                 <div className="row row-cols-auto">
                   <span className="col-auto">{exercise.name}</span>
