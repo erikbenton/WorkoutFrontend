@@ -13,7 +13,7 @@ const reRunCompletedWorkout = completedWorkout => {
         })
       }
     });
-    console.log('completed workout id', completedWorkout.workoutId)
+  console.log('completed workout id', completedWorkout.workoutId)
   return {
     ...initializeWorkout(completedWorkout),
     id: undefined,
@@ -27,7 +27,6 @@ const initializeWorkout = workout => {
     name: workout ? workout.name : "New Workout",
     note: null,
     description: workout ? workout.description : null,
-    selectedWorkout: { ...workout },
     activeExerciseGroup: null,
     workoutId: workout ? workout.id : null,
     exerciseGroups: workout
