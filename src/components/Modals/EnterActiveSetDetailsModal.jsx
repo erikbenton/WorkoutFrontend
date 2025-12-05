@@ -10,9 +10,12 @@ const EnterActiveSetDetailsModal = ({ show, set, groupKey }) => {
   const dispatch = useDispatch();
   const [reps, setReps] = useState(set.reps);
   const [weight, setWeight] = useState(set.weight);
+  const [message, setMessage] = useState(null);
 
   const confirm = () => {
-    if (reps === null) {
+    if (reps === null || reps < 0) {
+      setMessage('reps must be a non-negative integer')
+      setTimeout(() => setMessage(null), 5000)
       return;
     }
     const setKey = set.key;
@@ -36,7 +39,7 @@ const EnterActiveSetDetailsModal = ({ show, set, groupKey }) => {
   const updateReps = (e) => {
     e.preventDefault();
     const reps = e.target.value === "" ? null : e.target.value
-    setReps(reps);
+    setReps(reps ? parseInt(reps) : null);
   }
 
   const updateWeight = (e) => {
@@ -58,7 +61,7 @@ const EnterActiveSetDetailsModal = ({ show, set, groupKey }) => {
       <Modal.Body>
         <div className="row row-cols-auto m-1 text-center justify-content-center align-items-center">
           <span className="col-3 ps-0 ps-md-2">Reps</span>
-          <span className="col-5 me-2 me-md-4">Weight</span>
+          <span className="col-5">Weight</span>
         </div>
         <div className="row row-cols-auto m-1 justify-content-center align-items-center">
           <div className="col-3 ps-0 ps-md-2">
@@ -66,7 +69,7 @@ const EnterActiveSetDetailsModal = ({ show, set, groupKey }) => {
               type="number"
               className="form-control text-center"
               placeholder={repsPlaceholderText}
-              id={`reps_${set.key}`}
+              id={`modal_reps_${set.key}`}
               value={reps ?? ""}
               onChange={updateReps}
             />
@@ -75,7 +78,7 @@ const EnterActiveSetDetailsModal = ({ show, set, groupKey }) => {
             <input
               className={"form-control text-center align-items-center " + setTypePlaceholderClass(set)}
               type="number"
-              id={`weight_${set.key}`}
+              id={`modal_weight_${set.key}`}
               value={weight ?? ""}
               onChange={(e) => updateWeight(e)}
               style={{ color: setTypeColor(set) }}
@@ -83,6 +86,11 @@ const EnterActiveSetDetailsModal = ({ show, set, groupKey }) => {
             />
           </div>
         </div>
+        {message &&
+          <div className="row text-center mt-2">
+            <span className="text-danger">{message}</span>
+          </div>
+        }
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={closeModal}>Close</Button>
