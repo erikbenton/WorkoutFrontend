@@ -1,11 +1,12 @@
 import { useDispatch } from "react-redux";
-import { updateExerciseSet, restartRestTimer } from "../../reducers/runningWorkout";
+import { updateExerciseSet, restartRestTimer, setEditingSetKey } from "../../reducers/runningWorkout";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faPencil } from '@fortawesome/free-solid-svg-icons'
 import { setTypePlaceholderClass, setTypeColor } from "../../utils/setTypes";
 import ActiveExerciseSetOptions from "./AcitveExerciseSetOptions";
+import { MODAL_TYPES, setModal } from "../../reducers/modals";
 
 const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
   const dispatch = useDispatch();
@@ -36,8 +37,13 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
         dispatch(restartRestTimer(restTime))
       }
     } else {
-      alert("A set's reps must be non-negative.")
+      enterActiveSetDetailsModal();
     }
+  }
+
+  const enterActiveSetDetailsModal = () => {
+    dispatch(setEditingSetKey({ setKey: set.key, groupKey }));
+    dispatch(setModal({ openModal: MODAL_TYPES.ENTER_SET }));
   }
 
   const repsPlaceholderText =

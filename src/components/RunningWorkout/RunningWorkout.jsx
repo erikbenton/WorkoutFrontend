@@ -8,6 +8,7 @@ import { MODAL_TYPES } from "../../reducers/modals";
 import ConfirmModal from "../Modals/ConfirmModal";
 import { clearRunningWorkout } from "../../reducers/runningWorkout";
 import UpdateActiveSetModal from "../Modals/UpdateActiveSetModal";
+import EnterActiveSetDetailsModal from "../Modals/EnterActiveSetDetailsModal";
 
 const RunningWorkout = () => {
   const runningWorkout = useSelector(state => state.runningWorkout);
@@ -24,6 +25,7 @@ const RunningWorkout = () => {
 
   const showCancelModal = modals === MODAL_TYPES.CANCEL_WORKOUT;
   const showUpdateSetModal = modals === MODAL_TYPES.UPDATE_SET;
+  const showEnterSetDetailsModal = modals === MODAL_TYPES.ENTER_SET;
   const activeGroup = runningWorkout.activeExerciseGroup
     ? runningWorkout.exerciseGroups.find(g => g.key === runningWorkout.activeExerciseGroup.key)
     : null;
@@ -48,6 +50,7 @@ const RunningWorkout = () => {
           groupKey={activeGroup.key}
           show={showUpdateSetModal}
         />}
+      {showEnterSetDetailsModal && <EnterActiveSetDetailsModal show={showEnterSetDetailsModal} set={activeSet} groupKey={activeGroup.key} />}
       {!exerciseSelection.selectingExercises &&
         <RunningWorkoutName />
       }
