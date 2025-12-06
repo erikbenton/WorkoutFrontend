@@ -39,6 +39,9 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
     } else {
       enterActiveSetDetailsModal();
     }
+    if (set.completed) {
+      setCompleted(true);
+    }
   }
 
   const enterActiveSetDetailsModal = () => {

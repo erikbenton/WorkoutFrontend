@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
 import { clearModal } from "../../reducers/modals";
-import { setEditingSetKey, updateExerciseSet } from "../../reducers/runningWorkout";
+import { restartRestTimer, setEditingSetKey, updateExerciseSet } from "../../reducers/runningWorkout";
 import { useState } from "react";
 import { setTypePlaceholderClass, setTypeColor } from "../../utils/setTypes";
 import { Modal, Button } from "react-bootstrap"
 
 
-const EnterActiveSetDetailsModal = ({ show, set, groupKey }) => {
+const EnterActiveSetDetailsModal = ({ show, set, groupKey, restTime }) => {
   const dispatch = useDispatch();
   const [reps, setReps] = useState(set.reps);
   const [weight, setWeight] = useState(set.weight);
@@ -28,6 +28,7 @@ const EnterActiveSetDetailsModal = ({ show, set, groupKey }) => {
     dispatch(updateExerciseSet({
       groupKey, setKey, field: "completed", value: true
     }));
+    dispatch(restartRestTimer(restTime))
     closeModal();
   }
 

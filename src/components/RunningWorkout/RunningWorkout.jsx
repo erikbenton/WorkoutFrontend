@@ -50,7 +50,13 @@ const RunningWorkout = () => {
           groupKey={activeGroup.key}
           show={showUpdateSetModal}
         />}
-      {showEnterSetDetailsModal && <EnterActiveSetDetailsModal show={showEnterSetDetailsModal} set={activeSet} groupKey={activeGroup.key} />}
+      {showEnterSetDetailsModal &&
+        <EnterActiveSetDetailsModal
+          show={showEnterSetDetailsModal}
+          set={activeSet}
+          groupKey={activeGroup.key}
+          restTime={activeGroup.restTime}
+        />}
       {!exerciseSelection.selectingExercises &&
         <RunningWorkoutName />
       }
