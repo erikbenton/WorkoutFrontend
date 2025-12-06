@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { clearModal } from "../../reducers/modals";
 import { restartRestTimer, setEditingSetKey, updateExerciseSet } from "../../reducers/runningWorkout";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { setTypePlaceholderClass, setTypeColor } from "../../utils/setTypes";
 import { Modal, Button } from "react-bootstrap"
 
@@ -11,6 +11,13 @@ const EnterActiveSetDetailsModal = ({ show, set, groupKey, restTime }) => {
   const [reps, setReps] = useState(set.reps);
   const [weight, setWeight] = useState(set.weight);
   const [message, setMessage] = useState(null);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (show) {
+      inputRef.current.focus();
+    }
+  }, [show])
 
   const confirm = () => {
     if (reps === null || reps < 0) {
@@ -67,6 +74,7 @@ const EnterActiveSetDetailsModal = ({ show, set, groupKey, restTime }) => {
         <div className="row row-cols-auto m-1 justify-content-center align-items-center">
           <div className="col-3 ps-0 ps-md-2">
             <input
+              ref={inputRef}
               type="number"
               className="form-control text-center"
               placeholder={repsPlaceholderText}

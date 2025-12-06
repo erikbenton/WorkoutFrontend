@@ -25,6 +25,10 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
   }
 
   const toggleSetCompleted = (set, value) => {
+    if (set.completed) {
+      setCompleted(true);
+    }
+    
     if (set.reps && set.reps > -1) {
       dispatch(updateExerciseSet({
         groupKey,
@@ -38,9 +42,6 @@ const ActiveExerciseSet = ({ groupKey, set, restTime }) => {
       }
     } else {
       enterActiveSetDetailsModal();
-    }
-    if (set.completed) {
-      setCompleted(true);
     }
   }
 
